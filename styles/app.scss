@@ -32,7 +32,7 @@ body {
     @apply text-gray-700;
   }
 
-  p, dl, h1, h2, li {
+  p, dl, h1, h2, li, dd, dt {
     @apply text-gray-700;
     @apply mb-2;
   }
@@ -73,14 +73,14 @@ header {
   @apply px-4 pt-2;
 
   .heading {
-    @apply grid grid-cols-1;
+    @apply my-2;
 
-    @media (min-width: theme('screens.sm')) {
-      @apply grid grid-cols-2;
-    }
 
     a {
-      @apply font-bold text-white text-xl;
+      @apply font-bold text-white text-xl block;
+      @media (min-width: theme('screens.sm')) {
+        @apply inline-block;
+      }
     }
   }
 
@@ -89,7 +89,7 @@ header {
   }
 }
 
-footer{
+footer {
   @apply px-5;
 }
 

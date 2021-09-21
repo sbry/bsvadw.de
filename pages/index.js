@@ -20,8 +20,8 @@ export default function Index() {
                 </p>
 
                 <h1>Wöchentliche Trainingszeiten</h1>
-                <div className={"grid grid-flow-col grid-cols-2 grid-rows-1 gap-5"}>
-                    <div>
+                <div className={""}>
+                    <div className={"inline-block mr-5 w-60"}>
                         <h2>Schüler und Jugendliche</h2>
                         <dl>
                             <dt>Montag</dt>
@@ -30,7 +30,7 @@ export default function Index() {
                             <dd>17.30 - 19.00 Uhr</dd>
                         </dl>
                     </div>
-                    <div>
+                    <div className={"inline-block w-60"}>
                         <h2>Erwachsene</h2>
                         <dl>
                             <dt>Montag</dt>

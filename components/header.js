@@ -7,7 +7,7 @@ export default function Header() {
                 <a title={"Berliner Sportverein Akademie der Wissenschaften e.V."}
                    href="/">
                     <img
-                        className={"inline-block w-12 h-12 mr-2"} src="/images/logo/adw-symbol.png"
+                        className={"inline w-12 h-12 mr-1 lg:mr-2"} src="/images/logo/adw-symbol.png"
                         alt="AdW"
                     />
                     BSV AdW e.V. Tischtennis
@@ -17,7 +17,7 @@ export default function Header() {
                 <a title={"Spielbetrieb des BSV AdW beim Berliner Tischtennisverband"}
                    href={"https://bettv.tischtennislive.de/default.aspx?L1=Public&L2=Verein&L2P=1198&Page=Spielbetrieb&Sportart=96"}>
                     <img
-                        className={"inline-block w-12 mr-3"} src="/images/logo/tt-icon.svg"
+                        className={"inline w-12 sm:ml-6 mr-1 lg:mr-2"} src="/images/logo/tt-icon.svg"
                         alt="AdW"
                     />
                     Spielbetrieb bei bettv.de
