@@ -6,6 +6,8 @@
 
 $color: #20782d;
 $highlight: lighten(saturate($color, 20%), 10%);
+$active: lighten(saturate($color, 20%), 5%);
+
 // $highlight: #81af12;
 
 html,
@@ -35,13 +37,8 @@ body {
     @apply my-2;
   }
 
-  p {
-
-  }
-
   main {
     @apply mx-5 px-5 rounded-md bg-white;
-    border-top-left-radius: 0;
   }
 }
 
@@ -60,13 +57,13 @@ header, footer, body {
 
 nav {
   background-color: $highlight;
-  // @apply mb-5 rounded-md;
+  @apply mb-5 rounded-md;
+
   a {
     @apply text-white py-2 text-lg px-2 font-bold block ;
 
     @media (min-width: theme('screens.md')) {
-
-      @apply px-5 text-sm inline-block rounded-t-md;
+      @apply px-5 text-sm inline-block ;
     }
     @media (min-width: theme('screens.lg')) {
       @apply px-5 text-sm inline-block;
@@ -76,6 +73,12 @@ nav {
       @apply px-5 text-lg inline-block;
     }
 
+    &:last-child{
+      @apply rounded-r-md;
+    }
+    &:first-child{
+      @apply rounded-l-md;
+    }
     &:hover {
       background-color: $color;
       @apply text-white;
@@ -83,11 +86,12 @@ nav {
 
     &.active {
       &:hover {
-        color: black;
+        // color: black;
+        // @apply text-gray-700;
+        cursor: pointer!important;
       }
-
-      @apply text-gray-700;
-      @apply bg-white;
+      background-color: $active;
+      @apply text-white;
 
 
     }
