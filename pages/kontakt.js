@@ -1,19 +1,55 @@
 export default function Kontakt() {
     return (
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
-            <div className="">
+            <div>
                 <h1> Kontakt aufnehmen</h1>
-                <img className={'float-left'}
-                     src={"/kontakt/2153.png"}/>
-                <img className={'float-left'}
-                     src={"/kontakt/1732.png"}/>
-                <img className={'float-left'}
-                     src={"/kontakt/2027.png"}/>
-                <img className={'float-left'}
-                     src={"/kontakt/1765.png"}/>
+                <address className={"px-2"}>
+                    <div className={'text-center'}>
+                        Verein Allgemein
+                    </div>
+                    <br/>
+                    <div className={'text-center font-bold text-2xl font-serif'}>
+                        Andreas
+                    </div>
+                    <br/>
+                    030 / 534 11 63<br/>
+                    abteilungsleitungttadw[at]freenet.de
+                </address>
+                <address className={"px-2"}>
+                    <div className={'text-center'}> Jugend</div>
+                    <br/>
+                    <div className={'text-center font-bold text-2xl font-serif'}>
+                        Steven
+                    </div>
+                    <br/>0176 / 438 537 43<br/>steven.kecks[at]gmail.com
+                </address>
+                <address className={"px-2"}>
+                    <div className={'text-center'}>
+                        Damen
+                    </div>
+                    <br/>
+                    <div className={'text-center font-bold text-2xl font-serif'}>
+                        Bettina
+                    </div>
+                    <br/>
+                    0170 / 8101614 <br/>
+                    bettina.krause[at]spok-berlin.de
+                </address>
+                <address className={"px-2"}>
+                    <div className={'text-center'}>
+                        Herren
+                    </div>
+                    <br/>
+                    <div className={'text-center font-bold text-2xl font-serif'}>
+                        Dirk
+                    </div>
+                    <br/>0170 / 451 54 45<br/>dirk.giebson[at]gmail.com
+                </address>
+
+
             </div>
 
-            <div className="">
+            <div className="max-w-prose">
                 <h1> Probetraining</h1>
                 <p>
                     Wir bieten Ihnen ein kostenloses 4-wöchiges und über den Landessportbund Berlin versichertes
@@ -41,9 +77,6 @@ export default function Kontakt() {
                     Stand: September 2021
                 </p>
             </div>
-
         </div>
-
-
     )
 }

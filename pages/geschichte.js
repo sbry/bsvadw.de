@@ -1,7 +1,7 @@
 export default function Geschichte() {
     return (
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
-            <div>
+            <div className={"max-w-prose"}>
                 <h1> Geschichte der Tischtennisabteilung des BSV AdW</h1>
 
 
@@ -75,7 +75,7 @@ export default function Geschichte() {
                     Fall in punkto Geselligkeit ganz weit vorn...
                 </p>
             </div>
-            <div>
+            <div className={"max-w-prose"}>
                 <h1> Sporthallennutzung unserer Abt. TT seit dem Gründungsjahr 1954</h1>
 
                 <ol>

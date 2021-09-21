@@ -8,7 +8,6 @@ $color: #20782d;
 $highlight: lighten(saturate($color, 20%), 8%);
 $active: lighten(saturate($color, 20%), 5%);
 
-// $highlight: #81af12;
 
 html,
 body {
@@ -38,7 +37,7 @@ body {
   }
 
   main {
-    @apply mx-5 px-5 rounded-md bg-white;
+    @apply mx-5 px-5 rounded-md bg-white min-h-full;
   }
 }
 
@@ -60,20 +59,23 @@ nav {
   @apply mb-5 rounded-md;
 
   a {
-    @apply text-white py-2 text-lg px-2 font-bold block;
-    &:last-child {
-      @apply rounded-b-md;
-    }
+    @apply text-white p-3 text-lg font-bold block;
     &:first-child {
       @apply rounded-t-md;
     }
+
+    &:last-child {
+      @apply rounded-b-md;
+    }
+
     @media (min-width: theme('screens.md')) {
       @apply px-5 text-sm inline-block ;
-      &:last-child {
-        @apply rounded-r-md;
-      }
       &:first-child {
-        @apply rounded-l-md;
+        @apply rounded-l-md rounded-tr-none;
+
+      }
+      &:last-child {
+        @apply rounded-r-md rounded-bl-none;
       }
     }
     @media (min-width: theme('screens.lg')) {
@@ -111,5 +113,63 @@ ol {
 
 
 /*
-
+POST
  */
+$post-it-color-light: #fef18a;
+$post-it-color-dark: #fde420;
+
+
+address {
+  @apply m-5 inline-block p-5 text-gray-800;
+  background: $post-it-color-light linear-gradient(150deg, $post-it-color-dark 0%, $post-it-color-light 100%);
+  border: 1px solid $post-it-color-dark;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  border-bottom-right-radius: 60px 5px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &::before {
+    background-color: $post-it-color-dark;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    border: 0;
+    right: 0px;
+    top: 0;
+    height: 40px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    right: -1px;
+    width: 200px;
+    height: 140px;
+    background-image: linear-gradient(173deg, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.4) 100%);
+    transform: rotate(4deg);
+    filter: blur(2px);
+    z-index: -1;
+  }
+
+  &:nth-child(3n) {
+    transform: rotate(5deg);
+  }
+
+  &:nth-child(3n-1) {
+    transform: rotate(-4deg);
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    z-index: 2;
+  }
+}
+
+
+
+
+
+
+

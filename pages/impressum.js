@@ -1,6 +1,6 @@
 export default function Impressum() {
     return (
-        <div className={"grid grid-flow-col grid-cols-2 grid-rows-1"}>
+        <div className={"max-w-prose"}>
             <div><h1> Impressum</h1>
 
                 <address>
