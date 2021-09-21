@@ -22,7 +22,7 @@ export default function Index() {
                 <h1>Wöchentliche Trainingszeiten</h1>
                 <div className={"grid grid-flow-col grid-cols-2 grid-rows-1 gap-5"}>
                     <div>
-                        <h2>Schüler- und Jugend</h2>
+                        <h2>Schüler und Jugendliche</h2>
                         <dl>
                             <dt>Montag</dt>
                             <dd>17.30 - 19.00 Uhr</dd>
@@ -31,7 +31,7 @@ export default function Index() {
                         </dl>
                     </div>
                     <div>
-                        <h2>Erwachsenen</h2>
+                        <h2>Erwachsene</h2>
                         <dl>
                             <dt>Montag</dt>
                             <dd>19.00 - 22.00 Uhr</dd>
@@ -44,7 +44,7 @@ export default function Index() {
                 </div>
             </div>
 
-            <div className="py-4">
+            <div>
 
                 <MyGallery/>
 

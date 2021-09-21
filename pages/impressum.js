@@ -1,6 +1,6 @@
 export default function Impressum() {
     return (
-        <div className={"max-w-prose pt-0.5"}>
+        <div className={"max-w-prose"}>
 
             <h1> Impressum</h1>
 
@@ -30,6 +30,14 @@ export default function Impressum() {
                 dieser Homepage und macht sich diese Inhalte nicht zu eigen. Diese Erklärung gilt für alle auf
                 unserer Homepage angezeigten Links und für alle Inhalte der Seiten, zu denen wir Banner und
                 Links führen.
+            </p>
+            <p>
+                Technik: Hinweise und Anmerkungen an <a
+                href={"mailto:technik[at]salisbury.de"}>Justin
+                Salisbury.</a>
+                {/*    mit <a*/}
+                {/*    href={"https://nextjs.org/"}>Next.js</a> und <a href={"https://tailwindcss.com/"}>tailwindcss</a>*/}
+                {/**/}
             </p>
         </div>
     )

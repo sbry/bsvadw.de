@@ -58,7 +58,7 @@ export default function Kontakt() {
                     Nach dem Probetraining treffen Sie und wir die Entscheidung, ob Sie dem Verein beitreten möchten
                     und können. Für die Aufnahme in unseren Verein benötigen wir einen mit folgenden Daten
                     ausgefüllten
-                    Aufnahmeantrag den Sie in der Sporthalle erhalten: Vor- und Nachname, Geburtsdatum und Ihre
+                    Aufnahmeantrag den Sie in der Turnhalle erhalten: Vor- und Nachname, Geburtsdatum und Ihre
                     Anschrift. Um Sie über wichtige Ereignisse wie z.B. Hallensperrungen, Vereinsfeiern und Turniere
                     informieren zu können, wäre die Angabe einer Emailadresse vorteilhaft. Wenn Sie vorher bei einem
                     anderen Verein gespielt haben, wird der Name des Vereins und des Verbandes benötigt.

@@ -34,11 +34,11 @@ body {
 
   p, dl, h1, h2, li {
     @apply text-gray-700;
-    @apply my-2;
+    @apply mb-2;
   }
 
   main {
-    @apply m-5 px-5 pb-5 rounded-md bg-white min-h-full;
+    @apply p-4 bg-white min-h-full;
   }
 }
 
@@ -60,31 +60,47 @@ a {
 }
 
 header, footer {
+
   nav {
     @apply flex;
     a {
-      @apply text-white px-6 py-2 inline-block;
+      @apply text-white mr-5 py-2 inline-block;
     }
   }
 }
 
 header {
+  @apply px-4 pt-2;
+
+  .heading {
+    @apply grid grid-cols-1;
+
+    @media (min-width: theme('screens.sm')) {
+      @apply grid grid-cols-2;
+    }
+
+    a {
+      @apply font-bold text-white text-xl;
+    }
+  }
+
   nav {
     @apply font-bold;
   }
 }
 
+footer{
+  @apply px-5;
+}
 
-/*
-  @media (min-width: theme('screens.md')) {
-      }
+@media (min-width: theme('screens.md')) {
+}
 
-      @media (min-width: theme('screens.lg')) {
-      }
+@media (min-width: theme('screens.lg')) {
+}
 
-      @media (min-width: theme('screens.xl')) {
-      }
- */
+@media (min-width: theme('screens.xl')) {
+}
 
 
 /*
@@ -143,8 +159,16 @@ address {
 }
 
 
+dl {
+  @apply grid grid-cols-3;
 
+  dt {
+    @apply col-span-1 font-bold;
+  }
 
+  dd {
+    @apply col-span-2;
 
-
+  }
+}
 

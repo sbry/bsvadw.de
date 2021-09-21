@@ -1,5 +1,5 @@
 export default function Datenschutz(props) {
-    return <div className={"max-w-prose pt-0.5"}>
+    return <div className={"max-w-prose"}>
         <h1>Datenschutz&shy;erkl&auml;rung</h1>
         <h2>1. Datenschutz auf einen Blick</h2>
         <h3>Allgemeine Hinweise</h3> <p>Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber,

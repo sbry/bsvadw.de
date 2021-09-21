@@ -67,7 +67,7 @@ export default function Geschichte() {
                 </p>
                 <p>
                     Wir bieten sehr gute Trainingsbedingungen in einer
-                    modernen Sporthalle an neun Tischen. Wir sind ein sportlich engagierter Verein, bei dem auch
+                    modernen Turnhalle an neun Tischen. Wir sind ein sportlich engagierter Verein, bei dem auch
                     weiterhin
                     das persönliche Miteinander eine große Rolle spielen wird. Auch wenn wir mit den Berliner
                     Leistungszentren nicht in allen Belangen sportlich mithalten wollen und können, so sind wir auf
@@ -76,16 +76,16 @@ export default function Geschichte() {
                 </p>
             </div>
             <div className={"max-w-prose"}>
-                <h1> Sporthallennutzung unserer Abt. TT seit dem Gründungsjahr 1954</h1>
+                <h1> Turnhallennutzung seit dem Gründungsjahr 1954</h1>
 
-                <ol className={'list-decimal list-inside'}>
-                    <li>Betriebssporthalle (BBS) im Werk Johannisthal, Segelfliegerdamm bis 1966 unter dem Namen
+                <ul className={''}>
+                    <li>Betriebsturnhalle (BBS) im Werk Johannisthal, Segelfliegerdamm bis 1966 unter dem Namen
                         Motor
                         Johannisthal – ab 1966 nach der Fusion Motor Johannisthal mit Motor Friedrichshain/Süd zu TT
                         Sektion BSG
                         Kühlautomat.
                     </li>
-                    <li>Ab 1975 neue Sporthalle für BSG Kühlautomat in der 5. Grundschule Mosischstr. /Ecke
+                    <li>Ab 1975 neue Turnhalle für BSG Kühlautomat in der 5. Grundschule Mosischstr. /Ecke
                         Kiefholzstr. (heute SV Luftfahrt, Ringer-Leistungszentrum).
                     </li>
                     <li>Umzug 1995 zur Sonnenblumengrundschule in
@@ -95,14 +95,14 @@ export default function Geschichte() {
                         Wissenschaften zu BSV Akademie der Wissenschaften e.V., Abt. Tischtennis.
                     </li>
                     <li>Zwischenzeitlich Umzug in
-                        die neue Sporthalle Mosischstr. /Ecke Kiefholzstr.
+                        die neue Turnhalle Mosischstr. /Ecke Kiefholzstr.
                     </li>
                     <li>Letzter Umzug im Sommer 2004 – rechtzeitig zur
-                        Saison 2004/2005 in die neue Sporthalle der Brahe - Schule, Am Plänterwald 17 bis zum
+                        Saison 2004/2005 in die neue Turnhalle der Sophie-Brahe-Schule, Am Plänterwald 17 bis zum
                         heutigen
                         Tage.
                     </li>
-                </ol>
+                </ul>
             </div>
         </div>
     )
