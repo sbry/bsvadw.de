@@ -22,7 +22,7 @@ export default function Header() {
                         className={"inline-block w-12 mr-3"} src="/images/logo/tt-icon.svg"
                         alt="AdW"
                     />
-                    BeTTV-Spielbetrieb
+                    Spielbetrieb bei bettv.de
 
                 </a>
 
