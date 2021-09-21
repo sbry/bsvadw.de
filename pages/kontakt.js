@@ -4,46 +4,44 @@ export default function Kontakt() {
             <div>
                 <h1> Kontakt aufnehmen</h1>
                 <address className={"px-2"}>
-                    <div className={'text-center'}>
+                    <p className={'text-center'}>
                         Verein Allgemein
-                    </div>
-                    <br/>
-                    <div className={'text-center font-bold text-2xl font-serif'}>
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
                         Andreas
-                    </div>
-                    <br/>
-                    030 / 534 11 63<br/>
+                    </p>
+                    <p className={'oldstyle-nums'}> 030 / 534 11 63</p>
                     abteilungsleitungttadw[at]freenet.de
                 </address>
                 <address className={"px-2"}>
-                    <div className={'text-center'}> Jugend</div>
-                    <br/>
-                    <div className={'text-center font-bold text-2xl font-serif'}>
+                    <p className={'text-center'}> Jugend</p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
                         Steven
-                    </div>
-                    <br/>0176 / 438 537 43<br/>steven.kecks[at]gmail.com
+                    </p>
+                    <p className={'oldstyle-nums'}>0176 / 438 537 43</p><p>steven.kecks[at]gmail.com</p>
                 </address>
                 <address className={"px-2"}>
-                    <div className={'text-center'}>
+                    <p className={'text-center'}>
                         Damen
-                    </div>
-                    <br/>
-                    <div className={'text-center font-bold text-2xl font-serif'}>
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
                         Bettina
-                    </div>
-                    <br/>
-                    0170 / 8101614 <br/>
-                    bettina.krause[at]spok-berlin.de
+                    </p>
+                    <p className={'oldstyle-nums'}>
+                        0170 / 8101614</p>
+                    <p>
+                        bettina.krause[at]spok-berlin.de
+                    </p>
                 </address>
                 <address className={"px-2"}>
-                    <div className={'text-center'}>
+                    <p className={'text-center'}>
                         Herren
-                    </div>
-                    <br/>
-                    <div className={'text-center font-bold text-2xl font-serif'}>
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
                         Dirk
-                    </div>
-                    <br/>0170 / 451 54 45<br/>dirk.giebson[at]gmail.com
+                    </p>
+                    <p className={'oldstyle-nums'}>0170 / 451 54 45</p>
+                    <p>dirk.giebson[at]gmail.com</p>
                 </address>
 
 

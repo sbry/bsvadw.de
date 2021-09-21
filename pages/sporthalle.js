@@ -12,10 +12,10 @@ export default function Geschichte() {
             <div className="">
                 <h2>Adresse</h2>
                 <address>
-                    Am Plänterwald 17 <br/>12435 Berlin <br/>
-
+                    <p>Am Plänterwald 17</p><p>12435 Berlin</p>
+<p className={"text-sm"}>
                     <small>Eingang zur Halle zu Fuß über Erwin-Bennewitz-Weg</small>
-
+</p>
 
                 </address>
                 <h2>Fahrverbindungen</h2>
