@@ -1,0 +1,105 @@
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$color: #20782d;
+$highlight: lighten(saturate($color, 20%), 10%);
+// $highlight: #81af12;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+  Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+  sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+    @apply font-bold;
+    @apply text-gray-700;
+  }
+
+  h2 {
+    @apply text-xl;
+    @apply font-bold;
+    @apply text-gray-700;
+  }
+
+  p, dl, h1, h2, li {
+    @apply text-gray-700;
+    @apply my-2;
+  }
+
+  p {
+
+  }
+
+  main {
+    @apply mx-5 px-5 rounded-md bg-white;
+    border-top-left-radius: 0;
+  }
+}
+
+.external-link {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-image: url(tt-icon.svg);
+  background-size: 2rem auto;
+  padding-left: 36px;
+
+}
+
+header, footer, body {
+  background-color: $color;
+}
+
+nav {
+  background-color: $highlight;
+  // @apply mb-5 rounded-md;
+  a {
+    @apply text-white py-2 text-lg px-2 font-bold block ;
+
+    @media (min-width: theme('screens.md')) {
+
+      @apply px-5 text-sm inline-block rounded-t-md;
+    }
+    @media (min-width: theme('screens.lg')) {
+      @apply px-5 text-sm inline-block;
+    }
+
+    @media (min-width: theme('screens.xl')) {
+      @apply px-5 text-lg inline-block;
+    }
+
+    &:hover {
+      background-color: $color;
+      @apply text-white;
+    }
+
+    &.active {
+      &:hover {
+        color: black;
+      }
+
+      @apply text-gray-700;
+      @apply bg-white;
+
+
+    }
+  }
+}
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+
+/*
+
+ */
