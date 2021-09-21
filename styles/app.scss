@@ -7,7 +7,8 @@
 $color: #20782d;
 $highlight: lighten(saturate($color, 20%), 8%);
 $active: lighten(saturate($color, 20%), 5%);
-
+// $highlight: $color;
+// $active: $color;
 
 html,
 body {
@@ -80,12 +81,11 @@ nav {
 
     &:hover {
       background-color: $color;
-      @apply text-white;
     }
 
     &.active {
       background-color: $active;
-      @apply text-white;
+      cursor: default;
     }
   }
 }
