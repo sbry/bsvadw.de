@@ -41,25 +41,9 @@ body {
   }
 }
 
-//.external-link {
-//  background-position: left center;
-//  background-repeat: no-repeat;
-//  background-image: url(public/logo/tt-icon.svg);
-//  background-size: 2rem auto;
-//  padding-left: 36px;
-//
-//}
 
 header, footer, body {
   background-color: $color;
-}
-
-.heading {
-
-  @media (min-width: theme('screens.md')) {
-
-  }
-
 }
 
 nav {
@@ -100,16 +84,8 @@ nav {
     }
 
     &.active {
-      &:hover {
-        // color: black;
-        // @apply text-gray-700;
-        cursor: pointer !important;
-      }
-
       background-color: $active;
       @apply text-white;
-
-
     }
   }
 }

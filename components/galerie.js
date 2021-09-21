@@ -12,8 +12,8 @@ const images = ["1242.jpg",
     "1262.jpg",
     "1264.jpg",
     "1268.jpg"].map(filename => ({
-    original: `/galerie/${filename}`,
-    thumbnail: `/galerie/${filename}`
+    original: `/images/galerie/${filename}`,
+    thumbnail: `/images/galerie/${filename}`
 }));
 export default function MyGallery(props) {
     return <ImageGallery slideInterval={2500} slideDuration={500} showThumbnails={true}

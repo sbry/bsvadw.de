@@ -15,7 +15,7 @@ export default function Layout({children}) {
                      className={'mx-5 font-bold text-white text-xl md:text-2xl py-2'}>
                     <a href="/">
                         <img
-                            className={"inline-block w-12 h-12 mr-2"} src="/logo/adw-symbol.png"
+                            className={"inline-block w-12 h-12 mr-2"} src="/images/logo/adw-symbol.png"
                             alt="AdW"
                         />
                         BSV AdW e.V. Tischtennis
@@ -30,7 +30,7 @@ export default function Layout({children}) {
                         className={""}
                         href={"https://bettv.tischtennislive.de/default.aspx?L1=Public&L2=Verein&L2P=1198&Page=Spielbetrieb&Sportart=96"}>
                         <img
-                            className={"inline-block w-12 mr-3"} src="/logo/tt-icon.svg"
+                            className={"inline-block w-12 mr-3"} src="/images/logo/tt-icon.svg"
                             alt="AdW"
                         />
                         BeTTV-Spielbetrieb
