@@ -78,7 +78,7 @@ export default function Geschichte() {
             <div className={"max-w-prose"}>
                 <h1> Sporthallennutzung unserer Abt. TT seit dem Gründungsjahr 1954</h1>
 
-                <ol>
+                <ol className={'list-decimal list-inside'}>
                     <li>Betriebssporthalle (BBS) im Werk Johannisthal, Segelfliegerdamm bis 1966 unter dem Namen
                         Motor
                         Johannisthal – ab 1966 nach der Fusion Motor Johannisthal mit Motor Friedrichshain/Süd zu TT

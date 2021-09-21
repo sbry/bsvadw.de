@@ -1,14 +1,22 @@
-import Link from 'next/link'
+import ActiveLink from "./activelink";
 
-
-export default function Footer(props) {
+export default function Footer() {
     return (
-        <footer className="max-w-7xl mx-auto px-4 h-8">
-            <nav className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                {/*© */}
+        <footer>
+            <nav>
+                {[
+                    {name: 'Impressum', href: '/impressum/'},
+                    {name: 'Datenschutz', href: '/datenschutz/'},
+                ].map((item) => (
+                    <ActiveLink
+                        key={item.name}
+                        href={item.href}
+                    >
+                        {item.name}
+                    </ActiveLink>
+                ))}
 
             </nav>
         </footer>
-
     )
 }

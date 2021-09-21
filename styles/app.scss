@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 $color: #20782d;
-$highlight: lighten(saturate($color, 20%), 8%);
+$highlight: saturate($color, 20%);
 $active: lighten(saturate($color, 20%), 5%);
 // $highlight: $color;
 // $active: $color;
@@ -38,7 +38,7 @@ body {
   }
 
   main {
-    @apply mx-5 px-5 rounded-md bg-white min-h-full;
+    @apply m-5 px-5 pb-5 rounded-md bg-white min-h-full;
   }
 }
 
@@ -47,53 +47,44 @@ header, footer, body {
   background-color: $color;
 }
 
-nav {
-  background-color: $highlight;
-  @apply mb-5 rounded-md;
+a {
+  &:hover {
+    @apply underline;
+  }
 
-  a {
-    @apply text-white p-3 text-lg font-bold block;
-    &:first-child {
-      @apply rounded-t-md;
-    }
+  &.active {
+    cursor: default;
+    @apply underline;
+  }
 
-    &:last-child {
-      @apply rounded-b-md;
-    }
+}
 
-    @media (min-width: theme('screens.md')) {
-      @apply px-5 text-sm inline-block ;
-      &:first-child {
-        @apply rounded-l-md rounded-tr-none;
-
-      }
-      &:last-child {
-        @apply rounded-r-md rounded-bl-none;
-      }
-    }
-    @media (min-width: theme('screens.lg')) {
-      @apply text-base;
-    }
-
-    @media (min-width: theme('screens.xl')) {
-    }
-
-
-    &:hover {
-      background-color: $color;
-    }
-
-    &.active {
-      background-color: $active;
-      cursor: default;
+header, footer {
+  nav {
+    @apply flex;
+    a {
+      @apply text-white px-6 py-2 inline-block;
     }
   }
 }
 
-ol {
-  list-style-type: decimal;
-  list-style-position: inside;
+header {
+  nav {
+    @apply font-bold;
+  }
 }
+
+
+/*
+  @media (min-width: theme('screens.md')) {
+      }
+
+      @media (min-width: theme('screens.lg')) {
+      }
+
+      @media (min-width: theme('screens.xl')) {
+      }
+ */
 
 
 /*
@@ -104,7 +95,7 @@ $post-it-color-dark: #fde420;
 
 
 address {
-  @apply m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
+  @apply m-2 lg:m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
   background: $post-it-color-light linear-gradient(150deg, $post-it-color-dark 0%, $post-it-color-light 100%);
   border: 1px solid $post-it-color-dark;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
