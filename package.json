@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "stage": "rsync -avhz --delete bsvadw.de/out/ joni@app1.de:workspace/bsvadw.de/"
   },
   "dependencies": {
     "bootstrap-sass": "^3.4.1",
