@@ -15,7 +15,7 @@ export default function Index() {
                     Berliner Tischtennisverbandes und den Breitensport.
                 </p>
                 <p>
-                    Um weiterhin auf hohen Niveau spielen zu können, suchen wir verstärkt
+                    Um weiterhin auf hohem Niveau spielen zu können, suchen wir verstärkt
                     Spieler und Spielerinnen für die 1. Kreisklasse bis zur Bezirksklasse!
                 </p>
 
