@@ -70,12 +70,9 @@ header, footer {
 }
 
 header {
-  @apply px-4 pt-2;
+  @apply pt-2;
 
   .heading {
-    @apply my-2;
-
-
     a {
       @apply font-bold text-white text-xl block;
       @media (min-width: theme('screens.sm')) {
@@ -85,7 +82,7 @@ header {
   }
 
   nav {
-    @apply font-bold;
+    @apply px-4 font-bold;
   }
 }
 

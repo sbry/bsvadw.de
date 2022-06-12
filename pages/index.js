@@ -15,8 +15,11 @@ export default function Index() {
                     Berliner Tischtennisverbandes und den Breitensport.
                 </p>
                 <p>
-                    Um weiterhin auf hohem Niveau spielen zu können, suchen wir verstärkt
-                    Spieler und Spielerinnen für die 1. Kreisklasse bis zur Bezirksklasse!
+                    Wir sind ein relativ kleiner Verein mit einer eingeschränkten Anzahl an Tischtennistischen und einer
+                    nicht allzu großen Halle. Wir suchen daher derzeit vor allem Mitglieder, die unseren Jugend- und
+                    Damenbereich verstärken, sowie einige wenige männliche Spieler, die das Niveau haben, am
+                    Punktspielbetrieb teilnehmen zu können. Bei einem unverbindlichen Probetraining können wir uns
+                    gegenseitig kennenlernen, danach alles weitere besprechen…
                 </p>
 
                 <h1>Wöchentliche Trainingszeiten</h1>

@@ -1,4 +1,5 @@
 import ActiveLink from "./activelink";
+import OrbitSvg from "./orbit-svg"
 
 export default function Header() {
     return (
@@ -6,10 +7,18 @@ export default function Header() {
             <div className={"heading"}>
                 <a title={"Berliner Sportverein Akademie der Wissenschaften e.V."}
                    href="/">
-                    <img
-                        className={"inline w-12 h-12 mr-1 lg:mr-2"} src="/images/logo/adw-symbol.png"
-                        alt="AdW"
+                    {/*        <img className={"inline w-20 h-20"}
+                         src="/images/logo/adw-symbol.png"
+                         alt="AdW"
+                    />*/}
+                    {/*<span className={"inline-block ml-4 relative top-3"}>
+                    <OrbitSvg height="600px" width="600px"/>
+                        </span>*/}
+                    <img className={"inline w-16 h-16 mx-2 relative bottom-1"}
+                         src="/images/logo/adw-symbol-animated.svg"
+                         alt="AdW"
                     />
+
                     BSV AdW e.V. Tischtennis
                 </a>
 
@@ -17,7 +26,7 @@ export default function Header() {
                 <a title={"Spielbetrieb des BSV AdW beim Berliner Tischtennisverband"}
                    href={"https://bettv.tischtennislive.de/default.aspx?L1=Public&L2=Verein&L2P=1198&Page=Spielbetrieb&Sportart=96"}>
                     <img
-                        className={"inline w-12 sm:ml-6 mr-1 lg:mr-2"} src="/images/logo/tt-icon.svg"
+                        className={"inline w-12 mx-4"} src="/images/logo/tt-icon.svg"
                         alt="AdW"
                     />
                     Spielbetrieb bei bettv.de
