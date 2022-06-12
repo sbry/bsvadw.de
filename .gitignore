@@ -80,4 +80,5 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-/archive/
+/arch/
+/home/
