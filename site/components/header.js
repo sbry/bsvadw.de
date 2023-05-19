@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <header>
             <div className={"heading"}>
-                <a title={"Berliner Sportverein Akademie der Wissenschaften e.V."}
+                <a title={"Berliner Sportverein &quot;Akademie der Wissenschaften&quot; e.V."}
                    href="/">
                     {/*        <img className={"inline w-20 h-20"}
                          src="/images/logo/adw-symbol.png"

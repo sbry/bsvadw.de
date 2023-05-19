@@ -49,31 +49,33 @@ export default function Kontakt() {
 
             <div className="max-w-prose">
                 <h1> Probetraining</h1>
+
+                <p>Für Erwachsene können wir euch derzeit leider nur ein Probetraining für Kandidaten mit
+                    Tischtenniserfahrung anbieten, da unsere Hallenkapazitäten derzeit vollkommen ausgeschöpft
+                    sind.</p>
+
+                <p>Für Jugendliche ist ein begrenztes Probetraining nach Absprache mit den Jugendtrainern
+                    möglich, hier sind die Aufnahmekapazitäten allerdings ebenfalls begrenzt.</p>
+
+                <p>Die Rahmenbedingungen: Ein 4-wöchiges Probetraining wäre kostenlos und ist über den
+                    Landessportbund Berlin versichert. Benötigt werden Freude am Tischtennis, möglichst
+                    Vereinserfahrung, Sportkleidung, Hallenschuhe mit heller Sohle und ein Tischtennisschläger.</p>
+
+                <p>Nach dem Probetraining können beide Seiten entscheiden, ob ein Eintrag auf die Warteliste
+                    zur Aufnahme in den Verein AdW sinnvoll ist. Wenn es zu einer Aufnahme in unseren Verein
+                    kommt, wird ein Aufnahmeantrag mit folgenden Daten ausgefüllt: Vor- und Nachname,
+                    Geburtsdatum, Anschrift und die Kontaktdaten wie Telefon und Emailadresse, sowie ggf. der
+                    Name des vorherigen Vereins und des Verbandes.</p>
                 <p>
-                    Wir bieten Ihnen ein kostenloses 4-wöchiges und über den Landessportbund Berlin versichertes
-                    Probetraining an. Dafür benötigen Sie: Freude am Tischtennis und bestenfalls Vereinserfahrung,
-                    Sportkleidung, Hallenschuhe mit heller Sohle und einen Tischtennisschläger.
-                </p>
-                <p>
-                    Nach dem Probetraining treffen Sie und wir die Entscheidung, ob Sie dem Verein beitreten möchten
-                    und können. Für die Aufnahme in unseren Verein benötigen wir einen mit folgenden Daten
-                    ausgefüllten
-                    Aufnahmeantrag den Sie in der Turnhalle erhalten: Vor- und Nachname, Geburtsdatum und Ihre
-                    Anschrift. Um Sie über wichtige Ereignisse wie z.B. Hallensperrungen, Vereinsfeiern und Turniere
-                    informieren zu können, wäre die Angabe einer Emailadresse vorteilhaft. Wenn Sie vorher bei einem
-                    anderen Verein gespielt haben, wird der Name des Vereins und des Verbandes benötigt.
-                </p>
-                <p>
-                    Nach erfolgter Aufnahme wird sich unser Kassenwart Herr Ingo Overbeck bei Ihnen bzgl. der
-                    Beitragserhebung melden. Die Bezahlung der Mitgliedsbeiträge ist bei uns in bar an unseren
-                    Kassenwart direkt in der Halle oder per Überweisung möglich. Die Beiträge können viertel-, halb-
-                    oder jährlich bezahlt werden, immer bis spätestens zum 31.12. des jeweiligen Jahres. Die
-                    Kontoverbindung für Beitragsüberweisungen erhalten sie vom Kassenwart. Einmalig wird eine
-                    Aufnahmegebühr von 20 € fällig. Der Monatsbeitrag beträgt 12 €.
-                </p>
-                <p>
-                    Stand: September 2021
-                </p>
+                    Nach erfolgter Aufnahme wird sich unser Kassenwart zur Absprache der Beitragszahlung –
+                    möglich in bar oder per Überweisung – bei Dir melden. Der Beitrag ist im Voraus im
+                    Kalenderjahresmodus, also immer bis 31.12. eines Jahres fällig. Abweichend ist auch
+                    vierteljährliche oder oder halbjährliche Zahlungsweise möglich. Die Kontoverbindung für
+                    Beitragsüberweisungen erhältst du vom Kassenwart. Einmalig wird eine Aufnahmegebühr
+                    von 20 € fällig. Der Jahresbeitrag beträgt derzeit 144 €.</p>
+
+                <p>Stand: Mai 2023</p>
+
             </div>
         </div>
     )

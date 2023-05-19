@@ -31,14 +31,14 @@ export default function Impressum() {
                 unserer Homepage angezeigten Links und für alle Inhalte der Seiten, zu denen wir Banner und
                 Links führen.
             </p>
-            <p>
-                Technik: Hinweise und Anmerkungen an <a
-                href={"mailto:technik[at]salisbury.de"}>Justin
-                Salisbury.</a>
+            {/*<p>*/}
+            {/*    Technik: Hinweise und Anmerkungen an <a*/}
+            {/*    href={"mailto:technik[at]salisbury.de"}>Justin*/}
+            {/*    Salisbury.</a>*/}
                 {/*    mit <a*/}
                 {/*    href={"https://nextjs.org/"}>Next.js</a> und <a href={"https://tailwindcss.com/"}>tailwindcss</a>*/}
                 {/**/}
-            </p>
+            {/*</p>*/}
         </div>
     )
 }
