@@ -44,10 +44,9 @@ EOF
   date
   ;;
 pull)
-
   echo "Starting download $REMOTE_DIR from $HOST to $LOCAL_DIR"
   $LFTP <<EOF
-mirror $LFTP_MIRROR_ARGS $REMOTE_DIR $LOCAL_DIR;
+set net:socket-buffer 60000; set ftp:prefer-epsv no; set ssl:verify-certificate no; set xfer:use-temp-file yes; set ftp:use-mdtm off;set net:socket-maxseg 132072; set net:max-retries 10;set net:reconnect-interval-base 0;set net:reconnect-interval-multiplier 1; mirror $LFTP_MIRROR_ARGS $REMOTE_DIR $LOCAL_DIR;
 exit   
 EOF
   echo

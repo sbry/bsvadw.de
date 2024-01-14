@@ -16,9 +16,9 @@ export default function Kontakt() {
                 <address className={"px-2"}>
                     <p className={'text-center'}> Jugend</p>
                     <p className={'text-center font-bold text-2xl font-serif'}>
-                        Steven
+                        Aaron
                     </p>
-                    <p className={'oldstyle-nums'}>0176 / 438 537 43</p><p>steven.kecks[at]gmail.com</p>
+                    <p className={'oldstyle-nums'}>0152 / 56164048</p><p>aaron.seeliger[at]posteo.de</p>
                 </address>
                 <address className={"px-2"}>
                     <p className={'text-center'}>
@@ -51,11 +51,10 @@ export default function Kontakt() {
                 <h1> Probetraining</h1>
 
                 <p>Für Erwachsene können wir euch derzeit leider nur ein Probetraining für Kandidaten mit
-                    Tischtenniserfahrung anbieten, da unsere Hallenkapazitäten derzeit vollkommen ausgeschöpft
-                    sind.</p>
+                    Tischtenniserfahrung anbieten, da unsere Hallenkapazität ausgeschöpft ist.</p>
 
                 <p>Für Jugendliche ist ein begrenztes Probetraining nach Absprache mit den Jugendtrainern
-                    möglich, hier sind die Aufnahmekapazitäten allerdings ebenfalls begrenzt.</p>
+                    möglich.</p>
 
                 <p>Die Rahmenbedingungen: Ein 4-wöchiges Probetraining wäre kostenlos und ist über den
                     Landessportbund Berlin versichert. Benötigt werden Freude am Tischtennis, möglichst

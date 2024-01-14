@@ -74,7 +74,7 @@ header {
 
   .heading {
     a {
-      @apply font-bold text-white text-xl block;
+      @apply font-bold text-white text-xl block whitespace-nowrap;
       @media (min-width: theme('screens.sm')) {
         @apply inline-block;
       }
