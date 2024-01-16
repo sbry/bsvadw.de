@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-import ftplib, sys, fs
+import ftplib, sys, fs, datetime, slugify
 import fs.ftpfs, fs.mirror
 
 ##
 # import logging
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 # logger = logging.getLogger()
+
 
 
 class FTP_TLS(ftplib.FTP_TLS):
@@ -49,11 +50,11 @@ class MyFTPFS(fs.ftpfs.FTPFS):
 
 def usage():
     print("Usage:")
-    print(f"{sys.argv[0]} push|pull")
+    print(f"{sys.argv[0]} push|pull|archive")
     sys.exit()
 
 
-def remote_fs():
+def get_remote_fs():
     return MyFTPFS("***REMOVED***",
                    user="***REMOVED***",
                    passwd="***REMOVED***",
@@ -61,8 +62,15 @@ def remote_fs():
                    tls=True)
 
 
-def local_fs():
+def get_local_fs():
     return fs.open_fs('osfs://')
+
+
+def archive_home():
+    local_fs = get_local_fs()
+    local_fs.makedir('arch', recreate=True)
+    if local_fs.exists("home"):
+        local_fs.movedir('home', f'arch/{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}', create=True)
 
 
 if __name__ == '__main__':
@@ -72,9 +80,10 @@ if __name__ == '__main__':
     except IndexError:
         usage()
     if mode == "pull":
-        local_fs = local_fs()
+        archive_home()
+        local_fs = get_local_fs()
         local_fs.makedirs('home/html', recreate=True)
-        fs.mirror.mirror(remote_fs().opendir('html'),
+        fs.mirror.mirror(get_remote_fs().opendir('html'),
                          local_fs.opendir("home/html"),
                          walker=None,
                          copy_if_newer=True,
@@ -83,11 +92,13 @@ if __name__ == '__main__':
 
         pass
     elif mode == "push":
-        fs.mirror.mirror(local_fs().opendir("home/html"),
-                         remote_fs().opendir('html'),
+        fs.mirror.mirror(get_local_fs().opendir("home/html"),
+                         get_remote_fs().opendir('html'),
                          walker=None,
                          copy_if_newer=True,
                          workers=4,
                          preserve_time=False)
+    elif mode == "archive":
+        archive_home()
     else:
         usage()
