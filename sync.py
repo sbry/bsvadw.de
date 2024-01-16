@@ -1,8 +1,11 @@
-import ftplib, pathlib, re, sys, fs, logging, copy, datetime
+#!/usr/bin/env python
+import ftplib, sys, fs
 import fs.ftpfs, fs.mirror
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-logger = logging.getLogger()
+##
+# import logging
+# logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+# logger = logging.getLogger()
 
 
 class FTP_TLS(ftplib.FTP_TLS):
@@ -69,9 +72,10 @@ if __name__ == '__main__':
     except IndexError:
         usage()
     if mode == "pull":
-        pathlib.Path("html").mkdir(exist_ok=True, parents=True)
+        local_fs = local_fs()
+        local_fs.makedirs('home/html', recreate=True)
         fs.mirror.mirror(remote_fs().opendir('html'),
-                         local_fs().opendir("html"),
+                         local_fs.opendir("home/html"),
                          walker=None,
                          copy_if_newer=True,
                          workers=4,
@@ -79,7 +83,7 @@ if __name__ == '__main__':
 
         pass
     elif mode == "push":
-        fs.mirror.mirror(local_fs().opendir("html"),
+        fs.mirror.mirror(local_fs().opendir("home/html"),
                          remote_fs().opendir('html'),
                          walker=None,
                          copy_if_newer=True,
