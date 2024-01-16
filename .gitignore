@@ -80,8 +80,8 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-/arch/
-/home/
+arch
+home
 archive
 _next
-/html/
+
