@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File:     /home/justin/workspace/bsvadw.de/sync.py
+# Author:   Justin Salisbury justin@sinube
+# Created:  Tue Jan 15 12:13:57 2024
+#
+
 import ftplib, sys, fs, datetime, slugify
 import fs.ftpfs, fs.mirror
 
