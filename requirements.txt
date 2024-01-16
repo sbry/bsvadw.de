@@ -1,5 +1,5 @@
 fs
 python-slugify
-
+ics
 
 
