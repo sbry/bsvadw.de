@@ -1,8 +1,3 @@
-# This is a sample Python script.
-
-# Press ⇧⌘F11 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
 import ftplib, pathlib, re, sys, fs, logging, copy, datetime
 import fs.ftpfs, fs.mirror
 
@@ -40,9 +35,10 @@ class MyFTPFS(fs.ftpfs.FTPFS):
                 self._features = self._parse_features(feat_response)
                 self.encoding = "utf-8" if "UTF8" in self._features else "latin-1"
                 if not fs.ftpfs.PY2:
-                    _ftp.file = _ftp.sock.makefile(  # type: ignore
-                        "r", encoding=self.encoding
-                    )
+                    _ftp.file = _ftp.sock.makefile("r", encoding=self.encoding)
+                    pass
+                pass
+            pass
         _ftp.encoding = self.encoding
         self._welcome = _ftp.welcome
         return _ftp
@@ -79,7 +75,7 @@ if __name__ == '__main__':
                          walker=None,
                          copy_if_newer=True,
                          workers=4,
-                         preserve_time=True)
+                         preserve_time=False)
 
         pass
     elif mode == "push":
@@ -88,6 +84,6 @@ if __name__ == '__main__':
                          walker=None,
                          copy_if_newer=True,
                          workers=4,
-                         preserve_time=True)
+                         preserve_time=False)
     else:
         usage()
