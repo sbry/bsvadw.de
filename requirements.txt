@@ -1,5 +1,6 @@
+requests
 fs
 python-slugify
 ics
-
+lxml
 
