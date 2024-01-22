@@ -1,0 +1,119 @@
+$grey-100: #e4e9f0;
+$grey-300: #b5c0cd;
+$grey-200: #cfd7e3;
+$grey-800: #3e4e63;
+$grid-gap: 1px;
+$day-label-size: 20px;
+
+
+.calendar-month {
+  font-family: sans-serif;
+  position: relative;
+  background-color: $grey-200;
+  border: solid 1px $grey-200;
+
+  ol,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  details {
+    summary {
+      cursor: pointer;
+    }
+  }
+
+
+  .calendar-month-header {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: 600;
+
+    .calendar-month-header-selected-month {
+
+    }
+
+    #previous-month-selector, #next-month-selector {
+      cursor: pointer;
+    }
+
+  }
+
+  .calendar-month-body {
+
+    #days-of-week {
+      color: $grey-800;
+      font-size: 18px;
+      background-color: #fff;
+      padding-bottom: 5px;
+      padding-top: 10px;
+
+      * {
+        text-align: right;
+        padding-right: 5px;
+      }
+    }
+
+    #days-of-week, #calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    #calendar-days {
+      height: 100%;
+      position: relative;
+      grid-column-gap: $grid-gap;
+      grid-row-gap: $grid-gap;
+      border-top: solid 1px $grey-200;
+    }
+
+    .calendar-day {
+      position: relative;
+      min-height: 100px;
+      font-size: 16px;
+      background-color: #fff;
+      color: $grey-800;
+      padding: 5px;
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 2px;
+        width: $day-label-size;
+        height: $day-label-size;
+      }
+
+      ol {
+        margin: 10px;
+        border-radius: 4px;
+
+        li {
+          list-style: decimal !important;
+          list-style-position: inside;
+          margin-left: 25px;
+
+          a {
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    .calendar-day--not-current {
+      background-color: $grey-100;
+    }
+
+    .calendar-day--today {
+      background-color: $grey-300;
+    }
+  }
+}
