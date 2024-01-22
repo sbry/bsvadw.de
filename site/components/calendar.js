@@ -1,23 +1,26 @@
-// import './components/Cms.scss';
-import IcalExpander from 'ical-expander';
+import dayjs from "dayjs";
+import {createElement} from "react";
 
-const getIcalExpander = (calendarString, dateStart, dateEnd) => {
-    const icalExpander = new IcalExpander({ics: calendarString, maxIterations: null});
-    return icalExpander.between(dateStart, dateEnd);
-}
+var updateLocale = require('dayjs/plugin/updateLocale');
+dayjs.extend(updateLocale);
+dayjs.updateLocale('en', {
+    months: [
+        "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli",
+        "August", "September", "Oktober", "November", "Dezember"
+    ]
+});
+const weekday = require("dayjs/plugin/weekday");
+const weekOfYear = require("dayjs/plugin/weekOfYear");
+const isBetween = require('dayjs/plugin/isBetween');
 
-// const concatExpanders = (...icalExpanders) => {
-//     let allEvents = [];
-//     icalExpanders.forEach((expander) => {
-//         const mappedEvents = expander.events.map(e => ({startDate: e.startDate, summary: e.summary}));
-//         const mappedOccurrences = expander.occurrences.map(o => ({startDate: o.startDate, summary: o.item.summary}));
-//         allEvents.push(mappedEvents, mappedOccurrences);
-//     });
-//     return allEvents;
-// }
-// const allEvents = concatExpanders(perleServiceIcalExpander, ptadZonesIcalExpander)
-// console.log(allEvents)
-// console.log(allEvents.map(e => `${e.startDate.toJSDate().toISOString()} - ${e.summary}`).join('\n'));
+dayjs.extend(weekday);
+dayjs.extend(weekOfYear);
+dayjs.extend(isBetween);
+
+const INITIAL_YEAR = dayjs().format("YYYY");
+const INITIAL_MONTH = dayjs().format("M");
+const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+const TODAY = dayjs().format("YYYY-MM-DD");
 
 const getDayEvents = (day, events) => {
     const dayjs_date = dayjs(day);
@@ -27,78 +30,85 @@ const getDayEvents = (day, events) => {
         }
     });
 }
+<div onClick={(ev) => {
+    let selectedMonth = dayjs(selectedMonth).subtract(1, "month");
+    calendarBody(selectedMonth.format("YYYY"), selectedMonth.format("M"), allEvents);
+}} id="previous-month-selector">&lt;</div>
+<div id="present-month-selector">{dayjs(
+    new Date(year, month - 1)
+).format("MMMM YYYY")}</div>
 
-/*
- * build the calendar
- */
-import dayjs from "dayjs";
-
-const weekday = require("dayjs/plugin/weekday");
-const weekOfYear = require("dayjs/plugin/weekOfYear");
-const isBetween = require('dayjs/plugin/isBetween');
-
-dayjs.extend(weekday);
-dayjs.extend(weekOfYear);
-dayjs.extend(isBetween);
-
-
-const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const TODAY = dayjs().format("YYYY-MM-DD");
-
-const INITIAL_YEAR = dayjs().format("YYYY");
-const INITIAL_MONTH = dayjs().format("M");
-
-let selectedMonth = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
-let currentMonthDays;
-let previousMonthDays;
-let nextMonthDays;
-
-const daysOfWeekElement = document.getElementById("days-of-week");
-
-WEEKDAYS.forEach((weekday) => {
-    const weekDayElement = document.createElement("li");
-    daysOfWeekElement.appendChild(weekDayElement);
-    weekDayElement.innerText = weekday;
-});
-
-
-export function createCalendar(year = INITIAL_YEAR, month = INITIAL_MONTH, ics_sources = []) {
-
-    let allEvents = [].concat(ics_sources.map(ics_source => getIcalExpander(ics_source, new Date(year, 1, 1), new Date(year, 12, 31))).map(
-        events => icalExpander.events.concat(icalExpander.occurrences)
-    ))
+function createCalendar(year = INITIAL_YEAR, month = INITIAL_MONTH, allEvents) {
+    const calendar = createElement('div', {
+            'class': 'calendar-month'
+        }, createElement('div', {
+                'class': "calendar-month-header"
+            }, createElement('div', {
+                'id': "previous-month-selector",
+                'onClick': (ev) => {
+                    let selectedMonth = dayjs(selectedMonth).subtract(1, "month");
+                    calendarBody(selectedMonth.format("YYYY"), selectedMonth.format("M"), allEvents);
+                }
+            }, "<"), createElement('div', {'id': "present-month-selector"}),
+            createElement('div', {
+                'id': "next-month-selector",
+                'onClick': (ev) => {
+                    let selectedMonth = dayjs(selectedMonth).subtract(1, "month");
+                    calendarBody(selectedMonth.format("YYYY"), selectedMonth.format("M"), allEvents);
+                }
+            }, '>')),
+        createElement('div', {'class': "calendar-month-body"}, createElement('ol', {'id': 'days-of-week'}),
+            WEEKDAYS.map((weekday) => {
+                return createElement("li", {}, weekday);
+            }), createElement('ol', {
+                'id': 'calendar-days'
+            })
+        )
+    );
 
 
+    let selectedMonth = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
+
+    calendarBody(selectedMonth.format("YYYY"), selectedMonth.format("M"), allEvents);
+
+
+}
+
+export default createCalendar;
+
+function calendarBody(year, month, allEvents) {
     const calendarDaysElement = document.getElementById("calendar-days");
 
-    document.getElementById("selected-month").innerText = dayjs(
+    document.getElementById("present-month-selector").innerText = dayjs(
         new Date(year, month - 1)
     ).format("MMMM YYYY");
 
     removeAllDayElements(calendarDaysElement);
 
-    currentMonthDays = createDaysForCurrentMonth(
+    const currentMonthDays = createDaysForCurrentMonth(
         year,
         month,
         dayjs(`${year}-${month}-01`).daysInMonth()
     );
 
-    previousMonthDays = createDaysForPreviousMonth(year, month);
+    const previousMonthDays = createDaysForPreviousMonth(year, month, currentMonthDays);
 
-    nextMonthDays = createDaysForNextMonth(year, month);
+    const nextMonthDays = createDaysForNextMonth(year, month, currentMonthDays);
 
     const days = [...previousMonthDays, ...currentMonthDays, ...nextMonthDays];
 
     days.forEach((day) => {
-        appendDay(day, calendarDaysElement, getDayEvents(day.date, allEvents));
+        const dayEvents = getDayEvents(day.date, allEvents);
+        appendDay(day, calendarDaysElement, dayEvents);
     });
 }
 
+
 function appendDay(day, calendarDaysElement, dayEvents) {
-    const dayElement = document.createElement("li");
+    const dayElement = createElement("li");
     const dayElementClassList = dayElement.classList;
     dayElementClassList.add("calendar-day");
-    const dayOfMonthElement = document.createElement("span");
+    const dayOfMonthElement = createElement("span");
     dayOfMonthElement.innerText = day.dayOfMonth;
     dayElement.appendChild(dayOfMonthElement);
 
@@ -111,21 +121,33 @@ function appendDay(day, calendarDaysElement, dayEvents) {
         dayElementClassList.add("calendar-day--today");
     }
 
-    // perleServiceIcalExpander.events
-    // perleServiceIcalExpander.occurrences
-    // ptadZonesIcalExpander.events
-    // ptadZonesIcalExpander.occurrences
-
+    // no occurrences here!
 
     if (dayEvents) {
-        const ol = document.createElement("ol");
-        dayEvents.forEach((event) => {
-            const li = document.createElement('li')
-            // ${event.startDate.toJSDate().toLocaleTimeString()}
-            li.innerText = `${event.summary}`;
-            ol.appendChild(li)
-        });
-        dayElement.appendChild(ol);
+        var dayEventsGroupedByZone = Object.groupBy(dayEvents, (event) => event._firstProp('location'));
+        for (const short_zone_name in dayEventsGroupedByZone) {
+            const kampagne_count = dayEventsGroupedByZone[short_zone_name].length;
+            const details = createElement("details");
+            const detailsClassList = details.classList;
+            detailsClassList.add(short_zone_name);
+
+            const summary = createElement("summary");
+            summary.textContent = `${kampagne_count} x ${short_zone_name}`;
+            details.appendChild(summary);
+
+            const ol = createElement("ol");
+            dayEventsGroupedByZone[short_zone_name].forEach((event) => {
+                const li = createElement('li');
+                const a = createElement("a");
+                a.setAttribute('href', event._firstProp('url'));
+                a.setAttribute('target', '_blank');
+                a.innerText = `${event.summary}`;
+                li.appendChild(a);
+                ol.appendChild(li);
+            });
+            details.appendChild(ol);
+            dayElement.appendChild(details);
+        }
     }
     calendarDaysElement.appendChild(dayElement);
 
@@ -154,7 +176,7 @@ function createDaysForCurrentMonth(year, month) {
     });
 }
 
-function createDaysForPreviousMonth(year, month) {
+function createDaysForPreviousMonth(year, month, currentMonthDays) {
     const firstDayOfTheMonthWeekday = getWeekday(currentMonthDays[0].date);
 
     const previousMonth = dayjs(`${year}-${month}-01`).subtract(1, "month");
@@ -181,7 +203,7 @@ function createDaysForPreviousMonth(year, month) {
     });
 }
 
-function createDaysForNextMonth(year, month) {
+function createDaysForNextMonth(year, month, currentMonthDays) {
     const lastDayOfTheMonthWeekday = getWeekday(
         `${year}-${month}-${currentMonthDays.length}`
     );
@@ -205,28 +227,5 @@ function createDaysForNextMonth(year, month) {
 
 function getWeekday(date) {
     return dayjs(date).weekday();
-}
-
-export function initMonthSelectors() {
-    document
-        .getElementById("previous-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(selectedMonth).subtract(1, "month");
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
-
-    document
-        .getElementById("present-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
-
-    document
-        .getElementById("next-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(selectedMonth).add(1, "month");
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
 }
 
