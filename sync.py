@@ -6,14 +6,16 @@
 # Created:  Thu Jan 18 12:13:57 2024
 #
 
-import ftplib, sys, fs, datetime, slugify
+import ftplib, sys, fs, datetime
 import fs.ftpfs, fs.mirror
+
+import urllib.request
+
 
 ##
 # import logging
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 # logger = logging.getLogger()
-
 
 
 class FTP_TLS(ftplib.FTP_TLS):
@@ -57,7 +59,7 @@ class MyFTPFS(fs.ftpfs.FTPFS):
 
 def usage():
     print("Usage:")
-    print(f"{sys.argv[0]} push|pull|archive")
+    print(f"{sys.argv[0]} push|pull|archive|ics")
     sys.exit()
 
 
@@ -107,5 +109,15 @@ if __name__ == '__main__':
                          preserve_time=False)
     elif mode == "archive":
         archive_home()
+    elif mode == "ics":
+        bsvadw = {
+            "bettv": "https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=***REMOVED***&Runde=2&Hallenplan=True",
+            "google": "https://calendar.google.com/calendar/ical/***REMOVED***%40group.calendar.google.com/private-***REMOVED***/basic.ics"
+        }
+        for filename, url in bsvadw.items():
+            with open(f"site/public/{filename}.ics", "wb") as f:
+                contents = urllib.request.urlopen(url).read()
+                f.write(contents)
+
     else:
         usage()
