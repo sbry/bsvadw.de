@@ -5,21 +5,20 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import iCalendarPlugin from '@fullcalendar/icalendar'
 
 
-
-
-
-
-
 export default class DemoApp extends React.Component {
     render() {
         return (
             <FullCalendar
-                plugins={[ dayGridPlugin, rrulePlugin, iCalendarPlugin ]}
+                locale='de'
+                plugins={[dayGridPlugin, rrulePlugin, iCalendarPlugin]}
                 initialView="dayGridMonth"
-                events={{
-                    url: 'https://mywebsite/icalendar-feed.ics',
+                eventSources={[{
+                    url: '/bettv.ics',
                     format: 'ics'
-                }}
+                }, {
+                    url: '/google.ics',
+                    format: 'ics'
+                }]}
             />
         )
     }

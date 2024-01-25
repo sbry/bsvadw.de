@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build && next export && mkdir -p ../home/html/ && rsync -avhz --delete out/ ../home/html/",
     "start": "next start",
-    "stage": "rsync -avhz --delete out/ joni@app1.de:workspace/bsvadw.de/",
-    "deploy": "rsync -avhz --delete out/ ../home/html/"
+    "stage": "rsync -avhz --delete out/ joni@app1.de:workspace/bsvadw.de/"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
