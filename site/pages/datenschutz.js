@@ -1,4 +1,4 @@
-export default () => <div className={"max-w-prose"}>
+const Datenschutz = () => <div className={"max-w-prose"}>
     <h1>Datenschutz&shy;erkl&auml;rung</h1>
     <h2>1. Datenschutz auf einen Blick</h2>
     <h3>Allgemeine Hinweise</h3> <p>Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber,
@@ -179,3 +179,5 @@ export default () => <div className={"max-w-prose"}>
     Bestimmungen &ndash; insbesondere gesetzliche Aufbewahrungsfristen &ndash; bleiben unber&uuml;hrt.</p>
     <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
 </div>
+
+export default Datenschutz;

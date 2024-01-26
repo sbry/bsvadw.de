@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router'
 
-function ActiveLink({children, href}) {
+const ActiveLink = ({children, href}) => {
     const router = useRouter()
 
     const handleClick = (e) => {
@@ -16,4 +16,4 @@ function ActiveLink({children, href}) {
     )
 }
 
-export default ActiveLink
+export default ActiveLink;

@@ -1,4 +1,5 @@
-export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
+
+const Geschichte = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
     <div className={"max-w-prose"}>
         <h1> Geschichte der Tischtennisabteilung des BSV AdW</h1>
         <p> Unsere Abteilung Tischtennis wurde 1954 von Sportkamerad Herbert Richter gegründet und
@@ -69,3 +70,5 @@ export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
         </ol>
     </div>
 </div>
+
+export default Geschichte;

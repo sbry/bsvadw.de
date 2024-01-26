@@ -1,6 +1,6 @@
 import ActiveLink from "./activelink";
 
-export default function Footer() {
+const Footer = () => {
     return (
         <footer>
             <nav>
@@ -20,3 +20,6 @@ export default function Footer() {
         </footer>
     )
 }
+
+
+export default Footer;

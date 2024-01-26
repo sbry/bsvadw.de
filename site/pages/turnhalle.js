@@ -1,4 +1,4 @@
-export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5 "}>
+const Turnhalle = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5 "}>
     <div className="">
         <iframe
             className="border-none"
@@ -33,11 +33,9 @@ export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5 "}>
                 <dd>bis
                     S-Bahnhof Plänterwald
                 </dd>
-
             </dl>
-
         </div>
-
     </div>
 </div>
 
+export default Turnhalle;

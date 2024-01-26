@@ -1,7 +1,7 @@
 import ImageGallery from 'react-image-gallery';
 
 function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length, randomIndex;
 
     // While there remain elements to shuffle...
     while (currentIndex != 0) {
@@ -33,10 +33,12 @@ const images = ["1242.jpg",
     original: `/images/galerie/${filename}`,
     thumbnail: `/images/galerie/${filename}`
 }));
-export default function MyGallery(props) {
+const MyGallery = () => {
     return <ImageGallery slideInterval={2500} slideDuration={500} showThumbnails={true}
                          showFullscreenButton={true}
                          autoPlay={true}
                          items={shuffle(images)}/>;
 
 }
+
+export default MyGallery;

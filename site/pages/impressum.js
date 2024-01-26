@@ -1,4 +1,4 @@
-export default () => <div className={"max-w-prose"}>
+const Impressum = () => <div className={"max-w-prose"}>
     <h1> Impressum</h1>
 
     <address>
@@ -37,3 +37,4 @@ export default () => <div className={"max-w-prose"}>
     {/**/}
     {/*</p>*/}
 </div>
+export default Impressum;

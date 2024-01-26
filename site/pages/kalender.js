@@ -5,7 +5,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 
 
 
-export default () => <FullCalendar
+const Kalender = () => <FullCalendar
     locale='de'
     plugins={[dayGridPlugin, rrulePlugin, iCalendarPlugin]}
     initialView="dayGridMonth"
@@ -17,3 +17,5 @@ export default () => <FullCalendar
         format: 'ics'
     }]}
 />
+
+export default Kalender;

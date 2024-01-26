@@ -1,7 +1,8 @@
 import ActiveLink from "./activelink";
 import OrbitSvg from "./orbit-svg"
 
-export default function Header() {
+
+const Header = () => {
     return (
         <header>
             <div className={"heading"}>
@@ -49,3 +50,6 @@ export default function Header() {
         </header>
     )
 }
+
+
+export default Header;

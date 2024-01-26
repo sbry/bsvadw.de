@@ -1,4 +1,4 @@
-export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
+const Kontakt = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
     <div>
         <h1> Kontakt aufnehmen</h1>
         <address className={"px-2"}>
@@ -75,3 +75,5 @@ export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
 
     </div>
 </div>
+
+export default Kontakt;

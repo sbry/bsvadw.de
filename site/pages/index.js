@@ -1,6 +1,6 @@
 import MyGallery from "../components/galerie";
 
-export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
+const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
     <div>
         <h1>
             Tischtennis in Berlin Treptow</h1>
@@ -45,9 +45,9 @@ export default () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
     </div>
 
     <div>
-
         <MyGallery/>
-
     </div>
 </div>
 
+
+export default Index;
