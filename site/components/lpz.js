@@ -23,13 +23,14 @@ class Lpz extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modifiers: [],
-            lpz: 1429,
-            match_count: 2
+            base_modifiers: [],
+            this_lpz: 1429,
+            match_deltas: {}
         };
         this.getBaseValue = this.getBaseValue.bind(this);
         this.incrementMatchCount = this.incrementMatchCount.bind(this);
-
+        this.decrementMatchCount = this.decrementMatchCount.bind(this);
+        this.addOtherLpz = this.addOtherLpz.bind(this)
     }
 
     getBaseValue() {
@@ -39,13 +40,11 @@ class Lpz extends Component {
         )
     }
 
-    incrementMatchCount() {
+    setMatchDelta(index, delta) {
         this.setState((prevState) => {
-            return prevState.match_count + 1
+            return prevState.match_deltas[number] = delta;
         })
     }
-
-
 
     render() {
         return (
@@ -64,12 +63,30 @@ class Lpz extends Component {
                         type="checkbox"/> <span>{this.field_labels[name]}</span></label>
                 </fieldset>)}
 
-                <button
-                    onClick={this.addMatch}
-                >+
-                </button>
+                <fieldset>
+                    <button
+                        onClick={() => this.setMatchDelta(self.state.match_deltas.count())})
+                    >+
+                    </button>
+                </fieldset>
 
-                {[...Array(10).keys()].map(index => <Adversary number={index + 1}/>)}
+                <fieldset>
+                    <button
+                        onClick={this.decrementMatchCount}
+                    >-
+                    </button>
+                </fieldset>
+
+                <fieldset>
+
+                    {
+                        [...Array(10).keys()].map(index => <Match
+                            number={index + 1}
+                            {...this.state}
+                            setDelta={setDelta}/>)
+                    }
+
+                </fieldset>
 
                 <fieldset>
                     <label>{this.field_labels.new_lpz}: {0}</label>
@@ -80,7 +97,7 @@ class Lpz extends Component {
 }
 
 
-const Adversary = ({number}) => {
+const Match = ({number, this_lpz, other_lpz, base, setDelta}) => {
     const [lpz, setLpz] = useState(0);
     return <fieldset>
         <legend>Gegner {number}</legend>
@@ -91,12 +108,14 @@ const Adversary = ({number}) => {
                     inputMode="decimal"
                     min="1"
                     max="2500" step="1"
-                    type="number" value="1429"/>
+                    type="number" value={otherLpz}/>
             </label>
         </fieldset>
 
         <fieldset>
-            <label></label>
+            <button
+                onClick={() => addOtherLpz(this.state.lpz)}
+            ></button>
         </fieldset>
     </fieldset>
 }
