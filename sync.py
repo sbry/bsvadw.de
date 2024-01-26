@@ -8,6 +8,7 @@
 
 import ftplib, sys, fs, datetime
 import fs.ftpfs, fs.mirror
+import fs.walk
 
 import urllib.request
 
@@ -109,15 +110,26 @@ if __name__ == '__main__':
                          preserve_time=False)
     elif mode == "archive":
         archive_home()
-    elif mode == "ics":
+    elif mode == "pull_ics":
         bsvadw = {
             "bettv": "https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=***REMOVED***&Runde=2&Hallenplan=True",
             "google": "https://calendar.google.com/calendar/ical/***REMOVED***%40group.calendar.google.com/private-***REMOVED***/basic.ics"
         }
         for filename, url in bsvadw.items():
-            with open(f"site/public/{filename}.ics", "wb") as f:
+            with (open(f"site/public/{filename}.ics", "wb") as f1,
+                  open(f"home/html/{filename}.ics", "wb") as f2):
                 contents = urllib.request.urlopen(url).read()
-                f.write(contents)
-
+                f1.write(contents)
+                f2.write(contents)
+                pass
+            pass
+        pass
+    elif mode == 'push_ics':
+        fs.mirror.mirror(get_local_fs().opendir("home/html"),
+                         get_remote_fs().opendir('html'),
+                         walker=fs.walk.Walker(filter=['*.ics'], max_depth=1),
+                         copy_if_newer=True,
+                         workers=4,
+                         preserve_time=False)
     else:
         usage()
