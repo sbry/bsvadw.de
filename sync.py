@@ -125,11 +125,11 @@ if __name__ == '__main__':
             pass
         pass
     elif mode == 'push_ics':
-        fs.mirror.mirror(get_local_fs().opendir("home/html"),
-                         get_remote_fs().opendir('html'),
-                         walker=fs.walk.Walker(filter=['*.ics'], max_depth=1),
-                         copy_if_newer=True,
-                         workers=4,
-                         preserve_time=False)
+        localFs = get_local_fs().opendir("home/html")
+        remoteFs = get_remote_fs().opendir('html')
+        for f in ['google.ics', "bettv.ics"]:
+            fs.copy.copy_file(localFs, f,
+                              remoteFs, f,
+                              preserve_time=False)
     else:
         usage()
