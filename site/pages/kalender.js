@@ -3,7 +3,6 @@ import rrulePlugin from '@fullcalendar/rrule'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import iCalendarPlugin from '@fullcalendar/icalendar'
 
-
 const Kalender = () => <FullCalendar
     buttonText={{
         today: 'Heute',
@@ -11,6 +10,10 @@ const Kalender = () => <FullCalendar
         week: 'Woche',
         month: 'Monat'
     }}
+
+    weekNumbers={true}
+    dayHeaders={false}
+    dayCellContent={({date,dayNumberText}) => {return <span>{date.toLocaleString('de-de', {  weekday: 'short' })} {dayNumberText}.</span>}}
     aspectRatio="0.2"
     hiddenDays={[2, 4, 0]}
     locale='de'
