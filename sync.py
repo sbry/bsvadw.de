@@ -9,7 +9,7 @@
 import ftplib, sys, fs, datetime
 import fs.ftpfs, fs.mirror
 import fs.walk
-
+import fs.permissions
 import urllib.request
 
 
@@ -97,8 +97,7 @@ if __name__ == '__main__':
                          local_fs.opendir("home/html"),
                          walker=None,
                          copy_if_newer=True,
-                         workers=4,
-                         preserve_time=False)
+                         workers=4)
 
         pass
     elif mode == "push":
@@ -106,8 +105,7 @@ if __name__ == '__main__':
                          get_remote_fs().opendir('html'),
                          walker=None,
                          copy_if_newer=True,
-                         workers=4,
-                         preserve_time=False)
+                         workers=4)
     elif mode == "archive":
         archive_home()
     elif mode == "pull_ics":
@@ -127,9 +125,17 @@ if __name__ == '__main__':
     elif mode == 'push_ics':
         localFs = get_local_fs().opendir("home/html")
         remoteFs = get_remote_fs().opendir('html')
+        file_permission = fs.permissions.Permissions(user='rwx', group='r--', other='r--')
+        dir_permission = fs.permissions.Permissions(user='rwx', group='r-x', other='r-x')
         for f in ['google.ics', "bettv.ics"]:
-            fs.copy.copy_file(localFs, f,
-                              remoteFs, f,
-                              preserve_time=False)
+            copied = fs.copy.copy_file_if(localFs, f,
+                                          remoteFs, f,
+                                          condition="newer")
+            if copied:
+                remoteFs.setinfo(f, dict(access=dict(permissions=file_permission)))
+                print(remoteFs.getinfo(f).raw)
+
+
+
     else:
         usage()
