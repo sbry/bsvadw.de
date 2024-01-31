@@ -4,6 +4,12 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import multiMonthPlugin from '@fullcalendar/multimonth'
 
 const Kalender = () => <FullCalendar
+    viewDidMount={() => setTimeout(() => {
+        var element = document.getElementsByClassName('fc-day-today');
+        if (element.length) {
+            element[0].scrollIntoView();
+        }
+    }, 1)}
     views={
         {
             multiMonthTwoMonth: {
