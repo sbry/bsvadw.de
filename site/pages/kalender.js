@@ -1,24 +1,33 @@
 import FullCalendar from '@fullcalendar/react'
 import rrulePlugin from '@fullcalendar/rrule'
-import dayGridPlugin from '@fullcalendar/daygrid'
 import iCalendarPlugin from '@fullcalendar/icalendar'
+import multiMonthPlugin from '@fullcalendar/multimonth'
 
 const Kalender = () => <FullCalendar
+    views={
+        {
+            multiMonthTwoMonth: {
+                type: 'multiMonth',
+                duration: {months: 3}
+            }
+        }
+    }
+    multiMonthMaxColumns={1}
     buttonText={{
         today: 'Heute',
         day: 'Tag',
         week: 'Woche',
         month: 'Monat'
     }}
-
     weekNumbers={true}
     dayHeaders={false}
-    dayCellContent={({date,dayNumberText}) => {return <span>{date.toLocaleString('de-de', {  weekday: 'short' })} {dayNumberText}.</span>}}
-    aspectRatio="0.2"
+    dayCellContent={({date, dayNumberText}) => {
+        return <span>{date.toLocaleString('de-de', {weekday: 'short'})} {dayNumberText}.</span>
+    }}
     hiddenDays={[2, 4, 0]}
     locale='de'
-    plugins={[dayGridPlugin, rrulePlugin, iCalendarPlugin]}
-    initialView="dayGridMonth"
+    plugins={[multiMonthPlugin, rrulePlugin, iCalendarPlugin]}
+    initialView="multiMonthTwoMonth"
     eventSources={[{
         url: '/bettv.ics',
         format: 'ics'
