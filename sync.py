@@ -15,9 +15,9 @@ import pathlib
 
 
 ##
-# import logging
-# logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-# logger = logging.getLogger()
+import logging
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logger = logging.getLogger()
 
 
 class FTP_TLS(ftplib.FTP_TLS):
@@ -28,7 +28,6 @@ class FTP_TLS(ftplib.FTP_TLS):
                                             server_hostname=self.host,
                                             session=self.sock.session)  # this is the fix
         return conn, size
-
 
 class MyFTPFS(fs.ftpfs.FTPFS):
     def _open_ftp(self):
@@ -102,21 +101,25 @@ if __name__ == '__main__':
         usage()
     if mode == "pull":
         archive_home()
-        local_fs = get_local_fs()
-        local_fs.makedirs('home/html', recreate=True)
-        fs.mirror.mirror(get_remote_fs().opendir('html'),
-                         local_fs.opendir("home/html"),
-                         walker=None,
-                         copy_if_newer=True,
-                         workers=4)
-
+        homePath = pathlib.Path("home/html")
+        remoteConnection = get_remote_connection()
+        # remote_files = remoteConnection.nlst('./' + str(relativePath))
         pass
     elif mode == "push":
-        fs.mirror.mirror(get_local_fs().opendir("home/html"),
-                         get_remote_fs().opendir('html'),
-                         walker=None,
-                         copy_if_newer=True,
-                         workers=4)
+        homePath = pathlib.Path("home/html")
+        remoteConnection = get_remote_connection()
+        for homeFilePath in homePath.rglob('*'):
+            relativePath = homeFilePath.relative_to("home/html")
+            if homeFilePath.is_dir():
+                try:
+                    remoteConnection.mkd('./' + str(relativePath))
+                except ftplib.error_perm:
+                    logger.debug("Directory already exists %s", relativePath)
+            else:
+                with homeFilePath.open("rb") as fh:
+                    remoteConnection.storbinary(f"STOR {relativePath}", fh)
+                    remoteConnection.sendcmd(f"SITE CHMOD 644 {relativePath}")
+                    logger.debug("File Uploaded %s", relativePath)
     elif mode == "archive":
         archive_home()
     elif mode == "pull_ics":
@@ -134,9 +137,10 @@ if __name__ == '__main__':
             pass
         pass
     elif mode == 'push_ics':
+        homePath = pathlib.Path("home/html")
         remoteConnection = get_remote_connection()
         for basename in ['google.ics', "bettv.ics"]:
-            filePath = pathlib.Path("home/html") / basename
+            filePath = homePath / basename
             with filePath.open("rb") as file:
                 remoteConnection.storbinary(f"STOR {basename}", file)
             remoteConnection.sendcmd(f"SITE CHMOD 644 {basename}")
