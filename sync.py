@@ -11,6 +11,7 @@ import fs.ftpfs, fs.mirror
 import fs.walk
 import fs.permissions
 import urllib.request
+import pathlib
 
 
 ##
@@ -32,7 +33,7 @@ class FTP_TLS(ftplib.FTP_TLS):
 class MyFTPFS(fs.ftpfs.FTPFS):
     def _open_ftp(self):
         _ftp = FTP_TLS()
-        _ftp.set_debuglevel(0)
+        _ftp.set_debuglevel(1)
         with fs.ftpfs.ftp_errors(self):
             _ftp.connect(self.host, self.port, self.timeout)
             _ftp.login(self.user, self.passwd, self.acct)
@@ -70,6 +71,16 @@ def get_remote_fs():
                    passwd="***REMOVED***",
                    port=***REMOVED***,
                    tls=True)
+
+
+def get_remote_connection():
+    _ftp = FTP_TLS()
+    _ftp.set_debuglevel(1)
+    _ftp.connect("***REMOVED***", port=***REMOVED***)
+    _ftp.login(user="***REMOVED***", passwd="***REMOVED***")
+    _ftp.prot_p()
+    _ftp.cwd('html')
+    return _ftp
 
 
 def get_local_fs():
@@ -123,19 +134,12 @@ if __name__ == '__main__':
             pass
         pass
     elif mode == 'push_ics':
-        localFs = get_local_fs().opendir("home/html")
-        remoteFs = get_remote_fs().opendir('html')
-        file_permission = fs.permissions.Permissions(user='rwx', group='r--', other='r--')
-        dir_permission = fs.permissions.Permissions(user='rwx', group='r-x', other='r-x')
-        for f in ['google.ics', "bettv.ics"]:
-            copied = fs.copy.copy_file_if(localFs, f,
-                                          remoteFs, f,
-                                          condition="newer")
-            if copied:
-                remoteFs.setinfo(f, dict(access=dict(permissions=file_permission)))
-                print(remoteFs.getinfo(f).raw)
-
-
-
+        remoteConnection = get_remote_connection()
+        for basename in ['google.ics', "bettv.ics"]:
+            filePath = pathlib.Path("home/html") / basename
+            with filePath.open("rb") as file:
+                remoteConnection.storbinary(f"STOR {basename}", file)
+            remoteConnection.sendcmd(f"SITE CHMOD 644 {basename}")
+        remoteConnection.quit()
     else:
         usage()
