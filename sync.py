@@ -13,15 +13,26 @@ import fs.permissions
 import urllib.request
 import pathlib
 
-
 ##
 import logging
-if False:
+
+DEBUG=False
+
+if DEBUG:
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger()
 
 
-class FTP_TLS(ftplib.FTP_TLS):
+class FTP_TLS_BSVADW(ftplib.FTP_TLS):
+    def __init__(self):
+        super().__init__()
+        if DEBUG:
+            self.set_debuglevel(1)
+        self.connect("***REMOVED***", port=***REMOVED***)
+        self.login(user="***REMOVED***", passwd="***REMOVED***")
+        self.prot_p()
+        self.cwd('html')
+
     def ntransfercmd(self, cmd, rest=None):
         conn, size = ftplib.FTP.ntransfercmd(self, cmd, rest)
         if self._prot_p:
@@ -30,34 +41,6 @@ class FTP_TLS(ftplib.FTP_TLS):
                                             session=self.sock.session)  # this is the fix
         return conn, size
 
-class MyFTPFS(fs.ftpfs.FTPFS):
-    def _open_ftp(self):
-        _ftp = FTP_TLS()
-        _ftp.set_debuglevel(1)
-        with fs.ftpfs.ftp_errors(self):
-            _ftp.connect(self.host, self.port, self.timeout)
-            _ftp.login(self.user, self.passwd, self.acct)
-            try:
-                _ftp.prot_p()  # type: ignore
-            except AttributeError:
-                pass
-            self._features = {}
-            try:
-                feat_response = fs.ftpfs._decode(_ftp.sendcmd("FEAT"), "latin-1")
-            except fs.ftpfs.error_perm:  # pragma: no cover
-                self.encoding = "latin-1"
-            else:
-                self._features = self._parse_features(feat_response)
-                self.encoding = "utf-8" if "UTF8" in self._features else "latin-1"
-                if not fs.ftpfs.PY2:
-                    _ftp.file = _ftp.sock.makefile("r", encoding=self.encoding)
-                    pass
-                pass
-            pass
-        _ftp.encoding = self.encoding
-        self._welcome = _ftp.welcome
-        return _ftp
-
 
 def usage():
     print("Usage:")
@@ -65,30 +48,8 @@ def usage():
     sys.exit()
 
 
-def get_remote_fs():
-    return MyFTPFS("***REMOVED***",
-                   user="***REMOVED***",
-                   passwd="***REMOVED***",
-                   port=***REMOVED***,
-                   tls=True)
-
-
-def get_remote_connection():
-    _ftp = FTP_TLS()
-    _ftp.set_debuglevel(0)
-    _ftp.connect("***REMOVED***", port=***REMOVED***)
-    _ftp.login(user="***REMOVED***", passwd="***REMOVED***")
-    _ftp.prot_p()
-    _ftp.cwd('html')
-    return _ftp
-
-
-def get_local_fs():
-    return fs.open_fs('osfs://')
-
-
 def archive_home():
-    local_fs = get_local_fs()
+    local_fs = fs.open_fs('osfs://')
     local_fs.makedir('arch', recreate=True)
     if local_fs.exists("home"):
         local_fs.movedir('home', f'arch/{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}', create=True)
@@ -102,7 +63,7 @@ if __name__ == '__main__':
         usage()
     if mode == "push":
         homePath = pathlib.Path("home/html")
-        remoteConnection = get_remote_connection()
+        remoteConnection = FTP_TLS_BSVADW()
         for homeFilePath in homePath.rglob('*'):
             relativePath = homeFilePath.relative_to("home/html")
             if homeFilePath.is_dir():
@@ -133,7 +94,7 @@ if __name__ == '__main__':
         pass
     elif mode == 'push_ics':
         homePath = pathlib.Path("home/html")
-        remoteConnection = get_remote_connection()
+        remoteConnection = FTP_TLS_BSVADW()
         for basename in ['google.ics', "bettv.ics"]:
             filePath = homePath / basename
             with filePath.open("rb") as file:
