@@ -16,7 +16,8 @@ import pathlib
 
 ##
 import logging
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+if False:
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger()
 
 
@@ -74,7 +75,7 @@ def get_remote_fs():
 
 def get_remote_connection():
     _ftp = FTP_TLS()
-    _ftp.set_debuglevel(1)
+    _ftp.set_debuglevel(0)
     _ftp.connect("***REMOVED***", port=***REMOVED***)
     _ftp.login(user="***REMOVED***", passwd="***REMOVED***")
     _ftp.prot_p()
@@ -99,13 +100,7 @@ if __name__ == '__main__':
         mode = sys.argv[1]
     except IndexError:
         usage()
-    if mode == "pull":
-        archive_home()
-        homePath = pathlib.Path("home/html")
-        remoteConnection = get_remote_connection()
-        # remote_files = remoteConnection.nlst('./' + str(relativePath))
-        pass
-    elif mode == "push":
+    if mode == "push":
         homePath = pathlib.Path("home/html")
         remoteConnection = get_remote_connection()
         for homeFilePath in homePath.rglob('*'):
