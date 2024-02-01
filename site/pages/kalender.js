@@ -1,23 +1,22 @@
 import FullCalendar from '@fullcalendar/react'
 import rrulePlugin from '@fullcalendar/rrule'
 import iCalendarPlugin from '@fullcalendar/icalendar'
-import multiMonthPlugin from '@fullcalendar/multimonth'
+import dayGridPlugin from '@fullcalendar/daygrid'
+
 
 const Kalender = () => <FullCalendar
-    viewDidMount={() => setTimeout(() => {
-        var element = document.getElementsByClassName('fc-day-today');
-        if (element.length) {
-            element[0].scrollIntoView();
-        }
-    }, 1)}
+    moreLinkContent={({num, text}) => {
+        return `${num}`
+    }}
     views={
         {
-            multiMonthTwoMonth: {
-                type: 'multiMonth',
-                duration: {months: 3}
+            dayGridMonthMore: {
+                type: 'dayGridMonth',
+                dayMaxEventRows: 0,
             }
         }
     }
+    dayMaxEventRows={true}
     multiMonthMaxColumns={1}
     buttonText={{
         today: 'Heute',
@@ -26,14 +25,11 @@ const Kalender = () => <FullCalendar
         month: 'Monat'
     }}
     weekNumbers={true}
-    dayHeaders={false}
-    dayCellContent={({date, dayNumberText}) => {
-        return <span>{date.toLocaleString('de-de', {weekday: 'short'})} {dayNumberText}.</span>
-    }}
+    dayHeaders={true}
     hiddenDays={[2, 4, 0]}
     locale='de'
-    plugins={[multiMonthPlugin, rrulePlugin, iCalendarPlugin]}
-    initialView="multiMonthTwoMonth"
+    plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
+    initialView="dayGridMonthMore"
     eventSources={[{
         url: '/bettv.ics',
         format: 'ics'

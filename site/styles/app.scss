@@ -167,14 +167,15 @@ dl {
   }
 }
 
-
 .fc-daygrid-dot-event {
   align-items: normal;
 }
 
+
 .fc-event-title {
   white-space: normal;
 }
+
 
 .fc-daygrid-event-dot {
   display: none;
@@ -184,8 +185,16 @@ dl {
   display: none;
 }
 
-.fc-daygrid-event-harness {
-  margin: 10px 0px;
-  font-size: 12px;
+
+
+.fc-daygrid-more-link {
+  font-weight: bold;
+  float: none !important;
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  background-color: #dddddd;
+  padding: 20px;
+  border-radius: 4px;
 }
 
