@@ -5,15 +5,9 @@
 # Author:   Justin Salisbury justin@sinube
 # Created:  Thu Jan 18 12:13:57 2024
 #
-
-import ftplib, sys, fs, datetime
-import fs.ftpfs, fs.mirror
-import fs.walk
-import fs.permissions
+import ftplib, sys, datetime
 import urllib.request
 import pathlib
-
-##
 import logging
 
 DEBUG=False

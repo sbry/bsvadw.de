@@ -1,6 +1,0 @@
-requests
-fs
-python-slugify
-ics
-lxml
-pytz
