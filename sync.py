@@ -5,10 +5,7 @@
 # Author:   Justin Salisbury justin@sinube
 # Created:  Thu Jan 18 12:13:57 2024
 #
-import ftplib, sys, datetime
-import urllib.request
-import pathlib
-import logging
+import ftplib, sys, datetime, pathlib, urllib.request,logging
 
 DEBUG=False
 
@@ -38,7 +35,7 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
 
 def usage():
     print("Usage:")
-    print(f"{sys.argv[0]} push|pull|archive|ics")
+    print(f"{sys.argv[0]} push|pull|archive|pull_ics|push_ics")
     sys.exit()
 
 
