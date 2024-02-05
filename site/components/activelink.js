@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router'
 
-const ActiveLink = ({children, href}) => {
+const ActiveLink = ({children, href, title, className}) => {
     const router = useRouter()
 
     const handleClick = (e) => {
@@ -9,7 +9,7 @@ const ActiveLink = ({children, href}) => {
     }
 
     return (
-        <a className={router.asPath === href ? 'active' : ''}
+        <a title={title} className={router.asPath === href ? 'active ' : ' ' + className}
            href={href} onClick={handleClick}>
             {children}
         </a>

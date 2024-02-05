@@ -42,10 +42,17 @@ const Header = () => {
                     <ActiveLink
                         key={item.name}
                         href={item.href}
+                        className={""}
                     >
                         {item.name}
                     </ActiveLink>
                 ))}
+                <ActiveLink
+                    key="Hallenkalender"
+                    href="/kalender"
+                    title={"Hallenkalender"}
+                > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5"}/>
+                </ActiveLink>
             </nav>
         </header>
     )
