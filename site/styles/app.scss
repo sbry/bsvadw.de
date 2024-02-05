@@ -166,6 +166,9 @@ dl {
   }
 }
 
+.fc-daygrid-dot-event {
+  align-items: baseline;
+}
 
 .fc-event-title {
   white-space: normal;
@@ -177,8 +180,17 @@ dl {
   display: block;
   text-align: center;
   font-size: 2em;
-  background-color: #dddddd;
+  background-color: #ddd;
   padding: 20px;
   border-radius: 4px;
+  &.one-third{
+    background-color: #ddd;
+  }
+  &.two-thirds{
+    background-color: #aaa;
+  }
+  &.full{
+    background-color: #666;
+  }
 }
 

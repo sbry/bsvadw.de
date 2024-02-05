@@ -5,6 +5,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 
 
 const Kalender = () => <FullCalendar
+    moreLinkClassNames={({num, text}) => {
+        var map = {1: "one-third", 2: "two-thirds", 3: "full"}
+        return [ map[num] ];
+    }}
     moreLinkContent={({num, text}) => {
         return `${num}`
     }}
