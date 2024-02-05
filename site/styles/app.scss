@@ -60,7 +60,7 @@ a {
 header, footer {
 
   nav {
-    @apply flex pt-3;
+    @apply flex;
 
     a {
       @apply text-white mr-3 inline-block;
@@ -69,8 +69,6 @@ header, footer {
 }
 
 header {
-  @apply pt-2;
-
   .heading {
     a {
       @apply font-bold text-white text-xl block whitespace-nowrap;
@@ -86,7 +84,7 @@ header {
 }
 
 footer {
-  @apply px-5;
+  @apply p-3;
 }
 
 @media (min-width: theme('screens.md')) {
