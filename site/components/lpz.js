@@ -33,14 +33,14 @@ class Lpz extends Component {
         encounters_recent_lt_15: 4
     }
     field_labels = {
-        age_lt_16: 'Jünger als 16',
-        age_lt_21: 'Jünger als 21',
-        encounters_lt_30: 'Weniger als 30 Begegnungen',
-        encounters_recent_lt_15: 'Weniger als 15 Spiele nach einem Jahr Pause',
-        initial: 'Meine LPZ',
-        new: 'Meine neue LPZ',
+        age_lt_16: '< 16',
+        age_lt_21: '< 21',
+        encounters_lt_30: '< 30 Spiele',
+        encounters_recent_lt_15: '< 15 Spiele nach einem Jahr Pause',
+        initial: 'LPZ',
+        new: 'Neue LPZ',
         encounters: "Begegnungen",
-        base: "Basiswert",
+        base: "Basis",
         probability: "Gewinnwahrscheinlichkeit",
     }
 
@@ -53,7 +53,7 @@ class Lpz extends Component {
             initial: 1429,
             encounter_count: 2,
             encounters: {0: {}, 1: {}},
-            delta: 0
+            delta: 0,
         };
     }
 
@@ -69,14 +69,14 @@ class Lpz extends Component {
             (accumulator, currentValue) => {
                 const encounter = this.state.encounters[currentValue]
                 if (!encounter.lpz) {
-                    return accumulator + 0;
+                    return accumulator;
                 }
                 if (encounter.win === 'yes') {
                     return accumulator + computeWinDelta(this.state.initial, encounter.lpz, this.computeBase())
                 } else if (encounter.win === 'no') {
                     return accumulator + computeLoseDelta(this.state.initial, encounter.lpz, this.computeBase())
                 } else {
-                    return accumulator + 0;
+                    return accumulator;
                 }
             }, 0
         )
@@ -91,6 +91,7 @@ class Lpz extends Component {
             }
             return prevState
         })
+        this.setState({delta: this.computeDelta()})
     }
 
     changeHandlerEncounter = (index, state) => {
@@ -118,11 +119,11 @@ class Lpz extends Component {
     render() {
         return (
             <div className={"lpz"}>
-                <fieldset className={"grid grid-cols-2 md:grid-cols-2 gap-5"}>
+                <div className={"grid grid-cols-3 md:grid-cols-3 gap-5"}>
                     <fieldset>
                         <label><span>{this.field_labels.initial}</span>
                             <input
-                                name="lpz" className={"lpz-input"} min="1" max="2500" step="1"
+                                name="lpz" min="1" max="2500" step="1"
                                 onChange={(event) => {
                                     this.setState({
                                         initial: event.target.value,
@@ -133,6 +134,19 @@ class Lpz extends Component {
                                 type="number"
                                 value={this.state.initial}/>
                         </label>
+                        <fieldset className={"pt-2"}>
+                            <button
+                                className={"p-4"}
+                                onClick={this.changeHandlerEncounterCountIncrement}
+                            >+
+                            </button>
+                            <button
+                                className={"p-4"}
+                                onClick={this.changeHandlerEncounterCountDecrement}>-
+                            </button>
+
+                        </fieldset>
+
                     </fieldset>
 
                     <fieldset>
@@ -140,66 +154,56 @@ class Lpz extends Component {
                             <div>{this.field_labels.new}</div>
                             <div
                                 className={"math font-bold"}>
-                                {formatLpz(this.state.initial)} {formatDelta(this.state.delta)} = {formatLpz((this.state.initial + this.state.delta))}</div>
+                                {formatLpz(this.state.initial)} {formatDelta(this.state.delta)} = {formatLpz((Number(this.state.initial) + Number(this.state.delta)))}</div>
                         </label>
+
                     </fieldset>
 
-                </fieldset>
 
-                <fieldset className={"base"}>
-                    <label>{this.field_labels.base} <span className={"math"}>{this.computeBase()}</span></label>
-                    {Object.keys(this.modifiers).map(name => <fieldset>
-                        <label><input
-                            name={name}
-                            onChange={(event) => {
-                                this.setModifier(name, event.target.checked);
-                            }}
-                            value={1}
-                            type="checkbox"/> <span>{this.field_labels[name]}</span></label>
-                    </fieldset>)}
-                </fieldset>
-
-
-                <fieldset className={"encounters"}>
-
-                    {
-                        [...Array(this.state.encounter_count)].map((value, index) => {
-                                return <LpzEncounter
-                                    index={index}
-                                    base={this.computeBase()}
-                                    initial={this.state.initial}
-                                    onChange={this.changeHandlerEncounter}
-                                />
-                            }
-                        )
-                    }
-                    <fieldset>
-                        <button
-                            className={"mr-5 w-15 text-4xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded"}
-                            onClick={this.changeHandlerEncounterCountIncrement}
-                        >+
-                        </button>
-                        <button
-                            className={"w-15 text-4xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded"}
-                            onClick={this.changeHandlerEncounterCountDecrement}>-
-                        </button>
+                    <fieldset className={""}>
+                        <label>{this.field_labels.base} <span className={"math"}>{this.computeBase()}</span></label>
+                        {Object.keys(this.modifiers).map(name => <fieldset>
+                            <label><input
+                                name={name}
+                                onChange={(event) => {
+                                    this.setModifier(name, event.target.checked);
+                                }}
+                                value={1}
+                                type="checkbox"/> <span>{this.field_labels[name]}</span></label>
+                        </fieldset>)}
                     </fieldset>
-                </fieldset>
+                </div>
 
-                <fieldset className={"grid grid-cols-2 md:grid-cols-2 gap-5 rounded-2xl"}>
+                <div>
 
-                </fieldset>
+                    <fieldset className={"grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 gap-5"}>
+
+                        {
+                            [...Array(this.state.encounter_count)].map((value, index) => {
+                                    return <LpzEncounter
+                                        index={index}
+                                        initial={this.state.initial}
+                                        onChange={this.changeHandlerEncounter}
+                                    />
+                                }
+                            )
+                        }
+
+                    </fieldset>
+
+                </div>
             </div>
         )
     }
 }
 
 
-const LpzEncounter = ({index, onChange, initial, base}) => {
+const LpzEncounter = ({index, onChange, initial}) => {
     const [lpz, setLpz] = useState(Math.round(initial / 10) * 10);
     const [win, setWin] = useState("");
 
-    return <fieldset key={index} className={`encounter ${win ? 'active' : 'inactive'}`}>
+    return <fieldset key={index}
+                     className={`${win ? 'active' : 'inactive'} ${win == "yes" ? 'win' : ''} ${win == "no" ? 'loss' : ''} grid grid-cols-2 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5 my-2 rounded-lg p-2`}>
         <fieldset>
             <label><span></span>
                 <input
@@ -218,9 +222,9 @@ const LpzEncounter = ({index, onChange, initial, base}) => {
             </label>
         </fieldset>
 
-        <fieldset>
+        <fieldset className={"mt-2"}>
             <label
-                className={"math"}>P<sub>A</sub> = {formatProbability(computeProbability(initial, lpz))}</label>
+                className={"math "}>P<sub>A</sub> = {formatProbability(computeProbability(initial, lpz))}</label>
         </fieldset>
 
 
@@ -238,7 +242,7 @@ const LpzEncounter = ({index, onChange, initial, base}) => {
                     }}
                     value="yes"
                     type="radio"/>
-                Sieg <span className={"math"}>{formatDelta(computeWinDelta(initial, lpz, base))}</span>
+                Sieg
             </label>
         </fieldset>
 
@@ -257,7 +261,7 @@ const LpzEncounter = ({index, onChange, initial, base}) => {
                     }}
                     value="no"
                     type="radio"/>
-                Niederlage <span className={"math"}>{formatDelta(computeLoseDelta(initial, lpz, base))}</span>
+                Niederlage
             </label>
         </fieldset>
 
