@@ -65,7 +65,7 @@ if __name__ == '__main__':
             else:
                 with homeFilePath.open("rb") as fh:
                     remoteConnection.storbinary(f"STOR {relativePath}", fh)
-                    remoteConnection.sendcmd(f"SITE CHMOD 644 {relativePath}")
+                    remoteConnection.sendcmd(f"SITE CHMOD 755 {relativePath}")
                     logger.debug("File Uploaded %s", relativePath)
     elif mode == "archive":
         archive_home()
