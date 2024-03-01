@@ -1,10 +1,15 @@
 module.exports = {
-    purge: [],
+    // purge: [],
     // purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
     purge: ["./components/**/*.js", "./pages/**/*.js"],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: "media", // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                'dark': {'raw': '(prefers-color-scheme: dark)'},
+                // => @media (prefers-color-scheme: dark) { ... }
+            }
+        },
     },
     variants: {
         extend: {},
