@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider; next dev",
-    "build": "next build && next export && mkdir -p ../home/html/ && rsync -avhz --delete out/ ../home/html/",
-    "start": "next start",
-    "stage": "rsync -avhz --delete out/ joni@app1.de:workspace/bsvadw.de/"
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; next build && next export && mkdir -p ../home/html/ && rsync -avhz --delete out/ ../home/html/",
+    "start": "next start"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
