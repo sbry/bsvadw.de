@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 $color: #20782d;
 $highlight: saturate($color, 20%);
 $active: lighten(saturate($color, 20%), 5%);
@@ -10,81 +9,81 @@ $active: lighten(saturate($color, 20%), 5%);
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-  Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-  sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+	Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+	sans-serif;
 }
 
 @layer base {
-  h1 {
-    @apply text-2xl;
-    @apply font-bold;
-    @apply text-gray-700;
-  }
+	h1 {
+		@apply text-2xl;
+		@apply font-bold;
+		@apply text-gray-700;
+	}
 
-  h2 {
-    @apply text-xl;
-    @apply font-bold;
-    @apply text-gray-700;
-  }
+	h2 {
+		@apply text-xl;
+		@apply font-bold;
+		@apply text-gray-700;
+	}
 
-  p, dl, h1, h2, li, dd, dt {
-    @apply text-gray-700;
-    @apply mb-2;
-  }
+	p, dl, h1, h2, li, dd, dt {
+		@apply text-gray-700;
+		@apply mb-2;
+	}
 
-  main {
-    @apply p-4 bg-white min-h-full;
-  }
+	main {
+		@apply p-4 bg-white min-h-full;
+	}
 }
 
 
 header, footer, body {
-  background-color: $color;
+	background-color: $color;
 }
 
 a {
-  &:hover {
-    @apply underline;
-  }
+	&:hover {
+		@apply underline;
+	}
 
-  &.active {
-    cursor: default;
-    @apply underline;
-  }
+	&.active {
+		cursor: default;
+		@apply underline;
+	}
 
 }
 
 header, footer {
 
-  nav {
-    @apply flex;
+	nav {
+		@apply flex;
 
-    a {
-      @apply text-white mr-3 inline-block;
-    }
-  }
+		a {
+			@apply text-white mr-3 inline-block;
+		}
+	}
 }
 
 header {
-  .heading {
-    a {
-      @apply font-bold text-white text-xl block whitespace-nowrap;
-      @media (min-width: theme('screens.sm')) {
-        @apply inline-block;
-      }
-    }
-  }
+	.heading {
+		a {
+			@apply font-bold text-white text-xl block whitespace-nowrap;
+			@media (min-width: theme('screens.sm')) {
+				@apply inline-block;
+			}
+		}
+	}
 
-  nav {
-    @apply px-4 font-bold;
-  }
+	nav {
+		@apply px-4 font-bold;
+	}
 }
 
 footer {
-  @apply p-3;
+	@apply p-3;
 }
 
 @media (min-width: theme('screens.md')) {
@@ -105,92 +104,121 @@ $post-it-color-dark: #fde420;
 
 
 address {
-  @apply m-2 lg:m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
-  background: $post-it-color-light linear-gradient(150deg, $post-it-color-dark 0%, $post-it-color-light 100%);
-  border: 1px solid $post-it-color-dark;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  border-bottom-right-radius: 60px 5px;
-  position: relative;
-  transition: all 0.3s ease;
+	@apply m-2 lg:m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
+	background: $post-it-color-light linear-gradient(150deg, $post-it-color-dark 0%, $post-it-color-light 100%);
+	border: 1px solid $post-it-color-dark;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+	border-bottom-right-radius: 60px 5px;
+	position: relative;
+	transition: all 0.3s ease;
 
-  &::before {
-    background-color: $post-it-color-dark;
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    border: 0;
-    right: 0px;
-    top: 0;
-    height: 40px;
-  }
+	&::before {
+		background-color: $post-it-color-dark;
+		content: "";
+		position: absolute;
+		z-index: -1;
+		width: 100%;
+		border: 0;
+		right: 0px;
+		top: 0;
+		height: 40px;
+	}
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    right: -1px;
-    width: 200px;
-    height: 140px;
-    background-image: linear-gradient(173deg, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.4) 100%);
-    transform: rotate(4deg);
-    filter: blur(2px);
-    z-index: -1;
-  }
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: -2px;
+		right: -1px;
+		width: 200px;
+		height: 140px;
+		background-image: linear-gradient(173deg, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.4) 100%);
+		transform: rotate(4deg);
+		filter: blur(2px);
+		z-index: -1;
+	}
 
-  &:nth-child(3n) {
-    transform: rotate(5deg);
-  }
+	&:nth-child(3n) {
+		transform: rotate(5deg);
+	}
 
-  &:nth-child(3n-1) {
-    transform: rotate(-4deg);
-  }
+	&:nth-child(3n-1) {
+		transform: rotate(-4deg);
+	}
 
-  &:hover {
-    transform: scale(1.1);
-    z-index: 2;
-  }
+	&:hover {
+		transform: scale(1.1);
+		z-index: 2;
+	}
 }
 
 
 dl {
-  @apply grid grid-cols-3;
+	@apply grid grid-cols-3;
 
-  dt {
-    @apply col-span-1 font-bold;
-  }
+	dt {
+		@apply col-span-1 font-bold;
+	}
 
-  dd {
-    @apply col-span-2;
+	dd {
+		@apply col-span-2;
 
-  }
+	}
 }
 
 .fc-daygrid-dot-event {
-  align-items: baseline;
+	align-items: baseline;
 }
 
 .fc-event-title {
-  white-space: normal;
+	white-space: normal;
 }
 
 .fc-daygrid-more-link {
-  font-weight: bold;
-  float: none !important;
-  display: block;
-  text-align: center;
-  font-size: 2em;
-  background-color: #ddd;
-  padding: 20px;
-  border-radius: 4px;
-  &.one-third{
-    background-color: #ddd;
-  }
-  &.two-thirds{
-    background-color: #aaa;
-  }
-  &.full{
-    background-color: #666;
-  }
+	font-weight: bold;
+	float: none !important;
+	display: block;
+	text-align: center;
+	font-size: 2em;
+	background-color: #ddd;
+	padding: 20px;
+	border-radius: 4px;
+	&.one-third {
+		background-color: #ddd;
+	}
+	&.two-thirds {
+		background-color: #aaa;
+	}
+	&.full {
+		background-color: #666;
+	}
 }
 
+.lpz {
+	@apply grid grid-cols-2 md:grid-cols-2 gap-5;
+	input[type="checkbox"],
+	input[type="radio"] {
+		@apply w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+	}
+	input[type="number"] {
+		@apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500;
+	}
+	.encounters {
+		@apply grid grid-cols-2 md:grid-cols-2 gap-5;
+
+		fieldset.encounter {
+			@apply grid grid-cols-2 md:grid-cols-2 gap-2.5 p-2 rounded-2xl;
+			&.inactive {
+				@apply bg-gray-500;
+				.math {
+					display: none;
+				}
+			}
+			&.active {
+				@apply bg-green-500;
+			}
+		}
+	}
+	.math {
+		@apply bg-green-100 text-green-800 p-1 border-2 rounded;
+	}
+}

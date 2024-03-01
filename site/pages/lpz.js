@@ -1,12 +1,10 @@
-import Lpz from "../components/lpz";
+import LpzRechner from "../components/lpz";
 
 
-const LpzTest = () =>
-
-
+const Lpz = () =>
     <div>
 
-        <Lpz/>
+        <LpzRechner/>
 
         {/*<div className={"wt-5"}>*/}
         {/*    Danke jedenfalls an <a target="_blank" href={"https://xolay.com/de/ttr-rechner"}>XOLAY - Die*/}
@@ -14,4 +12,4 @@ const LpzTest = () =>
         {/*</div>*/}
     </div>
 
-export default LpzTest;
+export default Lpz;
