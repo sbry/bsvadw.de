@@ -5,9 +5,9 @@
 # Author:   Justin Salisbury justin@sinube
 # Created:  Thu Jan 18 12:13:57 2024
 #
-import ftplib, sys, datetime, pathlib, urllib.request,logging
+import ftplib, sys, datetime, pathlib, urllib.request, logging, os, urllib.parse
 
-DEBUG=False
+DEBUG = False
 
 if DEBUG:
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -23,8 +23,14 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
         if DEBUG:
             self.set_debuglevel(1)
             pass
-        self.connect("***REMOVED***", port=***REMOVED***)
-        self.login(user="***REMOVED***", passwd="***REMOVED***")
+        url = os.getenv("FTP_TLS_BSVADW_URL")
+        if not url:
+            usage("Environment FTP_TLS_BSVADW_URL must be set")
+        parsed_url = urllib.parse.urlparse(url)
+        logger.info("HOSTNAME %s PORT %s USERNAME %s PASSWORD --------",
+                    parsed_url.hostname, parsed_url.port, parsed_url.username)
+        self.connect(parsed_url.hostname, port=parsed_url.port)
+        self.login(user=parsed_url.username, passwd=parsed_url.password)
         self.prot_p()
         self.cwd('html')
 
@@ -35,13 +41,16 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
                                             server_hostname=self.host,
                                             session=self.sock.session)  # this is the fix
         return conn, size
+
     pass
 
 
-def usage():
+def usage(*args):
     print("Usage:")
-    print(f"{sys.argv[0]} push|pull|archive|pull_ics|push_ics")
+    print(f"{sys.argv[0]} push|push_ics|pull_ics")
+    print(*args)
     sys.exit()
+
 
 def push():
     homePath = pathlib.Path("home/html")
@@ -66,6 +75,7 @@ def push():
         pass
     pass
 
+
 def pull_ics():
     bsvadw = {
         "bettv": "https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=***REMOVED***&Runde=2&Hallenplan=True",
@@ -81,6 +91,7 @@ def pull_ics():
         pass
     pass
 
+
 def push_ics():
     homePath = pathlib.Path("home/html")
     with FTP_TLS_BSVADW() as remoteConnection:
@@ -95,7 +106,9 @@ def push_ics():
     pass
 
 
-
-
 if __name__ == '__main__':
-    globals().get(sys.argv[1], "usage")()
+
+    try:
+        globals().get(sys.argv[1], usage)()
+    except Exception as e:
+        usage()
