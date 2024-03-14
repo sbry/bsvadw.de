@@ -1,3 +1,37 @@
+[BSVAdw-Site](https://www.bsvadw.de)
+========================================
+
+~~~sh
+##
+# build the site
+cd site
+##
+# install NPM
+npm install
+##
+# update NPM
+npm update
+##
+# open development server
+npm run dev
+##
+# build site in ../html
+npm run build
+##
+#
+cd .. 
+##
+# Environment-Variable FTP_TLS_BSVADW_URL must be set (this is special)
+export FTP_TLS_BSVADW_URL=ftps://user:pass@host:port
+##
+# sync.py für Aktualisierungen:
+ Usage: 
+ ./sync.py push|push_ics|pull_ics
+
+
+~~~
+
+
 This is a starter template for [Learn Next.js](https://nextjs.org/learn).
 =======
 # README #
@@ -29,4 +63,3 @@ This README would normally document whatever steps are necessary to get your app
 
 * Repo owner or admin
 * Other community or team contact
-

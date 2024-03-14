@@ -86,3 +86,4 @@ archive
 _next
 
 *.ics
+/.env
