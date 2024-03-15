@@ -17,17 +17,32 @@ else:
 logger = logging.getLogger()
 
 
+def check_env():
+    wanted_keys = ["FTPS_URL", "ICS_URL_BETTV", "ICS_URL_GOOGLE"]
+    for key in wanted_keys:
+        if not os.getenv(key):
+            raise Exception(f"Environment variable not set: {key}, we need: {wanted_keys}")
+
+
+def usage(*args):
+    print("Error", *args)
+    print()
+    print("Usage:")
+    print(f"{sys.argv[0]} push|push_ics|pull_ics")
+    sys.exit()
+
+
 class FTP_TLS_BSVADW(ftplib.FTP_TLS):
     def __init__(self):
         super().__init__()
         if DEBUG:
             self.set_debuglevel(1)
             pass
-        url = os.getenv("FTP_TLS_BSVADW_URL")
+        url = os.getenv("FTPS_URL")
         if not url:
-            usage("Environment FTP_TLS_BSVADW_URL must be set")
+            usage("Environment FTPS_URL must be set")
         parsed_url = urllib.parse.urlparse(url)
-        logger.info("HOSTNAME %s PORT %s USERNAME %s PASSWORD --------",
+        logger.debug("HOSTNAME %s PORT %s USERNAME %s PASSWORD --------",
                     parsed_url.hostname, parsed_url.port, parsed_url.username)
         self.connect(parsed_url.hostname, port=parsed_url.port)
         self.login(user=parsed_url.username, passwd=parsed_url.password)
@@ -43,13 +58,6 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
         return conn, size
 
     pass
-
-
-def usage(*args):
-    print("Usage:")
-    print(f"{sys.argv[0]} push|push_ics|pull_ics")
-    print(*args)
-    sys.exit()
 
 
 def push():
@@ -77,13 +85,10 @@ def push():
 
 
 def pull_ics():
-    bsvadw = {
-        "bettv": "https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=***REMOVED***&Runde=2&Hallenplan=True",
-        "google": "https://calendar.google.com/calendar/ical/***REMOVED***%40group.calendar.google.com/private-***REMOVED***/basic.ics"
-    }
-    for filename, url in bsvadw.items():
-        with (open(f"site/public/{filename}.ics", "wb") as f1,
-              open(f"home/html/{filename}.ics", "wb") as f2):
+    for basename, url in dict(bettv=os.getenv("ICS_URL_BETTV"),
+                              google=os.getenv("ICS_URL_GOOGLE")).items():
+        with (open(f"site/public/{basename}.ics", "wb") as f1,
+              open(f"home/html/{basename}.ics", "wb") as f2):
             contents = urllib.request.urlopen(url).read()
             f1.write(contents)
             f2.write(contents)
@@ -107,8 +112,10 @@ def push_ics():
 
 
 if __name__ == '__main__':
-
     try:
+        check_env()
         globals().get(sys.argv[1], usage)()
-    except Exception as e:
-        usage()
+    except IndexError as e:
+        usage("Missing Argument")
+    except TypeError:
+        usage("Wrong Argument")

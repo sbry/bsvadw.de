@@ -21,8 +21,8 @@ npm run build
 #
 cd .. 
 ##
-# Environment-Variable FTP_TLS_BSVADW_URL must be set (this is special)
-export FTP_TLS_BSVADW_URL=ftps://user:pass@host:port
+# Environment-Variable FTPS_URL must be set (this is special)
+export FTPS_URL=ftps://user:pass@host:port
 ##
 # sync.py für Aktualisierungen:
  Usage: 
