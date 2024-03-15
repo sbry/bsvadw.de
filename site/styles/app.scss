@@ -1,11 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/**
+ * the colors we define
+ */
 $color: #20782d;
 $highlight: saturate($color, 20%);
 $active: lighten(saturate($color, 20%), 5%);
-// $highlight: $color;
-// $active: $color;
+$post-it-color-light: #fef18a;
+$post-it-color-dark: #fde420;
+
 
 html,
 body {
@@ -41,7 +45,7 @@ body {
 
 
 header, footer, body {
-	background-color: $color;
+	@apply bg-green-900;
 }
 
 a {
@@ -97,11 +101,8 @@ footer {
 
 
 /*
-POST
+POST-IT
  */
-$post-it-color-light: #fef18a;
-$post-it-color-dark: #fde420;
-
 
 address {
 	@apply m-2 lg:m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
@@ -165,6 +166,10 @@ dl {
 	}
 }
 
+/*
+Calendar
+ */
+
 .fc-daygrid-dot-event {
 	align-items: baseline;
 }
@@ -183,40 +188,15 @@ dl {
 	padding: 20px;
 	border-radius: 4px;
 	&.one-third {
-		background-color: #ddd;
+		@apply bg-gray-100;
 	}
 	&.two-thirds {
-		background-color: #aaa;
+		@apply bg-gray-200;
 	}
 	&.full {
-		background-color: #666;
+		@apply bg-gray-300;
 	}
 }
 
-.lpz {
-	button{
-		@apply font-bold bg-green-600 hover:bg-green-800 text-white rounded-lg;
-	}
-	input[type="checkbox"],
-	input[type="radio"] {
-		@apply w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
-	}
-	input[type="number"] {
-		@apply bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500;
-	}
-	.inactive {
-		@apply bg-gray-50;
-		.math {
-			display: none;
-		}
-	}
-	.win {
-		@apply bg-green-50 border-2 border-green-500;
-	}
-	.loss {
-		@apply bg-red-50 border-2 border-red-500;
-	}
-	.math {
-		@apply bg-green-100 text-green-800 p-1 border-2 border-green-500 rounded-lg;
-	}
-}
+
+
