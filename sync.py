@@ -21,11 +21,13 @@ def check_env():
     wanted_keys = ["FTPS_URL", "ICS_URL_BETTV", "ICS_URL_GOOGLE"]
     for key in wanted_keys:
         if not os.getenv(key):
-            raise Exception(f"Environment variable not set: {key}, we need: {wanted_keys}")
+            wanted_keys_string = " ".join([f'{wanted_key}=""' for wanted_key in wanted_keys])
+            raise EnvironmentError(f"Environment variable not set: {key}, like this: \nexport {wanted_keys_string};")
 
 
 def usage(*args):
-    print("Error", *args)
+    print()
+    print(*args)
     print()
     print("Usage:")
     print(f"{sys.argv[0]} push|push_ics|pull_ics")
@@ -43,7 +45,7 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
             usage("Environment FTPS_URL must be set")
         parsed_url = urllib.parse.urlparse(url)
         logger.debug("HOSTNAME %s PORT %s USERNAME %s PASSWORD --------",
-                    parsed_url.hostname, parsed_url.port, parsed_url.username)
+                     parsed_url.hostname, parsed_url.port, parsed_url.username)
         self.connect(parsed_url.hostname, port=parsed_url.port)
         self.login(user=parsed_url.username, passwd=parsed_url.password)
         self.prot_p()
@@ -115,7 +117,7 @@ if __name__ == '__main__':
     try:
         check_env()
         globals().get(sys.argv[1], usage)()
-    except IndexError as e:
+    except IndexError:
         usage("Missing Argument")
     except TypeError:
         usage("Wrong Argument")
