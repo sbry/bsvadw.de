@@ -5,7 +5,7 @@
 # Author:   Justin Salisbury justin@sinube
 # Created:  Thu Jan 18 12:13:57 2024
 #
-import ftplib, sys, datetime, pathlib, urllib.request, logging, os, urllib.parse
+import ftplib, sys, pathlib, urllib.request, logging, os, urllib.parse
 
 DEBUG = False
 
@@ -89,21 +89,25 @@ def push():
 def pull_ics():
     for basename, url in dict(bettv=os.getenv("ICS_URL_BETTV"),
                               google=os.getenv("ICS_URL_GOOGLE")).items():
-        with (open(f"site/public/{basename}.ics", "wb") as f1,
-              open(f"home/html/{basename}.ics", "wb") as f2):
-            contents = urllib.request.urlopen(url).read()
-            f1.write(contents)
-            f2.write(contents)
+        contents = urllib.request.urlopen(url).read()
+        for filePath in [pathlib.Path(f"site/public/{basename}.ics"),
+                         pathlib.Path(f"home/html/{basename}.ics")]:
+            try:
+                with filePath.open("wb") as file:
+                    file.write(contents)
+                    pass
+            except Exception as e:
+                logger.warning("Could not write file %s", e)
+                pass
             pass
         pass
     pass
 
 
 def push_ics():
-    homePath = pathlib.Path("home/html")
     with FTP_TLS_BSVADW() as remoteConnection:
         for basename in ['google.ics', "bettv.ics"]:
-            filePath = homePath / basename
+            filePath = pathlib.Path("site/public") / basename
             with filePath.open("rb") as file:
                 remoteConnection.storbinary(f"STOR {basename}", file)
                 remoteConnection.sendcmd(f"SITE CHMOD 644 {basename}")
