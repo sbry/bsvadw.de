@@ -53,6 +53,14 @@ const Header = () => {
                     title={"Hallenkalender"}
                 > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5"}/>
                 </ActiveLink>
+
+                <ActiveLink
+                    key="LpzRechner"
+                    href="/lpz"
+                    title={"Lpz Rechner"}
+                > <img src="/images/icon/calculator.svg" className={"w-5 h-5 mt-0.5"}/>
+                </ActiveLink>
+
             </nav>
         </header>
     )
