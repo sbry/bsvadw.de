@@ -57,7 +57,7 @@ class Lpz extends Component {
         this.state = {
             base_modifiers: {},
             initial_lpz: 1429,
-            lpz_encounters: [{}, {}],
+            lpz_encounters: [{}],
         };
     }
 
@@ -110,108 +110,101 @@ class Lpz extends Component {
     render() {
         let aggregate_delta = computeLpzAggregateDelta(this.state.initial_lpz, this.getBase(), this.state.lpz_encounters);
         return (
-            <div className={`
-                        grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-10
-                        max-w-24 w-full border-2 p-2 rounded 
-                `
-            }>
+            <>
+                <div className={"grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-w-24 w-full"}>
 
-                <fieldset className={`
-                `}>
-                    <input
-                        className={`
-                       bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-                        `}
-                        name="lpz" inputMode="decimal"
-                        min="1" max="2500" step="1"
-                        onChange={(event) => {
-                            this.setInitialLpz(event.target.value);
-                        }}
-                        type="number"
-                        value={this.state.initial_lpz}/>
-                </fieldset>
-
-
-                <details className={""}>
-                    <summary>{this.field_labels.base} <span
-                        className={"math"}>{this.getBase()}</span></summary>
                     <fieldset>
-                        {Object.keys(this.base_modifiers).map((name, index) => <fieldset key={index}>
-                            <label><input
-                                name={name}
-                                onChange={(event) => {
-                                    this.setModifier(name, event.target.checked);
-                                }}
-                                value={1}
-                                type="checkbox"/> <span>{this.field_labels[name]}</span></label>
-                        </fieldset>)}
+                        <input
+                            name="lpz" inputMode="decimal"
+                            min="1" max="2500" step="1"
+                            onChange={(event) => {
+                                this.setInitialLpz(event.target.value);
+                            }}
+                            type="number"
+                            value={this.state.initial_lpz}/>
                     </fieldset>
-                </details>
 
+                    <details className={""}>
+                        <summary>{this.field_labels.base} <span
+                            className={""}>{this.getBase()}</span></summary>
+                        <fieldset>
+                            {Object.keys(this.base_modifiers).map((name, index) => <fieldset key={index}>
+                                <label><input
+                                    name={name}
+                                    onChange={(event) => {
+                                        this.setModifier(name, event.target.checked);
+                                    }}
+                                    value={1}
+                                    type="checkbox"/> <span>{this.field_labels[name]}</span></label>
+                            </fieldset>)}
+                        </fieldset>
+                    </details>
 
-                {
-                    this.state.lpz_encounters.map((value, index) => {
-                            return <LpzEncounter
-                                key={index}
-                                index={index}
-                                initial_lpz={this.state.initial_lpz}
-                                onChange={this.setLpzEncounter}
-                                onRemove={this.removeLpzEncounter}
-                            />
-                        }
-                    )
-                }
+                    {
+                        this.state.lpz_encounters.map((value, index) => {
+                                return <LpzEncounter
+                                    key={index}
+                                    index={index}
+                                    base={this.getBase()}
+                                    initial_lpz={this.state.initial_lpz}
+                                    onChange={this.setLpzEncounter}
+                                    onRemove={this.removeLpzEncounter}
+                                />
+                            }
+                        )
+                    }
+                </div>
 
-                <fieldset className={""}>
+                <div>
                     <button
-                        className={"p-2 bg-gray-100 border rounded"}
+                        className={"my-3 w-full p-2 bg-gray-100 border rounded"}
                         onClick={() => this.addLpzEncounter({})}
                     >Spiel hinzufügen
                     </button>
-                </fieldset>
 
+                    <div
+                        className={`text-center px-2 py-2 bg-green-200 border-2 border-green-900 rounded font-bold text-3xl`}>
+                        {formatLpz(this.state.initial_lpz)} {formatDelta(aggregate_delta)} = {formatLpz(this.state.initial_lpz + aggregate_delta)}
+                    </div>
 
-                <div
-                    className={"font-bold p-1 bg-green-200 border-2 border-green-900 rounded text-3xl"}>
-                    {formatLpz(this.state.initial_lpz)} {formatDelta(aggregate_delta)} = {formatLpz(this.state.initial_lpz + aggregate_delta)}
                 </div>
-
-
-            </div>
+            </>
 
 
         )
     }
 }
 
+const LpzEncounterMath = ({initial_lpz, base, lpz, win}) => {
+    return <></>;
+    return <div
+        className={`text-xs font-mono`}>
+        <div className={`whitespace-nowrap`}> P
+            = {formatProbability(computeLpzEncounterProbability(initial_lpz, lpz))}</div>
+        <div className={`whitespace-nowrap`}>{formatDelta(computeLpzEncounterDelta(initial_lpz, base, {
+            lpz,
+            win
+        }))}</div>
 
-const LpzEncounter = ({index, onChange, onRemove, initial_lpz}) => {
+    </div>
+
+}
+const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
     const [lpz, setLpz] = useState(Math.round(initial_lpz / 10) * 10);
     const [win, setWin] = useState("");
 
-    return <div className={`
-                                relative          
-        `}>
+    return <div className={'my-2'}>
+        <div className={"relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 max-w-24 w-full"}>
 
-        <button
-            className={`
-p-2 bg-gray-100 border rounded            
-            text-sm absolute right-0 top-0
+            <button
+                className={"py-1 px-1.5 rounded bg-gray-100 text-sm absolute -right-3.5 -top-3.5"}
+                onClick={() => onRemove(index)}
+            >×
+            </button>
 
-
-            
-            `}
-            onClick={() => onRemove(index)}
-        >×
-        </button>
-
-
-        <fieldset className={`
-
-        `
-        }>
-            <label>
+            <label className={`text-center rounded mb-3 ${win === 'no' && "bg-red-200"}`}>
                 <input
+                    className={'hidden'}
                     name={`win[${index}]`}
                     checked={win === "no"}
                     onChange={(e) => {
@@ -224,16 +217,16 @@ p-2 bg-gray-100 border rounded
                     }}
                     value="no"
                     type="radio"/>
-                <span> verliert  </span>
-                <div
-                    className={"text-sm italic"}>P
-                    = {formatProbability(computeLpzEncounterProbability(lpz, initial_lpz))}</div>
-            </label>
-        </fieldset>
-        <fieldset>
+                <span> Verlust  </span>
 
-            <label>
+                <LpzEncounterMath initial_lpz={initial_lpz} base={base} lpz={lpz} win={'no'}/>
+
+            </label>
+
+            <label className={`text-center rounded mb-3 ${win === 'yes' && "bg-green-200"}`}>
+
                 <input
+                    className={'hidden'}
                     name={`win[${index}]`}
                     checked={win === "yes"}
                     onChange={(e) => {
@@ -246,38 +239,30 @@ p-2 bg-gray-100 border rounded
                     }}
                     value="yes"
                     type="radio"/>
-                <span className={""}> gewinnt  </span>
-                <div
-                    className={"text-sm italic"}>P
-                    = {formatProbability(computeLpzEncounterProbability(initial_lpz, lpz))}</div>
+
+                <span className={""}> Gewinn  </span>
+
+                <LpzEncounterMath initial_lpz={initial_lpz} base={base} lpz={lpz} win={'yes'}/>
+
             </label>
+        </div>
 
-        </fieldset>
 
-
-        <fieldset className={`
-        `}>
-            <label>
-                <input
-                    onChange={(e) => {
-                        setLpz(e.target.value)
-                        onChange({
-                            index,
-                            win,
-                            lpz
-                        })
-                    }}
-                    inputMode="decimal"
-                    min="1"
-                    max="2500" step="1"
-                    type="number" value={lpz}
-                    className={`
-                                           bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-                   
-                    `}
-                />
-            </label>
-        </fieldset>
+        <input
+            onChange={(e) => {
+                setLpz(e.target.value)
+                onChange({
+                    index,
+                    win,
+                    lpz
+                })
+            }}
+            inputMode="decimal"
+            min="1"
+            max="2500" step="1"
+            type="number" value={lpz}
+            className={`${win === 'yes' ? "bg-green-200" : ''} ${win === 'no' ? "bg-red-200" : ""}`}
+        />
 
 
     </div>
