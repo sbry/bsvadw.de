@@ -182,25 +182,26 @@ Calendar
 }
 
 .fc-daygrid-more-link {
-	font-weight: bold;
-	float: none !important;
-	display: block;
-	text-align: center;
-	font-size: 2em;
-	background-color: #ddd;
-	padding: 20px;
-	border-radius: 4px;
-	&.one-third {
-		@apply bg-gray-100;
-	}
-	&.two-thirds {
-		@apply bg-gray-200;
-	}
-	&.full {
-		@apply bg-gray-300;
-	}
-}
+	@extend address;
+	@apply font-bold w-2/3 mx-0 text-center h-8 inline-block;
+	padding-top: 10px!important;
 
+	//&.one-third {
+	//	@apply bg-gray-200;
+	//}
+	//&.two-thirds {
+	//	@apply bg-gray-300;
+	//}
+	//&.full {
+	//	@apply bg-gray-400;
+	//}
+}
+.fc-daygrid-day-bottom{
+	@apply text-center;
+}
+.fc-direction-ltr .fc-daygrid-more-link {
+	float: none !important;
+}
 
 input[type=number] {
 	@apply p-2.5 w-20 text-center border border-gray-300 text-gray-900 rounded-lg focus:border-green-500;
