@@ -2,8 +2,8 @@ import {useState} from "react";
 import React, {Component} from "react";
 import classNames from 'classnames';
 
-const computeLpzEncounterProbability = (lpz1, lpz2) => {
-    let exponent = (lpz2 - lpz1) / 150;
+const computeLpzEncounterProbability = (lpz_a, lpz_b) => {
+    let exponent = (lpz_a - lpz_b) / 150;
     return 1 / (1 + Math.pow(10, exponent))
 }
 
@@ -181,28 +181,36 @@ class Lpz extends Component {
     }
 }
 
-const LpzEncounterMath = ({initial_lpz, base, lpz_encounter}) => {
-    const delta = computeLpzEncounterDelta(initial_lpz, base, lpz_encounter);
-    return <div
+const LpzEncounterDelta = ({delta}) => (
+    <div
         className={classNames("border-2 text-center px-2 py-2 rounded", {
-                "bg-gray-200 border-gray-900": delta === 0,
-                "bg-green-200 border-green-900": delta > 0,
+                "border-green-900 bg-green-200": delta > 0,
                 "border-red-800 bg-red-200": delta < 0
             }
         )}>
         <div className={`whitespace-nowrap font-bold`}>{formatDelta(delta)}</div>
     </div>
+)
+
+const LpzEncounterProbability = ({lpz_a, lpz_b}) => {
+    const probability = computeLpzEncounterProbability(lpz_a, lpz_b);
+    return <div
+        className={`whitespace-nowrap italic text-xs`}>P = {formatProbability(probability)}</div>
+
 }
+
 const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
     const [lpz, setLpz] = useState(Math.round(initial_lpz / 10) * 10);
     const [win, setWin] = useState("");
+    const delta = computeLpzEncounterDelta(initial_lpz, base, {
+        lpz, win
+    });
+    return <div className={classNames(
+        "p-1 rounded max-w-24 w-full relative border-2", {
+            "border-green-800 bg-green-200": win === 'yes',
+            "border-red-800 bg-red-200": win === 'no',
+        })}>
 
-    return <div
-        className={classNames(
-            "p-1 rounded max-w-24 w-full relative border-2", {
-                "border-green-800 bg-green-200": win === 'yes',
-                "border-red-800 bg-red-200": win === 'no',
-            })}>
         <button
             className={"px-1.5 absolute right-0 top-0"}
             onClick={() => onRemove(index)}
@@ -212,7 +220,6 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
         <div className={'text-center'}>Spiel</div>
 
         <div className={""}>
-
             <fieldset
                 className={classNames("text-center", {
                         "border-green-800 bg-green-200": win === 'yes',
@@ -244,7 +251,7 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
             <div className={"grid grid-cols-2 gap-0"}>
                 <label
                     className={classNames(
-                        "text-center rounded mb-3",
+                        "text-center rounded-lg mb-3",
                         {
                             "": win === 'yes',
                             "cursor-pointer": win === 'no',
@@ -266,19 +273,15 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
                         type="radio"/>
 
                     <span className={""}> Gewinn  </span>
-                    <div
-                        className={`whitespace-nowrap italic text-xs`}>{formatProbability(computeLpzEncounterProbability(initial_lpz, lpz))}</div>
 
-
-                    {win == "yes" && <LpzEncounterMath initial_lpz={initial_lpz} base={base} lpz_encounter={{
-                        lpz, win
-                    }}/>}
+                    <LpzEncounterProbability lpz_a={initial_lpz} lpz_b={lpz}/>
+                    {win === "yes" && <LpzEncounterDelta delta={delta}/>}
 
                 </label>
 
                 <label
                     className={classNames(
-                        "text-center rounded mb-3",
+                        "text-center rounded-lg mb-3",
                         {
                             "": win === 'no',
                             "cursor-pointer": win === 'yes',
@@ -299,11 +302,8 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
                         value="no"
                         type="radio"/>
                     <span> Verlust  </span>
-                    <div
-                        className={`whitespace-nowrap italic text-xs`}>{formatProbability(computeLpzEncounterProbability(lpz, initial_lpz))}</div>
-                    {win == "no" && <LpzEncounterMath initial_lpz={initial_lpz} base={base} lpz_encounter={{
-                        lpz, win
-                    }}/>}
+                    <LpzEncounterProbability lpz_a={lpz} lpz_b={initial_lpz}/>
+                    {win === "no" && <LpzEncounterDelta delta={delta}/>}
 
                 </label>
 
