@@ -38,7 +38,7 @@ const Header = () => {
                 <ActiveLink
                     key={'Kontakt'}
                     href={'/kontakt/'}
-                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
+                    className={classNames("w-16 overflow-hidden overflow-ellipsis sm:w-16")}
                 >
                     Kontakt
                 </ActiveLink>
@@ -46,24 +46,22 @@ const Header = () => {
                 <ActiveLink
                     key={'Turnhalle'}
                     href={'/turnhalle/'}
-                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
+                    className={classNames("w-20 overflow-hidden overflow-ellipsis sm:w-20")}
                 >
                     Turnhalle
                 </ActiveLink>
-
+                <ActiveLink
+                    key={'Geschichte'}
+                    href={'/geschichte/'}
+                    className={classNames("w-12 overflow-hidden overflow-ellipsis sm:w-20")}
+                >
+                    Geschichte
+                </ActiveLink>
                 <ActiveLink
                     key="Hallenkalender"
                     href="/kalender"
                     title={"Hallenkalender"}
                 > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
-                </ActiveLink>
-
-                <ActiveLink
-                    key={'Geschichte'}
-                    href={'/geschichte/'}
-                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
-                >
-                    Geschichte
                 </ActiveLink>
 
                 <ActiveLink
