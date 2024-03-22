@@ -1,5 +1,6 @@
 import ActiveLink from "./activelink";
 import OrbitSvg from "./orbit-svg"
+import classNames from "classnames";
 
 
 const Header = () => {
@@ -34,24 +35,35 @@ const Header = () => {
                 </a>
             </div>
             <nav>
-                {[
-                    {name: 'Kontakt', href: '/kontakt/'},
-                    {name: 'Turnhalle', href: '/turnhalle/'},
-                    {name: 'Geschichte', href: '/geschichte/'},
-                ].map((item) => (
-                    <ActiveLink
-                        key={item.name}
-                        href={item.href}
-                        className={""}
-                    >
-                        {item.name}
-                    </ActiveLink>
-                ))}
+                <ActiveLink
+                    key={'Kontakt'}
+                    href={'/kontakt/'}
+                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
+                >
+                    Kontakt
+                </ActiveLink>
+
+                <ActiveLink
+                    key={'Turnhalle'}
+                    href={'/turnhalle/'}
+                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
+                >
+                    Turnhalle
+                </ActiveLink>
+
                 <ActiveLink
                     key="Hallenkalender"
                     href="/kalender"
                     title={"Hallenkalender"}
-                > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5"}/>
+                > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
+                </ActiveLink>
+
+                <ActiveLink
+                    key={'Geschichte'}
+                    href={'/geschichte/'}
+                    className={classNames("sm:w-5 overflow-hidden overflow-ellipsis")}
+                >
+                    Geschichte
                 </ActiveLink>
 
                 <ActiveLink
@@ -62,6 +74,7 @@ const Header = () => {
                 </ActiveLink>
 
             </nav>
+
         </header>
     )
 }

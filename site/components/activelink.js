@@ -1,4 +1,5 @@
 import {useRouter} from 'next/router'
+import classNames from "classnames";
 
 const ActiveLink = ({children, href, title, className}) => {
     const router = useRouter()
@@ -9,8 +10,12 @@ const ActiveLink = ({children, href, title, className}) => {
     }
 
     return (
-        <a title={title} className={router.asPath === href ? 'active ' : ' ' + className}
-           href={href} onClick={handleClick}>
+        <a title={title}
+           className={classNames(className, {
+               'active': router.asPath === href
+           })}
+           href={href}
+           onClick={handleClick}>
             {children}
         </a>
     )

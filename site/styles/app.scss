@@ -64,33 +64,22 @@ a {
 }
 
 header, footer {
-
+	@apply px-3;
+	a {
+		@apply text-white mr-3 whitespace-nowrap;
+	}
 	nav {
 		@apply flex;
-
-		a {
-			@apply text-white mr-3 inline-block;
-		}
 	}
+
 }
 
 header {
 	.heading {
 		a {
-			@apply font-bold text-white text-xl block whitespace-nowrap;
-			@media (min-width: theme('screens.sm')) {
-				@apply inline-block;
-			}
+			@apply block font-bold text-lg;
 		}
 	}
-
-	nav {
-		@apply px-4 font-bold;
-	}
-}
-
-footer {
-	@apply p-3;
 }
 
 @media (min-width: theme('screens.md')) {
