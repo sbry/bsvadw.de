@@ -2,8 +2,8 @@ import LpzRechner from "../components/lpz";
 
 
 const Lpz = () =>
-    <div>
 
+    <div className={"max-w-prose"}>
         <LpzRechner/>
 
         {/*<div className={"wt-5"}>*/}
