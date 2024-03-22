@@ -1,6 +1,6 @@
 import {useState} from "react";
 import React, {Component} from "react";
-
+import classNames from 'classnames';
 
 const computeLpzEncounterProbability = (lpz1, lpz2) => {
     let exponent = (lpz2 - lpz1) / 150;
@@ -111,11 +111,12 @@ class Lpz extends Component {
         let delta = computeLpzAggregateDelta(this.state.initial_lpz, this.getBase(), this.state.lpz_encounters);
         return (
             <>
-                <div className={"grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 max-w-24 w-full"}>
+                <div className={classNames("grid grid-cols-2 gap-5 max-w-24 w-full")}>
 
                     <fieldset>
                         <label>Meine LPZ</label>
                         <input
+                            className={classNames("p-1 w-20 text-center focus:ring-blue-500 focus:border-blue-500")}
                             name="lpz" inputMode="decimal"
                             min="1" max="2500" step="1"
                             onChange={(event) => {
@@ -125,7 +126,7 @@ class Lpz extends Component {
                             value={this.state.initial_lpz}/>
                     </fieldset>
 
-                    <details className={""}>
+                    <details>
                         <summary>{this.field_labels.base} <span
                             className={""}>{this.getBase()}</span></summary>
                         <fieldset>
@@ -162,9 +163,13 @@ class Lpz extends Component {
                         onClick={() => this.addLpzEncounter({})}
                     >Spiel hinzufügen
                     </button>
-
                     <div
-                        className={`${delta === 0 ? "bg-gray-200 border-gray-900" : (delta > 0 ? "bg-green-200 border-green-900" : "border-red-800 bg-red-200")} border-2 text-center px-2 py-2  rounded font-bold `}>
+                        className={classNames(
+                            "border-2 text-center px-2 py-2 rounded font-bold", {
+                                "bg-gray-200 border-gray-900": delta === 0,
+                                "bg-green-200 border-green-900": delta > 0,
+                                "border-red-800 bg-red-200": delta < 0
+                            })}>
                         {formatLpz(this.state.initial_lpz)} {formatDelta(delta)} = {formatLpz(this.state.initial_lpz + delta)}
                     </div>
 
@@ -179,8 +184,12 @@ class Lpz extends Component {
 const LpzEncounterMath = ({initial_lpz, base, lpz_encounter}) => {
     const delta = computeLpzEncounterDelta(initial_lpz, base, lpz_encounter);
     return <div
-        className={`border-2 text-center px-2 py-2 rounded 
-                        ${delta === 0 ? "bg-gray-200 border-gray-900" : (delta > 0 ? "bg-green-200 border-green-900" : "border-red-800 bg-red-200")}`}>
+        className={classNames("border-2 text-center px-2 py-2 rounded", {
+                "bg-gray-200 border-gray-900": delta === 0,
+                "bg-green-200 border-green-900": delta > 0,
+                "border-red-800 bg-red-200": delta < 0
+            }
+        )}>
         <div className={`whitespace-nowrap font-bold`}>{formatDelta(delta)}</div>
     </div>
 }
@@ -189,8 +198,11 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
     const [win, setWin] = useState("");
 
     return <div
-        className={`p-1 rounded max-w-24 w-full relative border-2 ${win === 'yes' ? "border-green-800 bg-green-200" : ''} ${win === 'no' ? "border-red-800 bg-red-200" : ""}`}>
-
+        className={classNames(
+            "p-1 rounded max-w-24 w-full relative border-2", {
+                "border-green-800 bg-green-200": win === 'yes',
+                "border-red-800 bg-red-200": win === 'no',
+            })}>
         <button
             className={"px-1.5 absolute right-0 top-0"}
             onClick={() => onRemove(index)}
@@ -202,8 +214,16 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
         <div className={""}>
 
             <fieldset
-                className={`text-center ${win === 'yes' ? "bg-green-200" : ''} ${win === 'no' ? "bg-red-200" : ""}`}>
+                className={classNames("text-center", {
+                        "border-green-800 bg-green-200": win === 'yes',
+                        "border-red-800 bg-red-200": win === 'no',
+                    }
+                )}>
                 <input
+                    className={classNames("p-1 w-20 text-center focus:ring-blue-500 focus:border-blue-500", {
+                        "border-green-800 bg-green-200": win === 'yes',
+                        "border-red-800 bg-red-200": win === 'no',
+                    })}
                     onChange={(e) => {
                         setLpz(e.target.value)
                         onChange({
@@ -215,13 +235,21 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
                     inputMode="decimal"
                     min="1"
                     max="2500" step="1"
-                    type="number" value={lpz}
+                    type="number"
+                    value={lpz}
                 />
 
             </fieldset>
 
-            <div className={"grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-0"}>
-                <label className={`text-center rounded mb-3`}>
+            <div className={"grid grid-cols-2 gap-0"}>
+                <label
+                    className={classNames(
+                        "text-center rounded mb-3",
+                        {
+                            "": win === 'yes',
+                            "cursor-pointer": win === 'no',
+                        },
+                        "hover:border-2 hover:bg-green-200 hover:border-green-900")}>
                     <input
                         className={'hidden'}
                         name={`win[${index}]`}
@@ -248,7 +276,14 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
 
                 </label>
 
-                <label className={`text-center rounded mb-3`}>
+                <label
+                    className={classNames(
+                        "text-center rounded mb-3",
+                        {
+                            "": win === 'no',
+                            "cursor-pointer": win === 'yes',
+                        },
+                        "hover:border-2 hover:bg-red-200 hover:border-red-900")}>
                     <input
                         className={'hidden'}
                         name={`win[${index}]`}
