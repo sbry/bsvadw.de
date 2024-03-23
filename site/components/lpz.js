@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import classNames from 'classnames';
 
 const computeLpzEncounterProbability = (lpz_a, lpz_b) => {
-    let exponent = (lpz_a - lpz_b) / 150;
+    let exponent = (lpz_b - lpz_a) / 150;
     return 1 / (1 + Math.pow(10, exponent))
 }
 
