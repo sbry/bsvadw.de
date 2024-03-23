@@ -1,6 +1,8 @@
 import {useState} from "react";
 import React, {Component} from "react";
 import classNames from 'classnames';
+import Cookies from 'js-cookie'
+
 
 const computeLpzEncounterProbability = (lpz_a, lpz_b) => {
     let exponent = (lpz_b - lpz_a) / 150;
@@ -56,7 +58,7 @@ class Lpz extends Component {
         super(props);
         this.state = {
             base_modifiers: {},
-            initial_lpz: 1429,
+            initial_lpz: Number(Cookies.get('initial_lpz')) || 1428,
             lpz_encounters: [],
         };
     }
@@ -109,6 +111,7 @@ class Lpz extends Component {
 
     render() {
         let delta = computeLpzAggregateDelta(this.state.initial_lpz, this.getBase(), this.state.lpz_encounters);
+        Cookies.set('initial_lpz', this.state.initial_lpz + delta)
         return (
             <>
                 <div className={classNames("grid grid-cols-2 gap-5 max-w-24 w-full")}>
@@ -166,8 +169,8 @@ class Lpz extends Component {
                     <div
                         className={classNames(
                             "border-2 text-center px-2 py-2 rounded font-bold", {
-                                "bg-gray-200 border-gray-900": delta === 0,
-                                "bg-green-200 border-green-900": delta > 0,
+                                "bg-gray-200 border-gray-800": delta === 0,
+                                "bg-green-200 border-green-800": delta > 0,
                                 "border-red-800 bg-red-200": delta < 0
                             })}>
                         {formatLpz(this.state.initial_lpz)} {formatDelta(delta)} = {formatLpz(this.state.initial_lpz + delta)}
@@ -182,14 +185,7 @@ class Lpz extends Component {
 }
 
 const LpzEncounterDelta = ({delta}) => (
-    <div
-        className={classNames("border-2 text-center px-2 py-2 rounded", {
-                "border-green-900 bg-green-200": delta > 0,
-                "border-red-800 bg-red-200": delta < 0
-            }
-        )}>
-        <div className={`whitespace-nowrap font-bold`}>{formatDelta(delta)}</div>
-    </div>
+    <div className={`whitespace-nowrap font-bold`}>{formatDelta(delta)}</div>
 )
 
 const LpzEncounterProbability = ({lpz_a, lpz_b}) => {
@@ -217,9 +213,7 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
         >×
         </button>
 
-        <div className={'text-center'}>Spiel</div>
-
-        <div className={""}>
+        <div>
             <fieldset
                 className={classNames("text-center", {
                         "border-green-800 bg-green-200": win === 'yes',
@@ -256,7 +250,7 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
                             "": win === 'yes',
                             "cursor-pointer": win === 'no',
                         },
-                        "hover:border-2 hover:bg-green-200 hover:border-green-900")}>
+                        "border-2 border-transparent hover:bg-green-200 hover:border-green-800")}>
                     <input
                         className={'hidden'}
                         name={`win[${index}]`}
@@ -286,7 +280,7 @@ const LpzEncounter = ({index, onChange, onRemove, initial_lpz, base}) => {
                             "": win === 'no',
                             "cursor-pointer": win === 'yes',
                         },
-                        "hover:border-2 hover:bg-red-200 hover:border-red-900")}>
+                        "border-2 border-transparent hover:bg-red-200 hover:border-red-800")}>
                     <input
                         className={'hidden'}
                         name={`win[${index}]`}
