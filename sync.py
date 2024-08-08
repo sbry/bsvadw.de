@@ -92,6 +92,7 @@ def pull_ics():
         contents = urllib.request.urlopen(url).read()
         for filePath in [pathlib.Path(f"site/public/{basename}.ics"),
                          pathlib.Path(f"home/html/{basename}.ics")]:
+            filePath.parent.mkdir(parents=True, exist_ok=True)
             try:
                 with filePath.open("wb") as file:
                     file.write(contents)
