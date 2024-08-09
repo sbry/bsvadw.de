@@ -87,3 +87,6 @@ _next
 
 *.ics
 /.env
+
+# just leave these images out for now
+site/public/images/galerie24

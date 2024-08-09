@@ -7,7 +7,7 @@ import React, {useEffect, useRef} from "react";
 const Kalender = () => {
     /*
      * reload on refocus so people dont call me...
-     * 
+     *
      * 25 years, people still dont reload, actually less than ever
      */
     const calendarRef = useRef(null)
@@ -49,7 +49,7 @@ const Kalender = () => {
         }}
         weekNumbers={true}
         dayHeaders={true}
-        hiddenDays={[2, 4, 0]}
+        hiddenDays={[4, 0]}
         locale='de'
         plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
         initialView="dayGridMonthMore"

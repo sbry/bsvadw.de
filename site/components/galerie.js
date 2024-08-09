@@ -18,20 +18,47 @@ function shuffle(array) {
     return array;
 }
 
-const images = ["1242.jpg",
-    "1244.jpg",
-    "1246.jpg",
-    "1248.jpg",
-    "1250.jpg",
-    "1252.jpg",
-    "1254.jpg",
-    "1256.jpg",
-    "1258.jpg",
-    "1262.jpg",
-    "1264.jpg",
-    "1268.jpg"].map(filename => ({
-    original: `/images/galerie/${filename}`,
-    thumbnail: `/images/galerie/${filename}`
+const images = [
+    'B70A0029.jpg',
+    'B70A0069.jpg',
+    'B70A0164.jpg',
+    'B70A0177.jpg',
+    'B70A0241.jpg',
+    'B70A0247.jpg',
+    'B70A0337.jpg',
+    'B70A0345.jpg',
+    'B70A0427.jpg',
+    'B70A0651.jpg',
+    'B70A0661.jpg',
+    'B70A0694.jpg',
+    'B70A0721.jpg',
+    'B70A7253.jpg',
+    'B70A7304.jpg',
+    'B70A7325.jpg',
+    'B70A7333.jpg',
+    'B70A7342.jpg',
+    'B70A7350.jpg',
+    'B70A7402.jpg',
+    'B70A7489.jpg',
+    'B70A7529.jpg',
+    'B70A7540.jpg',
+    'B70A7565.jpg',
+    'B70A7596.jpg',
+    'B70A7631.jpg',
+    'B70A7717.jpg',
+    'B70A7735.jpg',
+    'B70A7921.jpg',
+    'B70A7938.jpg',
+    'B70A7958.jpg',
+    'B70A8011.jpg',
+    'B70A8015.jpg',
+    'B70A8045.jpg',
+    'B70A9839.jpg',
+    '_OS_3390.jpg',
+    '_OS_3500.jpg'
+].map(filename => ({
+    original: `/images/galerie24/1024x/${filename}`,
+    thumbnail: `/images/galerie24/200x/${filename}`
 }));
 const MyGallery = () => {
     return <ImageGallery slideInterval={2500} slideDuration={500} showThumbnails={true}
