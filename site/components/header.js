@@ -58,13 +58,17 @@ const Header = () => {
                     Geschichte
                 </ActiveLink>
                 <ActiveLink
-                    key="Hallenkalender"
-                    href="/kalender"
-                    title={"Hallenkalender"}
-                > <img src="/images/icon/calendar.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
+                    key="Hallenkalender 1"
+                    href="/kalender1"
+                    title={"Termine Hallenkalender 1"}
+                > <img src="/images/icon/calendar-1.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
                 </ActiveLink>
-
                 <ActiveLink
+                    key="Hallenkalender 2"
+                    href="/kalender2"
+                    title={"Termine Hallenkalender 2"}
+                > <img src="/images/icon/calendar-2.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
+                </ActiveLink>                <ActiveLink
                     key="LpzRechner"
                     href="/lpz"
                     title={"Lpz Rechner"}

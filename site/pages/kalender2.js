@@ -4,7 +4,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import React, {useEffect, useRef} from "react";
 
-const Kalender = () => {
+const Kalender1 = () => {
     /*
      * reload on refocus so people dont call me...
      *
@@ -23,7 +23,7 @@ const Kalender = () => {
         return () => window.removeEventListener("focus", onFocus);
     });
 
-    return <FullCalendar
+    return <div><h1 style={{position: "absolute", right: 0, backgroundColor: '#0000ff', color:'#ffffff'}}>Halle 2</h1><FullCalendar
         ref={calendarRef}
         moreLinkClassNames={({num, text}) => {
             var map = {1: "one-third", 2: "two-thirds", 3: "full"}
@@ -36,7 +36,7 @@ const Kalender = () => {
             {
                 dayGridMonthMore: {
                     type: 'dayGridMonth',
-                    dayMaxEventRows: 0,
+                    dayMaxEventRows: 2,
                 }
             }
         }
@@ -49,17 +49,23 @@ const Kalender = () => {
         }}
         weekNumbers={true}
         dayHeaders={true}
-        hiddenDays={[4, 0]}
+        hiddenDays={[3, 4, 6, 0]}
         locale='de'
         plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
         initialView="dayGridMonthMore"
-        eventSources={[{
-            url: '/bettv.ics',
-            format: 'ics'
-        }, {
-            url: '/google.ics',
-            format: 'ics'
-        }]}
-    />
+        eventSources={[
+            // {
+            //     url: '/bettv.ics',
+            //     format: 'ics',
+            //     color: 'red',   // an option!
+            // },
+            {
+                url: '/google.ics',
+                format: 'ics',
+                color: 'blue',   // an option!
+
+            }
+        ]}
+    /></div>
 }
-export default Kalender;
+export default Kalender1;
