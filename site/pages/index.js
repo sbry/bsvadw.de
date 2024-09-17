@@ -42,6 +42,12 @@ const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
                 </dl>
             </div>
         </div>
+        <address className="content-center text-lg">
+            <p className="text-center">Hinweis</p>
+            <p>
+                Die Duschen in der Jungen-Umkleide sind momentan gesperrt.
+            </p>
+        </address>
     </div>
 
     <div>
