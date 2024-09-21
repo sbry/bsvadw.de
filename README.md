@@ -23,8 +23,8 @@ cd ..
 ##
 # Environment-Variable FTPS_URL must be set (this is special)
 export FTPS_URL=ftps://user:pass@host:port
-export ICS_URL_BETTV="https://"
-export ICS_URL_GOOGLE="https://"
+export HEIMSPIELE_HALLE1="https://"
+export TERMINE_HALLE2="https://"
 
 ##
 # sync.py für Aktualisierungen:

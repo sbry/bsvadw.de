@@ -4,7 +4,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import React, {useEffect, useRef} from "react";
 
-const Kalender1 = () => {
+const Kalenderj = () => {
     /*
      * reload on refocus so people dont call me...
      *
@@ -23,7 +23,7 @@ const Kalender1 = () => {
         return () => window.removeEventListener("focus", onFocus);
     });
 
-    return <div><h1 style={{position: "absolute", right: 0, backgroundColor: '#fde420'}}>Halle 1</h1><FullCalendar
+    return <div><h1 style={{position: "absolute", right: 0, backgroundColor: '#0000ff', color:'#ffffff'}}>Jugend</h1><FullCalendar
         ref={calendarRef}
         moreLinkClassNames={({num, text}) => {
             var map = {1: "one-third", 2: "two-thirds", 3: "full"}
@@ -36,7 +36,7 @@ const Kalender1 = () => {
             {
                 dayGridMonthMore: {
                     type: 'dayGridMonth',
-                    dayMaxEventRows: 0,
+                    dayMaxEventRows: 2,
                 }
             }
         }
@@ -49,23 +49,18 @@ const Kalender1 = () => {
         }}
         weekNumbers={true}
         dayHeaders={true}
-        hiddenDays={[2, 4, 6, 0]}
+        hiddenDays={[3, 4, 6, 0]}
         locale='de'
         plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
         initialView="dayGridMonthMore"
         eventSources={[
+            {
+                url: '/termine-jugend.ics',
+                format: 'ics',
+                color: 'orange',   // an option!
 
-            {
-                url: '/heimspiele-halle1.ics',
-                format: 'ics',
-                color: 'red',
-            },
-            {
-                url: '/termine-halle1.ics',
-                format: 'ics',
-                color: 'green',
-            },
+            }
         ]}
     /></div>
 }
-export default Kalender1;
+export default Kalenderj;

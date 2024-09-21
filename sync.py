@@ -6,6 +6,7 @@
 # Created:  Thu Jan 18 12:13:57 2024
 #
 import ftplib, sys, pathlib, urllib.request, logging, os, urllib.parse
+from os.path import basename
 
 DEBUG = False
 
@@ -15,10 +16,13 @@ else:
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 logger = logging.getLogger()
+##
+#
+KNOWN_CALENDARS = ["HEIMSPIELE_HALLE1", "TERMINE_HALLE2", "TERMINE_HALLE1", 'TERMINE_JUGEND']
 
 
 def check_env():
-    wanted_keys = ["FTPS_URL", "ICS_URL_BETTV", "ICS_URL_GOOGLE"]
+    wanted_keys = ["FTPS_URL"] + KNOWN_CALENDARS
     for key in wanted_keys:
         if not os.getenv(key):
             wanted_keys_string = " ".join([f'{wanted_key}=""' for wanted_key in wanted_keys])
@@ -86,13 +90,21 @@ def push():
     pass
 
 
+def get_filename(name):
+    return f"{name.replace('_', '-').lower()}.ics"
+
+
 def pull_ics():
-    for basename, url in dict(bettv=os.getenv("ICS_URL_BETTV"),
-                              google=os.getenv("ICS_URL_GOOGLE")).items():
+    ##
+    # copy to both locations for development
+    targetDirs = [pathlib.Path("site/public"), pathlib.Path("home/public")]
+    # and get them all
+    for name in KNOWN_CALENDARS:
+        url = os.getenv(name)
         contents = urllib.request.urlopen(url).read()
-        for filePath in [pathlib.Path(f"site/public/{basename}.ics"),
-                         pathlib.Path(f"home/html/{basename}.ics")]:
-            filePath.parent.mkdir(parents=True, exist_ok=True)
+        for targetDir in targetDirs:
+            targetDir.mkdir(parents=True, exist_ok=True)
+            filePath = targetDir / get_filename(name)
             try:
                 with filePath.open("wb") as file:
                     file.write(contents)
@@ -107,11 +119,11 @@ def pull_ics():
 
 def push_ics():
     with FTP_TLS_BSVADW() as remoteConnection:
-        for basename in ['google.ics', "bettv.ics"]:
-            filePath = pathlib.Path("site/public") / basename
+        for name in KNOWN_CALENDARS:
+            filePath = pathlib.Path("site/public") / get_filename(name)
             with filePath.open("rb") as file:
-                remoteConnection.storbinary(f"STOR {basename}", file)
-                remoteConnection.sendcmd(f"SITE CHMOD 644 {basename}")
+                remoteConnection.storbinary(f"STOR {filePath.name}", file)
+                remoteConnection.sendcmd(f"SITE CHMOD 644 {filePath.name}")
                 pass
             pass
         pass

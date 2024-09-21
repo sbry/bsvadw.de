@@ -60,15 +60,24 @@ const Header = () => {
                 <ActiveLink
                     key="Hallenkalender 1"
                     href="/kalender1"
-                    title={"Termine Hallenkalender 1"}
+                    title={"Termine Halle 1"}
                 > <img src="/images/icon/calendar-1.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
                 </ActiveLink>
                 <ActiveLink
                     key="Hallenkalender 2"
                     href="/kalender2"
-                    title={"Termine Hallenkalender 2"}
+                    title={"Termine Halle 2"}
                 > <img src="/images/icon/calendar-2.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
-                </ActiveLink>                <ActiveLink
+                </ActiveLink>
+
+                <ActiveLink
+                    key="Jugendkalender"
+                    href="/kalenderj"
+                    title={"Termine Jugend"}
+                > <img src="/images/icon/calendar-j.svg" className={"w-5 h-5 mt-0.5 object-contain"}/>
+                </ActiveLink>
+
+                <ActiveLink
                     key="LpzRechner"
                     href="/lpz"
                     title={"Lpz Rechner"}
