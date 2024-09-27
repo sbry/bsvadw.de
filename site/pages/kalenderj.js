@@ -26,18 +26,11 @@ const Kalenderj = () => {
     return <div><h1 style={{position: "absolute", right: 0, backgroundColor: '#0000ff', color: '#ffffff'}}>Jugend</h1>
         <FullCalendar
             ref={calendarRef}
-            moreLinkClassNames={({num, text}) => {
-                var map = {1: "one-third", 2: "two-thirds", 3: "full"}
-                return [map[num]];
-            }}
-            moreLinkContent={({num, text}) => {
-                return `${num}`
-            }}
             views={
                 {
                     dayGridMonthMore: {
                         type: 'dayGridMonth',
-                        dayMaxEventRows: 2,
+                        dayMaxEventRows: 6,
                     }
                 }
             }
@@ -51,7 +44,7 @@ const Kalenderj = () => {
             weekNumbers={true}
             dayHeaders={true}
             hiddenDays={[
-                // 3, 4, 6, 0
+                0 // 3, 4, 6, 0
             ]}
             locale='de'
             plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
@@ -61,7 +54,6 @@ const Kalenderj = () => {
                     url: '/termine-jugend.ics',
                     format: 'ics',
                     color: 'orange',   // an option!
-
                 }
             ]}
         /></div>

@@ -1,35 +1,35 @@
 ##
 # https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=2396&Runde=1&Hallenplan=False
 #
-# -> bsvadw.ics
+# -> termine-bsvadw.ics
 import icalendar
 from pathlib import Path
 import copy, re
 
 
-def all():
+def termine_bsvadw():
     ics_path = Path("bsvadw.ics")
     with ics_path.open() as f:
         calendar = icalendar.Calendar.from_ical(f.read())
     return calendar
 
 
-def jugend():
-    jugend_calendar = icalendar.Calendar()
-    jugend_calendar.add('prodid', '-//icalcombine//NONSGML//EN')
-    jugend_calendar.add('version', '2.0')
-    jugend_calendar.add('x-wr-calname', "BSVADW Jugendkalender")
+def termine_jugend():
+    jugend_icalendar = icalendar.Calendar()
+    jugend_icalendar.add('prodid', '-//termine_jugend//NONSGML//DE')
+    jugend_icalendar.add('version', '1.0')
+    jugend_icalendar.add('x-wr-calname', "BSVADW Jugendkalender")
 
-    for event in all().walk("VEVENT"):
+    for event in termine_bsvadw().walk("VEVENT"):
         # print(event.get("SUMMARY"))
         if re.search('\((Jungen|Mädchen)', event.get('SUMMARY')):
             copied_event = copy.copy(event)
-            jugend_calendar.add_component(copied_event)
-    return jugend_calendar
+            jugend_icalendar.add_component(copied_event)
+    return jugend_icalendar
 
 
 if __name__ == '__main__':
-    calendar = jugend()
+    calendar = termine_jugend()
     print(calendar.to_ical().decode('utf-8'))
 
 #
