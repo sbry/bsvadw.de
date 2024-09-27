@@ -1,5 +1,7 @@
 ##
 # https://bettv.tischtennislive.de/export/Tischtennis/iCal.aspx?Typ=Verein&ID=2396&Runde=1&Hallenplan=False
+#
+# -> bsvadw.ics
 import icalendar
 from pathlib import Path
 import copy, re
@@ -13,9 +15,6 @@ def all():
 
 
 def jugend():
-    wanted = [
-        '(Jungen', '(Mädchen'
-    ]
     jugend_calendar = icalendar.Calendar()
     jugend_calendar.add('prodid', '-//icalcombine//NONSGML//EN')
     jugend_calendar.add('version', '2.0')
@@ -32,10 +31,5 @@ def jugend():
 if __name__ == '__main__':
     calendar = jugend()
     print(calendar.to_ical().decode('utf-8'))
-    # for event in calendar.walk('VEVENT'):
-    #      print(event.get("SUMMARY"))
-    # print(jugend_calendar)
-    pass
-
 
 #
