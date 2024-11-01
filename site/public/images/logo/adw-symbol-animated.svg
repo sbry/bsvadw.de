@@ -1,41 +1,50 @@
 <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-        <path id="k-orbit"
-              d="m 18, 4 a 32, 80 -45 1,0 1,0 Z"/>
-        <path id="l-orbit"
-              d="m 112, 4 a 32, 80 45 1,0 1,0 Z"/>
-        <path id="l-orbit-inverse"
-              d="M 5, 110 a 32, 80 45 1,1 0,1 Z"/>
-    </defs>
+  <defs>
+    <path id="k-orbit"
+          d="m 18, 4 a 32, 80 -45 1,0 1,0 Z" />
+    <path id="k-orbit-inverse"
+          d="m 4, 18 a 32, 80 -45 1,1 0,1 Z" />
+    <path id="l-orbit"
+          d="m 112, 4 a 32, 80 45 1,0 1,0 Z" />
+    <path id="l-orbit-inverse"
+          d="M 4, 112 a 32, 80 45 1,1 0,1 Z" />
+  </defs>
 
-    <circle cx="64" cy="64" r="58" fill="#20782d" id="background"/>
-    <circle cx="64" cy="64" r="8" fill="white" id="nucleus"/>
+  <circle cx="64" cy="64" r="58" fill="#20782d" id="background" />
+  <circle cx="64" cy="64" r="8" fill="white" id="nucleus" />
 
-    <g id="orbit" transform="">
-        <g transform="rotate(5) scale(.72, .62)  translate(30,28)">
-            <use href="#k-orbit" stroke="white" fill="none" stroke-width="5px"/>
-            <use href="#l-orbit" stroke="white" fill="none" stroke-width="5px"/>
+  <g id="orbit" transform="">
+    <g transform="rotate(5) scale(.72, .62)  translate(30,28)">
+      <use href="#k-orbit" stroke="white" fill="none" stroke-width="5px" />
+      <use href="#l-orbit" stroke="white" fill="none" stroke-width="5px" />
 
-            <circle fill="#d3181a" r="7">
-                <animateMotion dur="10s" repeatCount="indefinite"
-                >
-                    <mpath href="#k-orbit"/>
-                </animateMotion>
-            </circle>
+      <circle fill="#d3181a" r="7">
+        <animateMotion dur="10s" repeatCount="indefinite"
+        >
+          <mpath href="#k-orbit" />
+        </animateMotion>
+      </circle>
 
-            <circle fill="#d3181a" r="7">
-                <animateMotion dur="10s" repeatCount="indefinite">
-                    <mpath href="#l-orbit"/>
-                </animateMotion>
-            </circle>
+      <circle fill="#d3181a" r="7">
+        <animateMotion dur="10s" repeatCount="indefinite"
+        >
+          <mpath href="#k-orbit-inverse" />
+        </animateMotion>
+      </circle>
 
-            <circle fill="#d3181a" r="7">
-                <animateMotion dur="10s" repeatCount="indefinite"
-                               keyPoints="1;0" keyTimes="0;1"
-                >
-                    <mpath href="#l-orbit-inverse"/>
-                </animateMotion>
-            </circle>
-        </g>
+      <circle fill="#d3181a" r="7">
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <mpath href="#l-orbit" />
+        </animateMotion>
+      </circle>
+
+      <circle fill="#d3181a" r="7">
+        <animateMotion dur="10s" repeatCount="indefinite"
+                       keyPoints="1;0" keyTimes="0;1"
+        >
+          <mpath href="#l-orbit-inverse" />
+        </animateMotion>
+      </circle>
     </g>
+  </g>
 </svg>

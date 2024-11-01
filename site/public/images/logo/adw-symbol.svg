@@ -2,10 +2,12 @@
     <defs>
         <path id="k-orbit"
               d="m 18, 4 a 32, 80 -45 1,0 1,0 Z"/>
+        <path id="k-orbit-inverse"
+              d="m 4, 18 a 32, 80 -45 1,1 0,1 Z"/>
         <path id="l-orbit"
-              d="m 112, 4 a 32, 80 45 1,0 1,0 Z"/>
+              d="m 112, 5 a 32, 80 45 1,0 1,0 Z"/>
         <path id="l-orbit-inverse"
-              d="M 5, 110 a 32, 80 45 1,1 0,1 Z"/>
+              d="M 5, 112 a 32, 80 45 1,1 0,1 Z"/>
     </defs>
 
     <circle cx="64" cy="64" r="58" fill="#20782d" id="background"/>
@@ -22,6 +24,14 @@
                     <mpath href="#k-orbit"/>
                 </animateMotion>
             </circle>
+
+            <circle fill="#d3181a" r="7">
+                <animateMotion dur="10s" repeatCount="indefinite"
+                >
+                    <mpath href="#k-orbit-inverse"/>
+                </animateMotion>
+            </circle>
+
 
             <circle fill="#d3181a" r="7">
                 <animateMotion dur="10s" repeatCount="indefinite">
