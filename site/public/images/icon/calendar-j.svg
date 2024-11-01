@@ -4,34 +4,10 @@
    height="146"
    version="1.1"
    id="svg16683"
-   sodipodi:docname="calendar-j.svg"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs16687" />
-  <sodipodi:namedview
-     id="namedview16685"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="4.765706"
-     inkscape:cx="80.890428"
-     inkscape:cy="97.467196"
-     inkscape:window-width="1824"
-     inkscape:window-height="1020"
-     inkscape:window-x="96"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g18045"
-     inkscape:pageshadow="2" />
   <rect
      style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:0.45;stroke-linecap:round"
      id="rect20496"
@@ -52,21 +28,18 @@
        x="24.680445"
        y="90.869804"
        id="text18034"><tspan
-         sodipodi:role="line"
          id="tspan18032"
          x="24.680445"
          y="90.869804"
          style="fill:#f7f2f2;fill-opacity:1;stroke-width:0.376384" /></text>
-    <text
-       xml:space="preserve"
-       style="font-weight:bold;font-size:113.654px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#f7f2f2;fill-opacity:1;stroke-width:1.33189"
-       x="56.151222"
-       y="119.55659"
-       id="text18034-3"><tspan
-         sodipodi:role="line"
-         id="tspan18032-6"
-         x="56.151222"
-         y="119.55659"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Delphine;-inkscape-font-specification:'Delphine Bold';fill:#333333;fill-opacity:1;stroke-width:1.33189">J</tspan></text>
+    <g
+       aria-label="J"
+       id="text18034-3"
+       style="font-weight:bold;font-size:113.654px;line-height:1.25;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;stroke-width:1.33189">
+      <path
+         d="m 93.31608,125.6939 q -1.022886,0.90924 -2.84135,2.38674 -0.795578,0.56827 -2.727696,0.56827 h -3.636928 q -0.56827,0 -3.750582,-1.2502 -3.182312,-1.13654 -3.750582,-1.13654 -0.454616,0 -0.454616,0.11366 v 0 q 0,0.22731 -0.454616,0.22731 -2.045772,0 -10.79713,-4.09155 -1.70481,-0.79558 -5.228084,-3.63693 -0.681924,-1.02288 -2.386734,-2.50038 -0.113654,-0.34097 -0.340962,-0.68193 -0.113654,-0.45461 -0.113654,-1.13654 0,-1.25019 0.909232,-2.15942 0.909232,-1.02289 1.818464,-1.02289 0.340962,0 1.932118,0.56827 0.795578,1.13654 2.386734,2.955 2.84135,2.27308 5.11443,3.63693 2.386734,1.2502 6.591932,2.7277 3.864236,1.36385 4.659814,1.36385 0.454616,0 2.386734,0.11365 1.932118,0.22731 2.500388,0.22731 1.70481,0 1.932118,-1.02289 -0.113654,0.56827 -0.113654,-1.70481 0,-1.70481 -2.27308,-9.54693 -2.159426,-7.84213 -2.159426,-12.047329 v -11.93367 q 0,-7.273856 -0.681924,-7.842126 0.113654,0 -6.023662,1.591156 -6.023662,1.591156 -7.95578,1.591156 -0.454616,0 -2.614042,0.454616 -2.159426,0.340962 -2.614042,0.340962 -2.500388,0 -6.81924,-1.818464 -5.455392,-2.386734 -5.455392,-5.569046 0,-0.454616 0.227308,-1.477502 0.227308,-1.13654 0.227308,-1.477502 0.113654,0 0.454616,-0.227308 0.340962,-0.227308 0.909232,-0.227308 0.454616,0 1.70481,1.477502 1.477502,1.818464 2.386734,2.386734 2.727696,1.70481 8.183088,1.70481 1.363848,0 6.364624,-0.909232 6.25097,-1.022886 9.433282,-2.386734 2.500388,-1.022886 5.569046,-4.432505 0.454616,0.113654 1.250194,0.113654 0.454616,-0.113654 0.795578,-0.113654 2.27308,0 2.27308,2.159425 0,0.340962 -0.795578,1.363848 -0.681924,1.022886 -0.795578,1.250194 -0.795578,2.84135 -0.795578,5.796354 0,0 0.227308,5.455392 0.227308,5.455392 0.227308,7.614818 -0.113654,8.296739 4.205198,23.867339 0.681924,-0.79558 0.909232,-0.79558 z"
+         style="font-family:Delphine;-inkscape-font-specification:'Delphine Bold';fill:#333333"
+         id="path827" />
+    </g>
   </g>
 </svg>
