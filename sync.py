@@ -79,6 +79,9 @@ def push():
                     pass
                 remoteConnection.sendcmd(f"SITE CHMOD 755 {relativePath}")
             else:
+                # dont copy calendar we use psh_ics for that
+                if homeFilePath.suffix == '.ics':
+                    continue
                 with homeFilePath.open("rb") as fh:
                     remoteConnection.storbinary(f"STOR {relativePath}", fh)
                     remoteConnection.sendcmd(f"SITE CHMOD 644 {relativePath}")
