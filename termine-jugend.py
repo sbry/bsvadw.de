@@ -22,7 +22,7 @@ def termine_jugend():
 
     for event in termine_bsvadw().walk("VEVENT"):
         # print(event.get("SUMMARY"))
-        if re.search('\((Jungen|Mädchen)', event.get('SUMMARY')):
+        if re.search(r'\((Jungen|Mädchen)', event.get('SUMMARY')):
             copied_event = copy.copy(event)
             jugend_icalendar.add_component(copied_event)
     return jugend_icalendar
