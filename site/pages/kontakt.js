@@ -8,7 +8,7 @@ const Kontakt = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
             <p className={'text-center font-bold text-2xl font-serif'}>
                 Andreas
             </p>
-            <p className={'oldstyle-nums'}> 030 / 534 11 63</p>
+            <p className={'oldstyle-nums'}>0172 / 7827627</p>
             abteilungsleitungttadw[at]freenet.de
         </address>
         <address className={"px-2"}>
