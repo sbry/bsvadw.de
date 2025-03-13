@@ -30,9 +30,14 @@ const images = [
     'B70A0427.jpg',
     'B70A0651.jpg',
     'B70A0661.jpg',
-    'B70A0694.jpg',
+    // das ist irgendwie klein gutes Bild
+    //    'B70A0694.jpg',
     'B70A0721.jpg',
-    'B70A7253.jpg',
+// das ist das Gruppenbild
+    // https://www.bsvadw.de/images/galerie24/1024x/B70A7253.jpg
+
+    // 'B70A7253.jpg',
+    'gruppenbild.jpg',
     'B70A7304.jpg',
     'B70A7325.jpg',
     'B70A7333.jpg',
