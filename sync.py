@@ -5,8 +5,10 @@
 # Author:   Justin Salisbury justin@sinube
 # Created:  Thu Jan 18 12:13:57 2024
 #
-import ftplib, sys, pathlib, urllib.request, logging, os, urllib.parse
+import ftplib, sys, pathlib, urllib.request, logging, os, urllib.parse, dotenv
 from os.path import basename
+
+dotenv.load_dotenv()
 
 DEBUG = False
 
