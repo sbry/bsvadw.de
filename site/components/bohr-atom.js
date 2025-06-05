@@ -1,5 +1,25 @@
 import React from 'react';
 
+import {shape, intersect} from "svg-intersections";
+
+
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    rotate(angle, origin = Point(0, 0)) {
+        const theta = (Math.PI / 180) * angle;
+        const cos_theta = Math.cos(theta)
+        const sin_theta = Math.sin(theta)
+        const nx = (cos_theta * (this.x - origin.x)) + (sin_theta * (this.y - origin.y)) + origin.x;
+        const ny = (cos_theta * (this.y - origin.y)) - (sin_theta * (this.x - origin.x)) + origin.y;
+        return new Point(nx, ny);
+    }
+}
+
+
 /**
  *  we learned a lot here:
  * https://stackoverflow.com/questions/55632058/set-origin-and-rotation-on-animatemotions-path
@@ -10,51 +30,70 @@ const BohrAtom = ({...props}) => {
     const counter = props.counter || 2;
     const center_x = width / 2;
     const center_y = height / 2;
-    const transforms = [
-        `rotate(45, ${center_x}, ${center_y})`,
-        `rotate(-45, ${center_x}, ${center_y})`
-    ]
-    /*
-     * three electrons per ellipse
-     */
-    const electrons = [
-        1, 2, 3
-    ]
-    // @todo not quite clear about the radii of the ellipse
-    // @todo would be nice to have a soft rotation of the whole thing
-    return <svg viewBox={`"0 0 ${width} ${height}`}
+    const centerPoint = new Point(center_x, center_y);
+    const topApex = new Point(center_x, 0);
+    const bottomApex = new Point(center_x, height);
+    const ellipse = {
+        rx: width / 5.4,
+        ry: width / 2.05,
+        cx: center_x,
+        cy: center_y
+    }
+    const ellipses = [
+        {
+            transform: `rotate(45, ${center_x}, ${center_y})`,
+            electrons: [
+                1, 2
+            ]
+        },
+        {
+            transform: `rotate(-45, ${center_x}, ${center_y})`,
+            electrons: [
+                1, 2, 3, 4
+            ]
+        }
+    ];
+    console.log(ellipses);
+    return <svg viewBox={`0 0 ${width} ${height}`}
                 preserveAspectRatio="xMidYMid meet" role="img"
                 width={width} height={height}
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink">
         <defs>
-            <ellipse id="orbit"
-                     fill="none" strokeWidth={width / 50} stroke="#fff"
-                     cx={center_x} cy={center_y}
-
-                     rx={width / 5}
-                     ry={width / 2}
-            />
+            <ellipse id="orbit" fill="none" stroke="#fff" strokeWidth={width / 35}
+                     {...ellipse} />
         </defs>
 
-        <circle id="atom" cx={width / 2} cy={height / 2} r={width / 2} fill="#20782d"/>
-        <circle id="nucleus" fill="#fff" cx={width / 2} cy={height / 2} r={width / 10}/>
 
-        {transforms.map((v, i) => (<g transform={transforms[i]} key={i}>
-            <use xlinkHref={"#orbit"}/>
-            {electrons.map((electron, i) => (
-                <circle
-                    fill="#d3181a"
-                    stroke="none" r={width / 40}>
-                    <animateMotion dur={`${electrons.length}s`} begin={`${electron}s`}
-                                   repeatDur={"indefinite"}
-                                   repeatCount="indefinite">
-                        <mpath xlinkHref="#orbit"/>
-                    </animateMotion>
-                </circle>
-            ))}
-        </g>))}
+        <g transform={`rotate(10, ${center_x}, ${center_y})`}>
+            <circle id="nucleus" fill="#fff" cx={center_x} cy={center_y} r={width / 13} />
 
+            {ellipses.map((ellipsis, i) => (<g transform={ellipsis.transform} key={`g-${i}`}>
+                <use xlinkHref={"#orbit"}/>
+                {ellipsis.electrons.map((electron, i) => (
+                    <circle
+                        key={`c-${i}`}
+                        fill="#d3181a"
+                        r={width / 23}>
+                        <animateMotion dur={`${ellipsis.electrons.length * 5}s`}
+                                       begin={`${(i + 1) * 5}s`}
+                                       repeatCount="indefinite">
+                            <mpath xlinkHref="#orbit"/>
+                        </animateMotion>
+                    </circle>
+                ))}
+            </g>))}
+
+            {/*<animateTransform*/}
+            {/*    attributeName="transform"*/}
+            {/*    attributeType="XML"*/}
+            {/*    type="rotate"*/}
+            {/*    from={`0 ${center_x} ${center_y}`}*/}
+            {/*    to={`360 ${center_x} ${center_y}`}*/}
+            {/*    dur="60s"*/}
+            {/*    repeatCount="indefinite"/>*/}
+
+        </g>
     </svg>
 };
 

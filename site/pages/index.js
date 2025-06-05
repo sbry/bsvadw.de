@@ -26,8 +26,8 @@ const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
                     <dd>17.30 - 19.00 Uhr</dd>
                     <dt>Mittwoch</dt>
                     <dd>17.30 - 19.00 Uhr</dd>
-                    <dt>Freitag</dt>
-                    <dd>17.30 - 19.00 Uhr</dd>
+                    {/*<dt>Freitag</dt>*/}
+                    {/*<dd>17.30 - 19.00 Uhr</dd>*/}
                 </dl>
             </div>
             <div className={"inline-block w-60"}>

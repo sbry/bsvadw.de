@@ -1,5 +1,4 @@
 import ActiveLink from "./activelink";
-import OrbitSvg from "./orbit-svg"
 import classNames from "classnames";
 
 
