@@ -11,6 +11,7 @@ from os.path import basename
 dotenv.load_dotenv()
 
 DEBUG = False
+FTP_DEBUG = True
 
 if DEBUG:
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -43,7 +44,7 @@ def usage(*args):
 class FTP_TLS_BSVADW(ftplib.FTP_TLS):
     def __init__(self):
         super().__init__()
-        if DEBUG:
+        if FTP_DEBUG:
             self.set_debuglevel(1)
             pass
         url = os.getenv("FTPS_URL")
@@ -55,7 +56,6 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
         self.connect(parsed_url.hostname, port=parsed_url.port)
         self.login(user=parsed_url.username, passwd=parsed_url.password)
         self.prot_p()
-        self.cwd('html')
 
     def ntransfercmd(self, cmd, rest=None):
         conn, size = ftplib.FTP.ntransfercmd(self, cmd, rest)
@@ -69,25 +69,31 @@ class FTP_TLS_BSVADW(ftplib.FTP_TLS):
 
 
 def push():
-    homePath = pathlib.Path("home/html")
     with FTP_TLS_BSVADW() as remoteConnection:
-        for homeFilePath in homePath.rglob('*'):
-            relativePath = homeFilePath.relative_to("home/html")
-            if homeFilePath.is_dir():
+        remoteConnection.cwd('/html/')
+        os.chdir("home/html")
+        for filePath in pathlib.Path(".").rglob('*'):
+            if filePath.is_dir():
                 try:
-                    remoteConnection.mkd('./' + str(relativePath))
-                except ftplib.error_perm:
-                    logger.debug("Directory already exists %s", relativePath)
+                    remoteConnection.mkd('./' + str(filePath))
+                except ftplib.error_perm as e:
                     pass
-                remoteConnection.sendcmd(f"SITE CHMOD 755 {relativePath}")
-            else:
-                # dont copy calendar we use psh_ics for that
-                if homeFilePath.suffix == '.ics':
-                    continue
-                with homeFilePath.open("rb") as fh:
-                    remoteConnection.storbinary(f"STOR {relativePath}", fh)
-                    remoteConnection.sendcmd(f"SITE CHMOD 644 {relativePath}")
-                    logger.debug("File Uploaded %s", relativePath)
+                except Exception as e:
+                    logger.exception(e)
+                try:
+                    remoteConnection.sendcmd(f"SITE CHMOD 755 {filePath}")
+                except ftplib.error_perm as e:
+                    pass
+                except Exception as e:
+                    logger.exception(e)
+            elif filePath.is_file():
+                try:
+                    with filePath.open("rb") as fh:
+                        remoteConnection.storbinary(f"STOR {filePath}", fh)
+                        remoteConnection.sendcmd(f"SITE CHMOD 644 {filePath}")
+                        logger.debug("File Uploaded %s", filePath)
+                except Exception as e:
+                    logger.exception(e)
                     pass
                 pass
             pass
@@ -109,9 +115,9 @@ def pull_ics():
         contents = urllib.request.urlopen(url).read()
         for targetDir in targetDirs:
             targetDir.mkdir(parents=True, exist_ok=True)
-            filePath = targetDir / get_filename(name)
+            basePath = targetDir / get_filename(name)
             try:
-                with filePath.open("wb") as file:
+                with basePath.open("wb") as file:
                     file.write(contents)
                     pass
             except Exception as e:
@@ -125,10 +131,10 @@ def pull_ics():
 def push_ics():
     with FTP_TLS_BSVADW() as remoteConnection:
         for name in KNOWN_CALENDARS:
-            filePath = pathlib.Path("site/public") / get_filename(name)
-            with filePath.open("rb") as file:
-                remoteConnection.storbinary(f"STOR {filePath.name}", file)
-                remoteConnection.sendcmd(f"SITE CHMOD 644 {filePath.name}")
+            basePath = pathlib.Path("site/public") / get_filename(name)
+            with basePath.open("rb") as file:
+                remoteConnection.storbinary(f"STOR {basePath.name}", file)
+                remoteConnection.sendcmd(f"SITE CHMOD 644 {basePath.name}")
                 pass
             pass
         pass
