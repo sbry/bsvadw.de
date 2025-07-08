@@ -90,3 +90,5 @@ _next
 
 # just leave these images out for now
 site/public/images/galerie24
+/.python-version
+/site/public/.env
