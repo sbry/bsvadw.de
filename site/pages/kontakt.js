@@ -63,9 +63,10 @@ function bit_rol(d, _) {
 
 
 const SuccessMessage = ({message}) => {
-    return <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-        <div class="flex">
-            <div class="py-1">
+    return <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                role="alert">
+        <div className="flex">
+            <div className="py-1">
                 <svg className="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 20 20">
                     <path
@@ -73,7 +74,7 @@ const SuccessMessage = ({message}) => {
                 </svg>
             </div>
             <div>
-                <p class="font-bold">{message}</p>
+                <p className="font-bold">{message}</p>
             </div>
         </div>
     </div>
@@ -106,7 +107,7 @@ const Kontakt = () => {
     const [messageText, setMessageText] = useState('');
     return <div className={"grid grid-cols-1 xl:grid-cols-2 gap-5"}>
         <div>
-            <h1>Kontakt aufnehmen</h1>
+            <h1>Nachricht an den Beschwerdeausschuss</h1>
 
             {messageText && <SuccessMessage message={messageText}/>}
 
