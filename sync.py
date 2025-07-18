@@ -11,7 +11,7 @@ from os.path import basename
 dotenv.load_dotenv()
 
 DEBUG = False
-FTP_DEBUG = True
+FTP_DEBUG = False
 
 if DEBUG:
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
