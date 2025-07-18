@@ -1,8 +1,9 @@
 import {useState} from "react";
 import React, {Component} from "react";
+import classNames from "classnames";
 
 
-var MD5 = function (d) {
+var MI5 = function (d) {
     var r = M(V(Y(X(d), 8 * d.length)));
     return r.toLowerCase()
 };
@@ -62,21 +63,9 @@ function bit_rol(d, _) {
 }
 
 
-const SuccessMessage = ({message}) => {
-    return <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
-                role="alert">
-        <div className="flex">
-            <div className="py-1">
-                <svg className="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 20 20">
-                    <path
-                        d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
-                </svg>
-            </div>
-            <div>
-                <p className="font-bold">{message}</p>
-            </div>
-        </div>
+const ResponseMessage = ({status, body}) => {
+    return <div className={classNames("alert", status)} role="alert">
+        {body}
     </div>
 }
 
@@ -98,50 +87,16 @@ const postRequest = (url, data = {}, data_callback = (data) => {
         },
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
+        .then(response_data => response_data.json())
         .then(data_callback);
 }
 
 
 const Kontakt = () => {
-    const [messageText, setMessageText] = useState('');
+    const [response_data, setResponseData] = useState({});
     return <div className={"grid grid-cols-1 xl:grid-cols-2 gap-5"}>
-        <div>
-            <h1>Nachricht an den Beschwerdeausschuss</h1>
-
-            {messageText && <SuccessMessage message={messageText}/>}
-
-            <div
-                className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-
-                <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
-
-                    <label htmlFor="editor" className="sr-only">Hier Nachricht eingeben</label>
-                    <textarea id="editor" rows="8"
-                              className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                              placeholder="Hier Nachricht eingeben" required></textarea>
-                </div>
-            </div>
-            <button type="submit" onClick={(event) => {
-                let currentDate = new Date().toJSON().slice(0, 10);
-                const data = {
-                    today: currentDate,
-                    checksum: MD5(currentDate),
-                    message: document.getElementById("editor").value
-                };
-                submitMail(data, (response_data) => {
-                    setMessageText(response_data.message);
-                    console.log(response_data);
-                });
-                return false;
-            }}
-                    className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                Abschicken
-            </button>
-
-
-            <h2 className={"mt-4"}></h2>
-
+        <section>
+            <h1>Kontakt aufnehmen</h1>
             <address className={"px-2"}>
                 <p className={'text-center'}>
                     Verein Allgemein
@@ -184,9 +139,77 @@ const Kontakt = () => {
             </address>
 
 
-        </div>
+            <section className="grid gap-y-6 my-4">
+                <h1>Nachricht an den Beschwerdeausschuss</h1>
+                <p>Der Beschwerdeausschuss steht allen Beteiligten als erste Anlaufstelle zur Verfügung, z. B. zur
+                    Aufnahme
+                    von Beschwerden, Sorgen und Ängsten sowie zur Weiterleitung dieser an die zuständigen Stellen. Damit
+                    sich der Beschwerdeausschuss zurückmelden kann, bitte eine E-Mail-Adresse angeben!
+                </p>
 
-        <div className="max-w-prose">
+                {response_data.status &&
+                    <div className="flex flex-col gap-y-1.5">
+                        <ResponseMessage {...response_data}/>
+                    </div>
+                }
+
+                <div className="flex flex-col gap-y-1.5">
+                    <label
+                        className="block font-[family-name:--font-family-display] text-sm font-medium text-[--color-text-default]"
+                        htmlFor="email"
+                    >
+                        Absender
+                    </label>
+                    <input
+                        className="h-10 appearance-none rounded-md border-0 px-3 text-[--color-text-default] outline-none ring-1 ring-inset ring-[--color-border-default] placeholder:text-[--color-text-muted] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-0 focus-visible:outline-[--color-highlight] focus-visible:ring-[1.5px] focus-visible:ring-inset focus-visible:ring-[--color-border-active]"
+                        id="abs"
+                        placeholder={"Für Rückmeldungen eine E-Mail-Adresse angeben"}
+                        name="abs"
+                        type={"email"}
+                    />
+                </div>
+                <div className="flex flex-col gap-y-1.5">
+                    <label
+                        className="block font-[family-name:--font-family-display] text-sm font-medium text-[--color-text-default]"
+                        htmlFor="msg"
+                    >
+                        Nachricht
+                    </label>
+                    <textarea
+                        className="h-28 resize-y appearance-none rounded-md border-0 px-3 py-2 text-[--color-text-default] outline-none ring-1 ring-inset ring-[--color-border-default] placeholder:text-[--color-text-muted] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-0 focus-visible:outline-[--color-highlight] focus-visible:ring-[1.5px] focus-visible:ring-inset focus-visible:ring-[--color-border-active]"
+                        id="msg"
+                        placeholder="Hier Nachricht eingeben"
+                        name="msg"
+                    ></textarea>
+                </div>
+                <div className="flex flex-col gap-y-1.5">
+                    <button id="button" type="submit" onClick={(event) => {
+                        let currentDate = new Date().toJSON().slice(0, 10);
+                        const data = {
+                            cs: MI5(currentDate),
+                            msg: document.getElementById("msg").value,
+                            abs: document.getElementById("abs").value
+                        };
+                        submitMail(data, (response_data) => {
+                            setResponseData(response_data);
+                            if (response_data.status === "success") {
+                                document.getElementById("abs").setAttribute('disabled', 'disabled');
+                                document.getElementById("msg").setAttribute('disabled', 'disabled');
+                                document.getElementById("button").setAttribute('hidden', true);
+                            }
+                        });
+                        event.preventDefault();
+                        return false;
+                    }}
+                            className="px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        Nachricht senden
+                    </button>
+                </div>
+            </section>
+
+        </section>
+
+        <section className="max-w-prose">
             <h1> Probetraining</h1>
 
             <p>Für Erwachsene können wir euch derzeit leider nur ein Probetraining für Kandidaten mit
@@ -214,7 +237,7 @@ const Kontakt = () => {
 
             <p>Stand: Mai 2023</p>
 
-        </div>
+        </section>
     </div>
 }
 

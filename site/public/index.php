@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function sendEmail($subject, $body){
+function sendEmail($to, $subject, $body, $reply_to = false){
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPDebug = 0;
@@ -19,7 +19,10 @@ function sendEmail($subject, $body){
     $mail->SetFrom($_ENV['SMTP_USERNAME'], $_SERVER['SERVER_NAME']);
     $mail->Subject = $subject;
     $mail->Body = $body;
-    $mail->AddAddress($_ENV['MAIL_TO'], $_ENV['MAIL_TO']);
+    $mail->AddAddress($to, $to);
+    if($reply_to){
+        $mail->AddReplyTo($reply_to);
+    }
     $return = $mail->Send();
     $mail->smtpClose();
     return $return;
@@ -31,14 +34,14 @@ function request(){
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
     $dotenv->required(['SMTP_USERNAME', 'SMTP_PASSWORD', 'MAIL_TO']);
-    if($request['checksum'] == md5(date('Y-m-d'))){
+    if($request['cs'] == md5(date('Y-m-d'))){
         return $request;
     }
 }
 
-function response($status, $message){
+function response($status, $body){
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(array('status' => $status, 'message' => $message));
+    echo json_encode(array('status' => $status, 'body' => $body));
     exit;
 }
 
@@ -63,16 +66,24 @@ if(isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] == 'OPTIONS'
 
 $path_map = array(
     'kontakt' => function($request){
-        if(!isset($request['message']) or !$request['message']){
-            response("failure", "Keine Nachricht gefunden.");
+        if(!isset($request['msg']) or !$request['msg']){
+            response("danger", "Keine Nachricht eingegeben");
         }
-        $message = wordwrap($request['message'], 70, "\r\n");
-        $mailed = sendEmail("[bsvadw.de] Homepage-Kontakt", $message);
+        $message = wordwrap($request['msg'], 70, "\r\n");
+        $subject = "[bsvadw.de] Nachricht an Beschwerdeausschuss";
+        $reply_to = false;
+
+        if(isset($request['abs']) and $request['abs'] and filter_var($request['abs'], FILTER_VALIDATE_EMAIL)){
+            $reply_to = $request['abs'];
+            $mailed = sendEmail($reply_to, "$subject (Kopie an Absender)", $message);
+            $message = "Absender $reply_to \r\n $message";
+        }
+        $mailed = sendEmail($_ENV['MAIL_TO'], $subject, $message, $reply_to);
         if($mailed){
             response("success", "Aktion erfolgreich.");
         }
         else{
-            response("failure", "Wartungsarbeiten.");
+            response("danger", "Wartungsarbeiten.");
         }
     }
 );
@@ -81,3 +92,5 @@ $request = request();
 if(isset($path_map[$request['path']])){
     $path = $path_map[$request['path']]($request);
 }
+
+
