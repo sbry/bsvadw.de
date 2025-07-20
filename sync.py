@@ -130,11 +130,16 @@ def pull_ics():
 
 def push_ics():
     with FTP_TLS_BSVADW() as remoteConnection:
+        remoteConnection.cwd('/html/')
         for name in KNOWN_CALENDARS:
             basePath = pathlib.Path("site/public") / get_filename(name)
-            with basePath.open("rb") as file:
-                remoteConnection.storbinary(f"STOR {basePath.name}", file)
-                remoteConnection.sendcmd(f"SITE CHMOD 644 {basePath.name}")
+            with basePath.open("rb") as fh:
+                try:
+                    remoteConnection.storbinary(f"STOR {basePath.name}", fh)
+                    remoteConnection.sendcmd(f"SITE CHMOD 644 {basePath.name}")
+                except Exception as e:
+                    logger.exception(e)
+                    pass
                 pass
             pass
         pass
