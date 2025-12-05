@@ -92,3 +92,4 @@ _next
 site/public/images/galerie24
 /.python-version
 /site/public/.env
+/python-venv/
