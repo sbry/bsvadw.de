@@ -50,7 +50,7 @@ const Kalender1 = () => {
             }}
             weekNumbers={true}
             dayHeaders={true}
-            hiddenDays={[3, 4, 6, 0]}
+            hiddenDays={[1, 4, 6, 0]}
             locale='de'
             plugins={[rrulePlugin, iCalendarPlugin, dayGridPlugin]}
             initialView="dayGridMonthMore"
