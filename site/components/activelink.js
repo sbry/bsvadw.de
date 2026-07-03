@@ -12,7 +12,7 @@ const ActiveLink = ({children, href, title, className}) => {
     return (
         <a title={title}
            className={classNames(className, {
-               'active': router.asPath === href
+               'active': router.asPath.replace(/\/$/, '') === href.replace(/\/$/, '')
            })}
            href={href}
            onClick={handleClick}>

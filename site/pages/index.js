@@ -1,8 +1,8 @@
 import MyGallery from "../components/galerie";
 
-const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
+const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-10"}>
     <div>
-        <h1>
+        <h1 className="text-4xl md:text-5xl">
             Tischtennis in Berlin Treptow</h1>
         <p>
             Unsere Abteilung findet man im Osten Berlins, im schönen
@@ -19,7 +19,7 @@ const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-5"}>
 
         <h1>Wöchentliche Trainingszeiten</h1>
         <div className={""}>
-            <div className={"inline-block mr-5 w-60"}>
+            <div className={"inline-block mr-5 w-64"}>
                 <h2>Schüler und Jugendliche</h2>
                 <dl>
                     <dt>Montag</dt>

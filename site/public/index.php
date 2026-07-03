@@ -18,12 +18,13 @@ function assertRateLimit($key, $limit, $period){
     // Get the IP address of the client, handling proxy headers if present
     $ip = $_SERVER['REMOTE_ADDR'];
     if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        $ip = trim($ips[0]);
     }
 
     // Ensure the IP address is a valid IPv4 or IPv6 address
     if(!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6)){
-        json_response("warning", "Ungültige IP Adresse");
+        json_response("warning", "Ungültige IP Adresse: $ip");
     }
 
     // Initialize the data array

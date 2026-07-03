@@ -2,6 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header-height-clamp { height: clamp(2rem, 6vw, 3.75rem); }
+.header-img-clamp { width: clamp(2rem, 6vw, 6.25rem); height: clamp(2rem, 6vw, 6.25rem); }
+.header-text-clamp { font-size: clamp(0.6rem, 5vw, 2.5rem); }
+.tt-icon-clamp { width: clamp(1.5rem, 4vw, 6.25rem); height: clamp(1.5rem, 4vw, 6.25rem); }
+.nav-text-clamp { font-size: clamp(0.65rem, 1.5vw, 1rem); }
+
 /**
  * the colors we define
  */
@@ -26,29 +33,27 @@ body {
 
 @layer base {
     h1 {
-        @apply text-2xl;
-        @apply font-bold;
+        @apply text-3xl;
         @apply text-gray-700;
     }
 
     h2 {
-        @apply text-xl;
-        @apply font-bold;
+        @apply text-2xl;
         @apply text-gray-700;
     }
 
     p, dl, h1, h2, li, dd, dt {
         @apply text-gray-700;
-        @apply mb-2;
+        @apply mb-4;
     }
 
     main {
-        @apply p-4 bg-white min-h-full;
+        @apply p-8 bg-white min-h-full;
     }
 }
 
 
-header, footer, body {
+header, footer {
     @apply bg-green-900;
 }
 
@@ -61,24 +66,36 @@ a {
         cursor: default;
         @apply underline;
     }
+}
 
+nav.nav-text-clamp {
+    a {
+        @apply border border-transparent border-b-0 rounded-t-lg rounded-b-none px-2 sm:px-3 py-1 no-underline mb-0 mr-0 sm:mr-3;
+    }
+    a.active {
+        @apply border border-white border-b-0 rounded-t-lg rounded-b-none px-2 sm:px-3 py-1 no-underline mb-0 mr-0 sm:mr-3;
+    }
+    a.nav-icon-link {
+        @apply border border-transparent border-b-0 rounded-t-lg rounded-b-none px-1 sm:px-2 mb-0 mr-0 sm:mr-3;
+    }
+    a.nav-icon-link.active {
+        @apply border border-white border-b-0 rounded-t-lg rounded-b-none px-1 sm:px-1.5 mb-0 mr-0 sm:mr-3 !important;
+    }
 }
 
 header, footer {
-    @apply px-3;
     a {
         @apply text-white mr-3 whitespace-nowrap;
     }
     nav {
         @apply flex;
     }
-
 }
 
 header {
     .heading {
         a {
-            @apply block font-bold text-lg;
+            @apply flex;
         }
     }
 }
@@ -101,7 +118,7 @@ address {
     @apply m-2 lg:m-5 inline-block px-5 pb-5 pt-0.5 text-gray-800;
     background:                 $post-it-color-light linear-gradient(150deg, $post-it-color-dark 0%, $post-it-color-light 100%);
     border:                     1px solid $post-it-color-dark;
-    box-shadow:                 0px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow:                 0px 4px 6px rgba(0, 0, 0, 0.4);
     border-bottom-right-radius: 60px 5px;
     position:                   relative;
     transition:                 all 0.3s ease;

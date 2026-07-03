@@ -1,25 +1,30 @@
 import ActiveLink from "./activelink";
+import classNames from "classnames";
 
 const Footer = () => {
     return (
-        <footer>
-            <nav>
-                {[
-                    {name: 'Impressum', href: '/impressum/'},
-                    {name: 'Datenschutz', href: '/datenschutz/'},
-                ].map((item) => (
+        <footer className={"w-full"}>
+            <nav className="px-4 py-2 nav-text-clamp flex justify-between items-center">
+                <div className="flex gap-4 min-w-0 flex-1">
                     <ActiveLink
-                        key={item.name}
-                        href={item.href}
+                        key={'Impressum'}
+                        href={'/impressum/'}
+                        className={classNames("truncate")}
                     >
-                        {item.name}
+                        Impressum
                     </ActiveLink>
-                ))}
 
+                    <ActiveLink
+                        key={'Datenschutz'}
+                        href={'/datenschutz/'}
+                        className={classNames("truncate")}
+                    >
+                        Datenschutz
+                    </ActiveLink>
+                </div>
             </nav>
         </footer>
     )
 }
-
 
 export default Footer;

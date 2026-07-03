@@ -97,46 +97,48 @@ const Kontakt = () => {
     return <div className={"grid grid-cols-1 xl:grid-cols-2 gap-5"}>
         <section>
             <h1>Kontakt aufnehmen</h1>
-            <address className={"px-2"}>
-                <p className={'text-center'}>
-                    Verein Allgemein
-                </p>
-                <p className={'text-center font-bold text-2xl font-serif'}>
-                    Andreas
-                </p>
-                <p className={'oldstyle-nums'}>0172 / 7827627</p>
-                abteilungsleitungttadw[at]freenet.de
-            </address>
-            <address className={"px-2"}>
-                <p className={'text-center'}> Jugend</p>
-                <p className={'text-center font-bold text-2xl font-serif'}>
-                    Aaron
-                </p>
-                <p className={'oldstyle-nums'}>0152 / 56164048</p><p>aaron.seeliger[at]posteo.de</p>
-            </address>
-            <address className={"px-2"}>
-                <p className={'text-center'}>
-                    Damen
-                </p>
-                <p className={'text-center font-bold text-2xl font-serif'}>
-                    Bettina
-                </p>
-                <p className={'oldstyle-nums'}>
-                    0170 / 8101614</p>
-                <p>
-                    bettina.krause[at]spok-berlin.de
-                </p>
-            </address>
-            <address className={"px-2"}>
-                <p className={'text-center'}>
-                    Herren
-                </p>
-                <p className={'text-center font-bold text-2xl font-serif'}>
-                    Dirk
-                </p>
-                <p className={'oldstyle-nums'}>0170 / 451 54 45</p>
-                <p>dirk.giebson[at]gmail.com</p>
-            </address>
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+                <address className={"px-2 my-12 flex flex-col items-center"}>
+                    <p className={'text-center'}>
+                        Verein Allgemein
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
+                        Andreas
+                    </p>
+                    <p className={'oldstyle-nums'}>0172 / 7827627</p>
+                    abteilungsleitungttadw[at]freenet.de
+                </address>
+                <address className={"px-2 my-12 flex flex-col items-center"}>
+                    <p className={'text-center'}> Jugend</p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
+                        Aaron
+                    </p>
+                    <p className={'oldstyle-nums'}>0152 / 56164048</p><p>aaron.seeliger[at]posteo.de</p>
+                </address>
+                <address className={"px-2 my-12 flex flex-col items-center"}>
+                    <p className={'text-center'}>
+                        Damen
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
+                        Bettina
+                    </p>
+                    <p className={'oldstyle-nums'}>
+                        0170 / 8101614</p>
+                    <p>
+                        bettina.krause[at]spok-berlin.de
+                    </p>
+                </address>
+                <address className={"px-2 my-12 flex flex-col items-center"}>
+                    <p className={'text-center'}>
+                        Herren
+                    </p>
+                    <p className={'text-center font-bold text-2xl font-serif'}>
+                        Dirk
+                    </p>
+                    <p className={'oldstyle-nums'}>0170 / 451 54 45</p>
+                    <p>dirk.giebson[at]gmail.com</p>
+                </address>
+            </div>
 
 
             <section className="grid gap-y-6 my-4">
