@@ -22,6 +22,9 @@ module.exports = {
                     50: "#FFFFFFff"
                 },
             },
+            fontSize: {
+                '7px': '7px',
+            },
             screens: {
                 'dark': {'raw': '(prefers-color-scheme: dark)'},
                 // => @media (prefers-color-scheme: dark) { ... }

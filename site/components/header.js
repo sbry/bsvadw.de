@@ -1,6 +1,5 @@
 import ActiveLink from "./activelink";
 import classNames from "classnames";
-import HeuteButton from "./heute-button";
 
 
 const Header = () => {
@@ -17,8 +16,6 @@ const Header = () => {
                 <a href="/">
                     <span className="header-text-clamp">BSV AdW e.V. Tischtennis</span>
                 </a>
-
-                <HeuteButton />
 
                 <a className="flex items-center h-full min-w-0" title={"Spielbetrieb des BSV AdW beim Berliner Tischtennisverband"}
                    href={"https://bettv.tischtennislive.de/default.aspx?L1=Public&L2=Verein&L2P=1198&Page=Spielbetrieb&Sportart=96"}>

@@ -17,7 +17,9 @@ const Layout = ({children}) => {
                 <link rel="apple-touch-icon" sizes="152x152" href="/images/logo/adw-symbol-152.png"/>
             </Head>
             <Header/>
-            <main>{children}</main>
+            <main>
+                {children}
+            </main>
             <Footer/>
         </>
     )

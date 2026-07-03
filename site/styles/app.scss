@@ -109,6 +109,23 @@ header {
 @media (min-width: theme('screens.xl')) {
 }
 
+@media (max-width: 400px) {
+    nav.nav-text-clamp {
+        a {
+            @apply px-1;
+        }
+        a.active {
+            @apply px-1;
+        }
+        a.nav-icon-link {
+            @apply px-0.5;
+        }
+        a.nav-icon-link.active {
+            @apply px-0.5 !important;
+        }
+    }
+}
+
 
 /*
 POST-IT

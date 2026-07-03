@@ -64,10 +64,10 @@ const HeuteButton = () => {
         <>
             <button
                 onClick={() => setIsModalOpen(true)}
-                className="bg-yellow-400 text-black px-2 py-1 rounded font-bold text-xs sm:text-sm animate-pulse flex items-center border-none cursor-pointer"
+                className="absolute -top-5 -right-5 z-40 bg-yellow-400 text-black px-1.5 py-0.5 rounded font-bold text-xs flex items-center border-none cursor-pointer shadow-sm"
                 title="Heute gibt es Termine! Anklicken für Details."
             >
-                Aktuell
+                {`Heute ${eventsToday.length} Termin${eventsToday.length === 1 ? '' : 'e'}`}
             </button>
 
             {isModalOpen && (

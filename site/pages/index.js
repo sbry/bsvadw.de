@@ -1,6 +1,8 @@
 import MyGallery from "../components/galerie";
+import HeuteButton from "../components/heute-button";
 
-const Index = () => <div className={"grid grid-cols-1 md:grid-cols-2 gap-10"}>
+const Index = () => <div className={"relative grid grid-cols-1 md:grid-cols-2 gap-10"}>
+    <HeuteButton />
     <div>
         <h1 className="text-4xl md:text-5xl">
             Tischtennis in Berlin Treptow</h1>
