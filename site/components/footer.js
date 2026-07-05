@@ -4,7 +4,7 @@ import classNames from "classnames";
 const Footer = () => {
     return (
         <footer className={"w-full"}>
-            <nav className="px-4 py-2 nav-text-clamp flex justify-between items-center">
+            <nav className="px-2 sm:px-4 py-2 nav-text-clamp flex justify-between items-center">
                 <div className="flex gap-4 min-w-0 flex-1">
                     <ActiveLink
                         key={'Impressum'}
