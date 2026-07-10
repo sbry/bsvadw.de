@@ -50,13 +50,17 @@ const Datenschutz = () => <div className={"max-w-prose"}>
     nicht m&ouml;glich.</p>
     <h3>Hinweis zur verantwortlichen Stelle</h3> <p>Die verantwortliche Stelle f&uuml;r die Datenverarbeitung
     auf
-    dieser Website ist:</p> <p>Berliner Sportverein Akademie der Wissenschaften e.V.<br/>
-    Abteilung Tischtennis<br/>
-    Kablower Weg 89<br/>
-    12526 Berlin</p>
+dieser Website ist:</p>
 
-    <p>Telefon: +49 172 7827627<br/>
-        E-Mail: abteilungsleitungttadw[at]freenet.de</p>
+    <address>
+        <p>Berliner Sportverein Akademie der Wissenschaften e.V.</p>
+        <p>Abteilung Tischtennis</p>
+        <p>Sportpromenade 3</p>
+        <p>12527 Berlin</p>
+        <p>Tel: 0172 / 7827627</p>
+        <p>abteilungsleitungttadw[at]freenet.de</p>
+    </address>
+
     <p>Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit
         anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.&nbsp;B. Namen,
         E-Mail-Adressen o. &Auml;.) entscheidet.</p>

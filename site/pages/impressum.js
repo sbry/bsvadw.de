@@ -4,8 +4,8 @@ const Impressum = () => <div className={"max-w-prose"}>
     <address>
         <p>Berliner Sportverein Akademie der Wissenschaften e.V.</p>
         <p>Abteilung Tischtennis</p>
-        <p>Kablower Weg 89</p>
-        <p>12526 Berlin</p>
+        <p>Sportpromenade 3</p>
+        <p>12527 Berlin</p>
         <p>Tel: 0172 / 7827627</p>
         <p>abteilungsleitungttadw[at]freenet.de</p>
     </address>
